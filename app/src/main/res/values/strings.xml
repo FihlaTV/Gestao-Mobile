@@ -2,9 +2,9 @@
     <string name="app_name">Gestao-Mobile</string>
     <string name="btnRegistro">Registrase</string>
     <string name="btnCancelar">Cancelar</string>
-    <string name="etnombre1">Ingresa tu primer nombre</string>
+    <string name="etnombre1">Ingresa tu nombre</string>
     <string name="etnombre2">Ingresa tu segundo nombre</string>
-    <string name="etapellido1">Ingresa tu primer apellido</string>
+    <string name="etapellido1">Ingresa tu apellido</string>
     <string name="etapellido2">Ingresa tu segundo apellido</string>
     <string name="etpass">Ingresa tu clave de acceso</string>
     <string name="etcorreo">tucorreo@mail.com</string>
