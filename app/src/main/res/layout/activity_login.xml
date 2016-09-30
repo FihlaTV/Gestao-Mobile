@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/Registrarse"
-            android:id="@+id/etRegistro" />
+            android:id="@+id/tvRegistro" />
     </LinearLayout>
 
 </RelativeLayout>
