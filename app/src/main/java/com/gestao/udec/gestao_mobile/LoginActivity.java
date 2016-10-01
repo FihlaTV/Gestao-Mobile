@@ -2,12 +2,15 @@ package com.gestao.udec.gestao_mobile;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,6 +29,27 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etPassword = (EditText) findViewById(R.id.etClave);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
         final Button bLogin = (Button) findViewById(R.id.btnIngresar);
+        final ImageView iudec = (ImageView) findViewById(R.id.iudec);
+
+
+        iudec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String url = (String)iudec.getTag();
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+                //pass the url to intent data
+                intent.setData(Uri.parse(url));
+
+                startActivity(intent);
+
+            }
+        });
 
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                                intent.putExtra("name1", name1);
                                 LoginActivity.this.startActivity(intent);
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Login Failed")
-                                        .setNegativeButton("Retry", null)
-                                        .create()
-                                        .show();
+                                String error = getResources().getString(R.string.errorLogin);
+                                Toast.makeText(LoginActivity.this,error,Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {

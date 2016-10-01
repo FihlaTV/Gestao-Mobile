@@ -5,6 +5,8 @@
     <string name="etnombre1">Ingresa tu nombre</string>
     <string name="etnombre2">Ingresa tu segundo nombre</string>
     <string name="etapellido1">Ingresa tu apellido</string>
+    <string name="errorLogin">Usuario o Contraseña Incorrectos!</string>
+
     <string name="etapellido2">Ingresa tu segundo apellido</string>
     <string name="etpass">Ingresa tu clave de acceso</string>
     <string name="etcorreo">tucorreo@mail.com</string>
