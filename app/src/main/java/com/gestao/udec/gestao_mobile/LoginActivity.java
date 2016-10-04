@@ -1,6 +1,5 @@
 package com.gestao.udec.gestao_mobile;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -79,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (mather.find() != true) {
                     etemail.setError(getResources().getString(R.string.correoInvalido));
-                    estado = false;
                 }
                 if (etPassword.getText().toString().trim().equalsIgnoreCase("")) {
                     etPassword.setError(getResources().getString(R.string.campoNoNulo));
@@ -87,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (etPassword.length() < 7) {
                     etPassword.setError(getResources().getString(R.string.claveNoCaracter));
-                    estado = false;
                 }
 
                 if (estado == true) {

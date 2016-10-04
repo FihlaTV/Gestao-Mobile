@@ -20,5 +20,10 @@
     <string name="errorConexion">Ha ocurrido un error de conexion</string>
     <string name="Registrarse">Registrarse</string>
     <string name="claveConfirm">Confirma tu clave de acceso</string>
+    <string name="escanear">Escanear</string>
+    <string name="vincular">Vincular clases</string>
+    <string name="horario">Mi horario</string>
+    <string name="reservar">Reservar clase</string>
+    <string name="profesores">Mis profesores</string>
 
 </resources>

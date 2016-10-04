@@ -4,15 +4,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class UserAreaActivity extends AppCompatActivity implements View.OnClickListener{
+public class TeacherAreaActivity extends AppCompatActivity implements View.OnClickListener{
     Button escanear;
     Button vincular;
     Button horario;
     Button registrar;
-    Button profesores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +25,10 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         escanear = (Button) findViewById(R.id.btescanear);
         vincular = (Button) findViewById(R.id.btvincular);
         horario = (Button) findViewById(R.id.bthorario);
-        profesores = (Button) findViewById(R.id.btprofesores);
         registrar = (Button) findViewById(R.id.btreservar);
-
-
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);
         horario.setOnClickListener(this);
-        profesores.setOnClickListener(this);
         registrar.setOnClickListener(this);
         /*
         Intent intent = getIntent();
@@ -48,26 +47,14 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        Intent intent;
         switch(v.getId()){
             case R.id.btescanear:
-
                 break;
             case R.id.bthorario:
-                intent = new Intent(UserAreaActivity.this, HorarioActivity.class);
-                UserAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btreservar:
-                intent = new Intent(UserAreaActivity.this, ReservarActivity.class);
-                UserAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btvincular:
-                intent = new Intent(UserAreaActivity.this, VincularActivity.class);
-                UserAreaActivity.this.startActivity(intent);
-                break;
-            case R.id.btprofesores:
-               intent = new Intent(UserAreaActivity.this, ProfesoresActivity.class);
-                UserAreaActivity.this.startActivity(intent);
                 break;
 
         }

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.UserAreaActivity">
+    tools:context="com.gestao.udec.gestao_mobile.TeacherAreaActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,40 +30,24 @@
 
             <Button
                 android:text="@string/vincular"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btvincular"
                 android:layout_weight="1" />
 
             <Button
                 android:text="@string/horario"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bthorario"
                 android:layout_weight="1" />
-
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <Button
+            android:text="@string/reservar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:text="@string/profesores"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btprofesores"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/reservar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btreservar"
-                android:layout_weight="1" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/btreservar" />
 
     </LinearLayout>
 </RelativeLayout>

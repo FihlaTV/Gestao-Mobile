@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -26,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.5/gestao/mobile/register_person.php";
+    String insertUrl = "http://192.168.1.7/gestao/mobile/register_person.php";
 
     @Override
 
@@ -77,11 +76,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (etnombre1.getText().toString().trim().equalsIgnoreCase("")) {
                     etnombre1.setError(getResources().getString(R.string.campoNoNulo));
-                    estado = false;
                 }
                 if (etapellido1.getText().toString().trim().equalsIgnoreCase("")) {
                     etapellido1.setError(getResources().getString(R.string.campoNoNulo));
-                    estado = false;
                 }
                 if (!etclave.getText().toString().equals(etclave2.getText().toString())) {
                     etclave2.setError(getResources().getString(R.string.claveNoIgual));
@@ -90,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (etclave2.length() < 7 || etclave.length() < 7) {
                     etclave2.setError(getResources().getString(R.string.claveNoCaracter));
-                    estado = false;
                 }
 
                 if (estado == true) {
