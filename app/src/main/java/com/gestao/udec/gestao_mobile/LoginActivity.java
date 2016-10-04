@@ -19,6 +19,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,33 @@ public class LoginActivity extends AppCompatActivity {
                 final String correo = etemail.getText().toString();
                 final String password = etPassword.getText().toString();
 
+                boolean estado = true;
+                Pattern pattern = Pattern
+                        .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+                String email = etemail.getText().toString();
+
+                Matcher mather = pattern.matcher(email);
+
+                if (mather.find() != true) {
+                    etemail.setError(getResources().getString(R.string.correoInvalido));
+                    estado = false;
+                }
+                if (etPassword.getText().toString().trim().equalsIgnoreCase("")) {
+                    etPassword.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                }
+                if (etPassword.length() < 7) {
+                    etPassword.setError(getResources().getString(R.string.claveNoCaracter));
+                    estado = false;
+                }
+
+                if (estado == true) {
+
+
+
+
                 // Response received from the server
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -81,8 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                                intent.putExtra("name1", name1);
                                 LoginActivity.this.startActivity(intent);
                             } else {
-                                String error = getResources().getString(R.string.errorLogin);
-                                Toast.makeText(LoginActivity.this,error,Toast.LENGTH_LONG).show();
+
+                                Toast.makeText(LoginActivity.this,getResources().getString(R.string.errorLogin),Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {
@@ -94,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest(correo, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
-            }
+            }}
         });
     }
 }

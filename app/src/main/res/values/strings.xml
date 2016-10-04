@@ -5,14 +5,20 @@
     <string name="etnombre1">Ingresa tu nombre</string>
     <string name="etnombre2">Ingresa tu segundo nombre</string>
     <string name="etapellido1">Ingresa tu apellido</string>
-    <string name="errorLogin">Usuario o Contraseña Incorrectos!</string>
-
+    <string name="errorLogin">Usuario o Contraseña Incorrectos !</string>
+    <string name="campoNoNulo">Este campo no puede ser nulo !</string>
+    <string name="claveNoIgual">Las claves deben coincidir !</string>
+    <string name="claveNoCaracter">las claves deben tener almenos 8 caracteres</string>
     <string name="etapellido2">Ingresa tu segundo apellido</string>
     <string name="etpass">Ingresa tu clave de acceso</string>
-    <string name="etcorreo">tucorreo@mail.com</string>
+    <string name="etcorreo">Tucorreo@mail.com</string>
     <string name="estudiante">Estudiante</string>
     <string name="docente">Docente</string>
+    <string name="correoInvalido">Correo Invalido</string>
     <string name="ingresar">Ingresar</string>
+    <string name="registroExitoso">Registro Exitoso !</string>
+    <string name="errorConexion">Ha ocurrido un error de conexion</string>
     <string name="Registrarse">Registrarse</string>
+    <string name="claveConfirm">Confirma tu clave de acceso</string>
 
 </resources>

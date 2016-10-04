@@ -1,10 +1,13 @@
 package com.gestao.udec.gestao_mobile;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -18,10 +21,13 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String insertUrl = "http://192.168.1.5/gestao/mobile/register_person.php";
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,43 +37,101 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etapellido1 = (EditText) findViewById(R.id.etApellido1);
         final EditText etcorreo = (EditText) findViewById(R.id.etCorreo);
         final EditText etclave = (EditText) findViewById(R.id.etClave);
+        final EditText etclave2 = (EditText) findViewById(R.id.etClave2);
         final RadioButton rbestudiante = (RadioButton) findViewById(R.id.rbEstudiante);
         final RadioButton rbdocente = (RadioButton) findViewById(R.id.rbDocente);
         final Button btnregistro = (Button) findViewById(R.id.btnRegistro);
+
+
+
+
     requestQueue = Volley.newRequestQueue(getApplicationContext());
         btnregistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(RegisterActivity.this,"registro exitoso",Toast.LENGTH_LONG).show();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this,"ha ocurrido un error",Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                       Map<String,String> parameters = new HashMap<String, String>();
-                        parameters.put("nombre1",etnombre1.getText().toString() );
-                        parameters.put("apellido1",etapellido1.getText().toString() );
-                        parameters.put("password",etclave.getText().toString() );
-                        parameters.put("correo",etcorreo.getText().toString() );
-                        if (rbestudiante.isChecked()){
-                            parameters.put("rol","E");
-                        }else{
-                            parameters.put("rol","D");
-                        }
-                        return parameters;
-                    }
-                };
-                requestQueue.add(request);
-            }
 
-        });
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                inputMethodManager.hideSoftInputFromWindow(etnombre1.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(etapellido1.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(etclave.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(etclave2.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(etcorreo.getWindowToken(), 0);
+                boolean estado = true;
+
+
+                Pattern pattern = Pattern
+                        .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+                String email = etcorreo.getText().toString();
+
+                Matcher mather = pattern.matcher(email);
+
+                if (mather.find() != true) {
+                    etcorreo.setError(getResources().getString(R.string.correoInvalido));
+                    estado = false;
+                }
+
+
+
+                if (etnombre1.getText().toString().trim().equalsIgnoreCase("")) {
+                    etnombre1.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                }
+                if (etapellido1.getText().toString().trim().equalsIgnoreCase("")) {
+                    etapellido1.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                }
+                if (!etclave.getText().toString().equals(etclave2.getText().toString())) {
+                    etclave2.setError(getResources().getString(R.string.claveNoIgual));
+                    estado = false;
+                }
+
+                if (etclave2.length() < 7 || etclave.length() < 7) {
+                    etclave2.setError(getResources().getString(R.string.claveNoCaracter));
+                    estado = false;
+                }
+
+                if (estado == true) {
+
+                    StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(RegisterActivity.this,response , Toast.LENGTH_LONG).show();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(RegisterActivity.this,getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> parameters = new HashMap<String, String>();
+                            parameters.put("nombre1", etnombre1.getText().toString());
+                            parameters.put("apellido1", etapellido1.getText().toString());
+                            parameters.put("password", etclave.getText().toString());
+                            parameters.put("correo", etcorreo.getText().toString());
+                            if (rbestudiante.isChecked()) {
+                                parameters.put("rol", "E");
+                            } else {
+                                parameters.put("rol", "D");
+                            }
+                            return parameters;
+                        }
+                    };
+                    requestQueue.add(request);
+
+
+                }
+
+            }
+        }
+        );
 
     }
+
 }
+
