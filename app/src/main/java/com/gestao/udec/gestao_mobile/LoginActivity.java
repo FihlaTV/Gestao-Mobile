@@ -102,7 +102,12 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (success) {
                                 String name1 = jsonResponse.getString("name1");
+                                String id = jsonResponse.getString("id");
+                                String email = jsonResponse.getString("email");
+                                String rol = jsonResponse.getString("rol");
 
+                                SessionManager sesion = new SessionManager(LoginActivity.this);
+                                sesion.createLoginSession(name1,email,id,rol);
 
                                 Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
                                intent.putExtra("name1", name1);

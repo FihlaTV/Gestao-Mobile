@@ -25,5 +25,15 @@
     <string name="horario">Mi horario</string>
     <string name="reservar">Reservar clase</string>
     <string name="profesores">Mis profesores</string>
+    <string name="ingreseLaHoraInicial" >Ingrese la hora inicial</string>
+    <string name="ingreseLaHoraFinal">Ingrese la hora final</string>
+    <string name="diaSemana">Dia de la semana</string>
+    <string name="lunes">Lunes</string>
+    <string name="martes">Martes</string>
+    <string name="miercoles">Miercoles</string>
+    <string name="jueves">Jueves</string>
+    <string name="viernes">Viernes</string>
+    <string name="sabado">Sabado</string>
+    <string name="clase">Clase</string>
 
 </resources>

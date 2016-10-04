@@ -7,6 +7,8 @@ public class ProfesoresActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SessionManager sesion = new SessionManager(ProfesoresActivity.this);
+        sesion.checkLogin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profesores);
     }

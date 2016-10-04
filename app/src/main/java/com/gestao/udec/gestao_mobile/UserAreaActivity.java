@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class UserAreaActivity extends AppCompatActivity implements View.OnClickListener{
     Button escanear;
@@ -13,10 +14,17 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     Button horario;
     Button registrar;
     Button profesores;
+    TextView textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        SessionManager sesion = new SessionManager(UserAreaActivity.this);
+        sesion.checkLogin();
+        if(sesion.getUserDetails().get("rol").equals("D")){
+            Intent intent;
+            intent = new Intent(UserAreaActivity.this, TeacherAreaActivity.class);
+            UserAreaActivity.this.startActivity(intent);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
         escanear = (Button) findViewById(R.id.btescanear);
@@ -24,7 +32,6 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         horario = (Button) findViewById(R.id.bthorario);
         profesores = (Button) findViewById(R.id.btprofesores);
         registrar = (Button) findViewById(R.id.btreservar);
-
 
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);

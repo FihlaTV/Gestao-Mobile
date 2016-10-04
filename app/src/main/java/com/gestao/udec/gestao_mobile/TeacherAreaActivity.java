@@ -19,7 +19,8 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        SessionManager sesion = new SessionManager(TeacherAreaActivity.this);
+        sesion.checkLogin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
         escanear = (Button) findViewById(R.id.btescanear);
