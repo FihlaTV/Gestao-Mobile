@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.7/gestao/mobile/register_person.php";
+    String insertUrl = "http://192.168.1.6/gestao/mobile/register_person.php";
 
     @Override
 

@@ -37,6 +37,8 @@
     <string name="horaInicialIntervalo">La hora inicial debe estar entre las 7 y las 21 horas</string>
     <string name="horaFinalIntervalo">La hora final debe estar entre las 8 y las 22 horas</string>
     <string name="clase">Clase</string>
+    <string name="nombreProfesor">Nombre del profesor</string>
+    <string name="consultar">Consultar</string>
     <string name="crearClase">Crear clase</string>
 
 </resources>
