@@ -34,6 +34,8 @@
     <string name="jueves">Jueves</string>
     <string name="viernes">Viernes</string>
     <string name="sabado">Sabado</string>
+    <string name="horaInicialIntervalo">La hora inicial debe estar entre las 7 y las 21 horas</string>
+    <string name="horaFinalIntervalo">La hora final debe estar entre las 8 y las 22 horas</string>
     <string name="clase">Clase</string>
 
 </resources>
