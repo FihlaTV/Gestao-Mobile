@@ -30,24 +30,40 @@
 
             <Button
                 android:text="@string/vincular"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btvincular"
                 android:layout_weight="1" />
 
             <Button
                 android:text="@string/horario"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/bthorario"
                 android:layout_weight="1" />
+
         </LinearLayout>
 
-        <Button
-            android:text="@string/reservar"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btreservar" />
+            android:layout_weight="1">
+
+            <Button
+                android:text="@string/reservar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btreservar"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="@string/crearClase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btclase"
+                android:layout_weight="1" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

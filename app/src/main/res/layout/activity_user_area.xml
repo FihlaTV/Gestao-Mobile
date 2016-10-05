@@ -56,13 +56,6 @@
                 android:id="@+id/btprofesores"
                 android:layout_weight="1" />
 
-            <Button
-                android:text="@string/reservar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btreservar"
-                android:layout_weight="1" />
-
         </LinearLayout>
 
     </LinearLayout>

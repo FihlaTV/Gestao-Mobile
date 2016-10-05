@@ -1,6 +1,7 @@
 package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,10 +46,12 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sesion = new SessionManager(ReservarActivity.this);
-        sesion.checkLogin();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservar);
+
+        sesion = new SessionManager(ReservarActivity.this);
+        sesion.checkLogin();
 
         clase = (Spinner) findViewById(R.id.spClase);
         diaSemana = (Spinner) findViewById(R.id.spDiaSemana);
@@ -140,7 +143,10 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
 
                         @Override
                         public void onResponse(String response) {
+                            Intent intent;
                             Toast.makeText(ReservarActivity.this,response , Toast.LENGTH_LONG).show();
+                            intent = new Intent(ReservarActivity.this, TeacherAreaActivity.class);
+                            ReservarActivity.this.startActivity(intent);
                         }
                     }, new Response.ErrorListener() {
                         @Override

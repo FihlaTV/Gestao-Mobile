@@ -7,9 +7,9 @@ public class HorarioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SessionManager sesion = new SessionManager(HorarioActivity.this);
-        sesion.checkLogin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario);
+        SessionManager sesion = new SessionManager(HorarioActivity.this);
+        sesion.checkLogin();
     }
 }
