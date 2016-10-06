@@ -11,30 +11,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.gestao.udec.gestao_mobile.ProfesoresActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/actProfesor"
-            android:layout_weight="1"
-            android:hint="@string/nombreProfesor" />
-
-        <Button
-            android:text="@string/consultar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btconsutar"
-            android:layout_weight="1" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/actProfesor"
+                android:layout_weight="1"
+                android:hint="@string/nombreProfesor" />
+
+            <Button
+                android:text="@string/consultar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btconsutar"
+                android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -50,9 +49,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvnombrefull"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="24sp" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="100dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/twiter"
+                    android:gravity="center"
+                    android:id="@+id/itwiter"
+                    android:layout_weight="1"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/facebook"
+                    android:id="@+id/ifacebook"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:layout_weight="1"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
