@@ -3,6 +3,7 @@
     <string name="btnRegistro">Registrase</string>
     <string name="btnCancelar">Cancelar</string>
     <string name="etnombre1">Ingresa tu nombre</string>
+    <string name="errorDocente">El docente seleccionado no se encuentra !</string>
     <string name="etnombre2">Ingresa tu segundo nombre</string>
     <string name="etapellido1">Ingresa tu apellido</string>
     <string name="errorLogin">Usuario o Contraseña Incorrectos !</string>
