@@ -66,6 +66,8 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                 TeacherAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btvincular:
+                intent = new Intent(TeacherAreaActivity.this, VincularActivity.class);
+                TeacherAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btclase:
 

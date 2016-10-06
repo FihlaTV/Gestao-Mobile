@@ -40,5 +40,11 @@
     <string name="nombreProfesor">Nombre del profesor</string>
     <string name="consultar">Consultar</string>
     <string name="crearClase">Crear clase</string>
+    <string name="nombreClase">Ingresa el nombre de la clase</string>
+    <string name="unirmeClase">Unirme a clase</string>
+    <string name="vinculacionClase">Vinculación clase</string>
+    <string name="vinculacionAceptacion">¿Esta seguro de vincularse a la clase %1$s ?</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
 
 </resources>

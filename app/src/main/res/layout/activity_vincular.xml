@@ -9,5 +9,39 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.gestao.udec.gestao_mobile.VincularActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/actClase"
+            android:layout_weight="1"
+            android:hint="@string/nombreClase"
+            android:completionHint="@string/nombreClase" />
+
+        <Button
+            android:text="@string/unirmeClase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btVincular"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvnombrefull"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProfesoresActivity extends AppCompatActivity {
-    String showteachers = "http://192.168.1.4/gestao/mobile/show_teachers.php";
+    String showteachers = "http://192.168.1.7/gestao/mobile/show_teachers.php";
     RequestQueue requestQueue;
 
     AutoCompleteTextView auto;
