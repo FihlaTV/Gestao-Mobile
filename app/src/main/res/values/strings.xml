@@ -47,5 +47,8 @@
     <string name="vinculacionAceptacion">¿Esta seguro de vincularse a la clase %1$s ?</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="sala">Sala</string>
+    <string name="horas">Hora</string>
+    <string name="fecha">Fecha</string>
 
 </resources>

@@ -13,7 +13,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/sv">
 
         <LinearLayout
             android:orientation="vertical"
@@ -53,6 +54,27 @@
                 android:gravity="center"
                 android:textSize="24sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvcorreo"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvtelefono"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvdescrip"
+                android:layout_weight="1" />
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -84,6 +106,54 @@
                 android:id="@+id/textView"
                 android:layout_weight="1"
                 android:textSize="24sp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"
+                android:id="@+id/tlclases"
+                android:visibility="invisible">
+
+                <TableRow
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:text="@string/clase"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView2" />
+
+                    <TextView
+                        android:text="@string/sala"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView5" />
+
+                    <TextView
+                        android:text="@string/horas"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView3" />
+
+                    <TextView
+                        android:text="@string/fecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView6" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/trclase" />
+
+            </TableLayout>
 
         </LinearLayout>
     </ScrollView>
