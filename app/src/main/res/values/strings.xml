@@ -26,7 +26,7 @@
     <string name="horario">Mi horario</string>
     <string name="reservar">Reservar clase</string>
     <string name="profesores">Mis profesores</string>
-    <string name="ingreseLaHoraInicial" >Ingrese la hora inicial</string>
+    <string name="ingreseLaHoraInicial">Ingrese la hora inicial</string>
     <string name="ingreseLaHoraFinal">Ingrese la hora final</string>
     <string name="diaSemana">Dia de la semana</string>
     <string name="lunes">Lunes</string>
@@ -50,5 +50,20 @@
     <string name="sala">Sala</string>
     <string name="horas">Hora</string>
     <string name="fecha">Fecha</string>
+    <string name="ingresaCodigo">Ingresa tu código</string>
+    <string name="ingresaNombre1">Ingresa tu primer nombre</string>
+    <string name="ingresaNombre2">Ingresa tu segundo nombre</string>
+    <string name="ingresaApellido1">Ingresa tu primer apellido</string>
+    <string name="ingresaApellido2">Ingresa tu segundo apellido</string>
+    <string name="ingresaUrlFacebook">Ingresa tu direccion de perfil de facebook</string>
+    <string name="ingresaUrlTwitter">Ingresa la direccion de tu pagina de twitter</string>
+    <string name="ingresaDescripcion">Ingresa algo sobre ti</string>
+    <string name="ingresaCorreo">Ingresa tu correo</string>
+    <string name="ingresaTelefono">Ingresa tu número telefonico</string>
+    <string name="ingresaSemestre">Ingresa tu semestre actual</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="urlInvalida">La url ingresada no es valida</string>
+    <string name="semestreInvalido">El semestre ingresado no es valido</string>
+    <string name="numeroTelefonicoInvalido">El numero telefonico ingresado no es valido</string>
 
 </resources>

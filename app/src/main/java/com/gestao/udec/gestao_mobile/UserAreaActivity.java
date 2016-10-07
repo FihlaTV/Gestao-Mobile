@@ -25,11 +25,28 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         SessionManager sesion = new SessionManager(UserAreaActivity.this);
         sesion.checkLogin();
         if(sesion.getUserDetails().get("rol").equals("D")){
-            Intent intent;
-            intent = new Intent(UserAreaActivity.this, TeacherAreaActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            UserAreaActivity.this.startActivity(intent);
+            if(verificacionPerfil("D")) {
+                Intent intent;
+                intent = new Intent(UserAreaActivity.this, TeacherAreaActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                UserAreaActivity.this.startActivity(intent);
+            }
+            else{
+                Intent intent;
+                intent = new Intent(UserAreaActivity.this, PerfilActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                UserAreaActivity.this.startActivity(intent);
+            }
+        }else{
+            if(!verificacionPerfil("E")){
+                Intent intent;
+                intent = new Intent(UserAreaActivity.this, PerfilActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                UserAreaActivity.this.startActivity(intent);
+            }
         }
 
         escanear = (Button) findViewById(R.id.btescanear);
@@ -57,7 +74,12 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         tvhola.setText(message);
 */
     }
+    private boolean verificacionPerfil(String rol){
+        boolean obligatorios;
+        obligatorios = false;
 
+        return obligatorios;
+    }
     @Override
     public void onClick(View v) {
         Intent intent;
