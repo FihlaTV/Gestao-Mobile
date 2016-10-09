@@ -19,6 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -97,12 +101,27 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
 
-                            if (response.equals("Registro Exitoso") && rbestudiante.isChecked()){
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                JSONArray jArray = jsonResponse.getJSONArray("response");
+                                JSONObject id = jArray.getJSONObject(0);
+                                if (id.getString("estado").equals("Registro Exitoso") && rbestudiante.isChecked()){
 
-                                Toast.makeText(RegisterActivity.this,"aqui me voy al user activity" , Toast.LENGTH_LONG).show();
 
+                                    SessionManager sesion = new SessionManager(RegisterActivity.this);
+                                    sesion.createLoginSession(etnombre1.getText().toString(),etcorreo.getText().toString(),id.getString("id"),"E");
+                                    Intent intent = new Intent(RegisterActivity.this, UserAreaActivity.class);
+
+                                    RegisterActivity.this.startActivity(intent);
+                                    //Toast.makeText(RegisterActivity.this,"aqui me voy al user activity" , Toast.LENGTH_LONG).show();
+
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                            Toast.makeText(RegisterActivity.this,response , Toast.LENGTH_LONG).show();
+
+
                         }
                     }, new Response.ErrorListener() {
                         @Override
