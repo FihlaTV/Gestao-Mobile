@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+
 public class UserAreaActivity extends AppCompatActivity implements View.OnClickListener{
     Button escanear;
     Button vincular;
@@ -19,7 +21,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_area);
+
 
 
         SessionManager sesion = new SessionManager(UserAreaActivity.this);
@@ -31,7 +33,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             UserAreaActivity.this.startActivity(intent);
         }
-
+        setContentView(R.layout.activity_user_area);
         escanear = (Button) findViewById(R.id.btescanear);
         vincular = (Button) findViewById(R.id.btvincular);
         horario = (Button) findViewById(R.id.bthorario);

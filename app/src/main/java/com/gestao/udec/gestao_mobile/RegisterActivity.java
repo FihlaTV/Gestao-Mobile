@@ -1,6 +1,7 @@
 package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.7/gestao/mobile/register_person.php";
+    String insertUrl = "http://192.168.1.4/gestao/mobile/register_person.php";
 
     @Override
 
@@ -95,6 +96,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(String response) {
+
+                            if (response.equals("Registro Exitoso") && rbestudiante.isChecked()){
+
+                                Toast.makeText(RegisterActivity.this,"aqui me voy al user activity" , Toast.LENGTH_LONG).show();
+
+                            }
                             Toast.makeText(RegisterActivity.this,response , Toast.LENGTH_LONG).show();
                         }
                     }, new Response.ErrorListener() {
