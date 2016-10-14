@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 public class TeacherAreaActivity extends AppCompatActivity implements View.OnClickListener{
     Button escanear;
     Button vincular;
@@ -58,6 +59,8 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         Intent intent;
         switch(v.getId()){
             case R.id.btescanear:
+                intent = new Intent(TeacherAreaActivity.this, ARSimple.class);
+                TeacherAreaActivity.this.startActivity(intent);
                 break;
             case R.id.bthorario:
                 break;

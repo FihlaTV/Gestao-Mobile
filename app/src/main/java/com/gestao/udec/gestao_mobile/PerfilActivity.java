@@ -29,8 +29,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.7/gestao/mobile/select_perfil.php";
-    String url2 = "http://192.168.1.7/gestao/mobile/update_perfil.php";
+    String url = "http://192.168.1.2/gestao/mobile/select_perfil.php";
+    String url2 = "http://192.168.1.2/gestao/mobile/update_perfil.php";
 
     EditText codigo;
     EditText nombre1;
@@ -194,7 +194,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
 
-                if (telefono.getText().toString().equals("")) {
+            /*    if (telefono.getText().toString().equals("")) {
                     estado = false;
                     telefono.setError(getResources().getString(R.string.numeroTelefonicoInvalido));
                 } else if (Integer.parseInt(telefono.getText().toString()) < 1000000 || Integer.parseInt(telefono.getText().toString()) >= 9999999) {
@@ -202,7 +202,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                         estado = false;
                         telefono.setError(getResources().getString(R.string.numeroTelefonicoInvalido));
                     }
-                }
+                }*/
                 if (sesion.getUserDetails().get("rol").equals("E")) {
                     if (semestre.getText().toString().equals("")) {
                         estado = false;

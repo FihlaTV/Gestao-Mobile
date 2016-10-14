@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 
+
 public class UserAreaActivity extends AppCompatActivity implements View.OnClickListener{
     Button escanear;
     Button vincular;
@@ -50,7 +51,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                 UserAreaActivity.this.startActivity(intent);
             }
         }
-        setContentView(R.layout.activity_user_area);
+
         escanear = (Button) findViewById(R.id.btescanear);
         vincular = (Button) findViewById(R.id.btvincular);
         horario = (Button) findViewById(R.id.bthorario);
@@ -78,7 +79,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     }
     private boolean verificacionPerfil(String rol){
         boolean obligatorios;
-        obligatorios = false;
+        obligatorios = true;
 
         return obligatorios;
     }
@@ -87,7 +88,8 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         Intent intent;
         switch(v.getId()){
             case R.id.btescanear:
-
+                intent = new Intent(UserAreaActivity.this, ARSimple.class);
+                UserAreaActivity.this.startActivity(intent);
                 break;
             case R.id.bthorario:
                 intent = new Intent(UserAreaActivity.this, HorarioActivity.class);
