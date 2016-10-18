@@ -50,6 +50,13 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:text="@string/miPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btPerfil"
+                android:layout_weight="1" />
+
+            <Button
                 android:text="@string/profesores"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

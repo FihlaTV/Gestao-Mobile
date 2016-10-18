@@ -20,18 +20,24 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class ReservarActivity extends AppCompatActivity implements View.OnClickListener {
-    Spinner clase;
+public class ClaseActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    EditText idClase;
+    EditText nombreClase;
+    EditText grupo;
+    EditText creditos;
+    EditText semestre;
+    EditText cantEstudiantes;
+    EditText requerimientos;
+
     Spinner diaSemana;
     Spinner ocurrencias;
     EditText horaInicial;
@@ -42,24 +48,31 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
     HashMap<String, String> arregloClases;
 
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.3/gestao/mobile/select_clases.php";
-    String insertUrl2 = "http://192.168.1.3/gestao/mobile/insert_clase_aula_horario.php";
+    String insertUrl = "http://192.168.1.3/gestao/mobile/insert_clase.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservar);
+        setContentView(R.layout.activity_clase);
 
-        sesion = new SessionManager(ReservarActivity.this);
+        sesion = new SessionManager(ClaseActivity.this);
         sesion.checkLogin();
 
-        clase = (Spinner) findViewById(R.id.spClase);
+
+        idClase= (EditText) findViewById(R.id.etCodigoClase);
+        nombreClase= (EditText) findViewById(R.id.etNombreClase);
+        grupo= (EditText) findViewById(R.id.etGrupo);
+        creditos= (EditText) findViewById(R.id.etNumCreditos);
+        semestre= (EditText) findViewById(R.id.etSemestre);
+        cantEstudiantes= (EditText) findViewById(R.id.etCantEstudiantes);
+        requerimientos= (EditText) findViewById(R.id.etRequerimientos);
+
         diaSemana = (Spinner) findViewById(R.id.spDiaSemana);
         ocurrencias = (Spinner) findViewById(R.id.spOcurrencias);
         horaInicial = (EditText) findViewById(R.id.etHoraInicial);
         horaFinal = (EditText) findViewById(R.id.etHoraFinal);
-        reservar = (Button) findViewById(R.id.btReservar);
+        reservar = (Button) findViewById(R.id.btCrear);
 
         reservar.setOnClickListener(this);
 
@@ -74,54 +87,13 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
         ocurrencias.setAdapter(adapter);
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        obtenerClases();
-    }
-
-    protected void obtenerClases() {
-        StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jArray = jsonResponse.getJSONArray("response");
-                    String[] clasesNombres = new String[jArray.length()];
-                    arregloClases = new HashMap<String, String>();
-                    for (int i = 0; i < jArray.length(); i++) {
-                        JSONObject e = jArray.getJSONObject(i);
-                        clasesNombres[i] = e.getString("nombre");
-                        arregloClases.put(e.getString("nombre"), e.getString("id_clase"));
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservarActivity.this, android.R.layout.simple_spinner_dropdown_item, clasesNombres);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    clase.setAdapter(adapter);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ReservarActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("id_persona", sesion.getUserDetails().get("id"));
-
-                return parameters;
-            }
-        };
-        requestQueue.add(request);
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btReservar:
+            case R.id.btCrear:
 
                 requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -133,9 +105,50 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
 
                 boolean estado = true;
 
-                if(clase.getSelectedItem() == null){
-                    Toast.makeText(ReservarActivity.this, getResources().getString(R.string.noClaseSeleccionada), Toast.LENGTH_LONG).show();
+
+                if(idClase.getText().toString().isEmpty()){
+                    idClase.setError(getResources().getString(R.string.campoNoNulo));
                     estado = false;
+                }
+                if(nombreClase.getText().toString().isEmpty()){
+                    nombreClase.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                }
+                if(grupo.getText().toString().isEmpty()){
+                    grupo.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                }
+                try {
+                    if (Integer.parseInt(cantEstudiantes.getText().toString()) < 1 || Integer.parseInt(cantEstudiantes.getText().toString()) >= 100) {
+                        estado = false;
+                        cantEstudiantes.setError(getResources().getString(R.string.cantidadNoValida));
+                    }
+                } catch (NumberFormatException e) {
+                    estado = false;
+                    cantEstudiantes.setError(getResources().getString(R.string.cantidadNoValida));
+                }
+
+                if(!semestre.getText().toString().isEmpty()){
+                    try {
+                        if (Integer.parseInt(semestre.getText().toString()) < 1 || Integer.parseInt(semestre.getText().toString()) >= 13) {
+                            estado = false;
+                            semestre.setError(getResources().getString(R.string.cantidadNoValida));
+                        }
+                    } catch (NumberFormatException e) {
+                        estado = false;
+                        semestre.setError(getResources().getString(R.string.cantidadNoValida));
+                    }
+                }
+                if(!creditos.getText().toString().isEmpty()){
+                    try {
+                        if (Integer.parseInt(creditos.getText().toString()) < 1 || Integer.parseInt(creditos.getText().toString()) > 18) {
+                            estado = false;
+                            creditos.setError(getResources().getString(R.string.cantidadNoValida));
+                        }
+                    } catch (NumberFormatException e) {
+                        estado = false;
+                        creditos.setError(getResources().getString(R.string.cantidadNoValida));
+                    }
                 }
 
                 try {
@@ -160,25 +173,31 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
 
                 if (estado == true) {
 
-                    StringRequest request = new StringRequest(Request.Method.POST, insertUrl2, new Response.Listener<String>() {
+                    StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
 
                         @Override
                         public void onResponse(String response) {
                             Intent intent;
-                            Toast.makeText(ReservarActivity.this, response, Toast.LENGTH_LONG).show();
-                            intent = new Intent(ReservarActivity.this, TeacherAreaActivity.class);
-                            ReservarActivity.this.startActivity(intent);
+                            Toast.makeText(ClaseActivity.this, response, Toast.LENGTH_LONG).show();
+                            intent = new Intent(ClaseActivity.this, TeacherAreaActivity.class);
+                            ClaseActivity.this.startActivity(intent);
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(ReservarActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ClaseActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
                         }
                     }) {
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> parameters = new HashMap<String, String>();
-                            parameters.put("id_clase", arregloClases.get(clase.getSelectedItem()));
+                            parameters.put("id_clase", idClase.getText().toString());
+                            parameters.put("nombre_clase", nombreClase.getText().toString());
+                            parameters.put("grupo", grupo.getText().toString());
+                            parameters.put("creditos", creditos.getText().toString());
+                            parameters.put("semestre", semestre.getText().toString());
+                            parameters.put("cantidad_estudiantes", cantEstudiantes.getText().toString());
+                            parameters.put("requerimientos", requerimientos.getText().toString());
                             parameters.put("id_persona", sesion.getUserDetails().get("id"));
                             parameters.put("dia_semana", String.valueOf(diaSemana.getSelectedItemPosition()));
                             parameters.put("ocurrencias", String.valueOf(ocurrencias.getSelectedItemPosition()));

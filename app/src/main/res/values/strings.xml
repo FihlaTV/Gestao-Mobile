@@ -67,5 +67,19 @@
     <string name="urlInvalida">La url ingresada no es valida</string>
     <string name="semestreInvalido">El semestre ingresado no es valido</string>
     <string name="numeroTelefonicoInvalido">El numero telefonico ingresado no es valido</string>
+    <string name="miPerfil">Mi perfil</string>
+    <string name="noClaseSeleccionada">No se ha seleccionado ninguna clase</string>
+    <string name="unaSolaVez">Una sola vez</string>
+    <string name="todoElSemestre">Todo el semestre</string>
+    <string name="ocurrencias">Ocurrencias</string>
+    <string name="ingresaCodigoClase">Ingresa el codigo de la nueva clase</string>
+    <string name="ingresaNombreClase">Ingresa el nombre de la clase</string>
+    <string name="ingresaGrupoClase">Ingresa el grupo de la clase</string>
+    <string name="ingresaNumeroCreditos">Ingresa el numero de creditos</string>
+    <string name="ingresaSemestre2">Ingresa el semestre al cual pertenece la clase</string>
+    <string name="ingreseCantidadEstudiantes">Ingrese el numero de estudiantes en la clase</string>
+    <string name="ingreseRequerimientos">Ingrese los requerimientos de la clase</string>
+    <string name="cantidadNoValida">Cantidad  no valida</string>
+
 
 </resources>

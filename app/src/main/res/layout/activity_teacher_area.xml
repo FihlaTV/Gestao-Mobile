@@ -48,7 +48,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            >
 
             <Button
                 android:text="@string/reservar"
@@ -62,6 +62,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btclase"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="@string/miPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btPerfil"
                 android:layout_weight="1" />
         </LinearLayout>
 

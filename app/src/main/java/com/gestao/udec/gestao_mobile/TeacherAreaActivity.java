@@ -18,6 +18,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
     Button horario;
     Button registrar;
     Button clase;
+    Button perfil;
 
 
     @Override
@@ -33,12 +34,14 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         horario = (Button) findViewById(R.id.bthorario);
         registrar = (Button) findViewById(R.id.btreservar);
         clase = (Button) findViewById(R.id.btclase);
+        perfil = (Button) findViewById(R.id.btPerfil);
 
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);
         horario.setOnClickListener(this);
         registrar.setOnClickListener(this);
         clase.setOnClickListener(this);
+        perfil.setOnClickListener(this);
         /*
         Intent intent = getIntent();
         String name1 = intent.getStringExtra("name1");
@@ -73,7 +76,12 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                 TeacherAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btclase:
-
+                intent = new Intent(TeacherAreaActivity.this, ClaseActivity.class);
+                TeacherAreaActivity.this.startActivity(intent);
+                break;
+            case R.id.btPerfil:
+                intent = new Intent(TeacherAreaActivity.this, PerfilActivity.class);
+                TeacherAreaActivity.this.startActivity(intent);
                 break;
         }
     }

@@ -29,19 +29,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.2/gestao/mobile/select_perfil.php";
-    String url2 = "http://192.168.1.2/gestao/mobile/update_perfil.php";
+    String url = "http://192.168.1.3/gestao/mobile/select_perfil.php";
+    String url2 = "http://192.168.1.3/gestao/mobile/update_perfil.php";
 
-    EditText codigo;
-    EditText nombre1;
+    EditText codigo;//o
+    EditText nombre1;//o
     EditText nombre2;
-    EditText apellido1;
+    EditText apellido1;//o
     EditText apellido2;
-    EditText email;
-    EditText telefono;
-    EditText facebook;
+    EditText email;//o
+    EditText telefono;//o
+    EditText facebook;//o
     EditText twitter;
-    EditText descripcion;
+    EditText descripcion;//o
     EditText semestre;
     Button actualizar;
 
