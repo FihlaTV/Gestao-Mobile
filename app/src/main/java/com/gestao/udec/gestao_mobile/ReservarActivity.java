@@ -42,8 +42,8 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
     HashMap<String, String> arregloClases;
 
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.3/gestao/mobile/select_clases.php";
-    String insertUrl2 = "http://192.168.1.3/gestao/mobile/insert_clase_aula_horario.php";
+    String insertUrl = "http://192.168.1.66/gestao/mobile/select_clases.php";
+    String insertUrl2 = "http://192.168.1.66/gestao/mobile/insert_clase_aula_horario.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

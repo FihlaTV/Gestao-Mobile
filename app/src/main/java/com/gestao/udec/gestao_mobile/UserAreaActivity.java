@@ -26,7 +26,7 @@ import java.util.Map;
 
 
 public class UserAreaActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.3/gestao/mobile/verificacion_datos_basicos.php";
+    String url = "http://192.168.1.66/gestao/mobile/verificacion_datos_basicos.php";
     Button escanear;
     Button vincular;
     Button horario;

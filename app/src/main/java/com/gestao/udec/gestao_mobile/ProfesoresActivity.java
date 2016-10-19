@@ -42,10 +42,10 @@ import java.util.Map;
 import static android.R.attr.bitmap;
 
 public class ProfesoresActivity extends AppCompatActivity {
-    String showteachers = "http://192.168.1.4/gestao/mobile/show_teachers.php";
+    String showteachers = "http://192.168.1.66/gestao/mobile/show_teachers.php";
 
-    String showteacheree = "http://192.168.1.4/gestao/mobile/show_teachers_e.php";
-    String showteacherec = "http://192.168.1.4/gestao/mobile/select_latest_clases_e.php";
+    String showteacheree = "http://192.168.1.66/gestao/mobile/show_teachers_e.php";
+    String showteacherec = "http://192.168.1.66/gestao/mobile/select_latest_clases_e.php";
     ImageView ifacebook;
     ImageView itwiter;
     ImageView ivfoto;
@@ -293,7 +293,7 @@ obtener_profesor();
         requestQueue.add(requesttwo);
 
 
-        String url_photo = "http://192.168.1.4/gestao/img_profiles/"+id_profesor+".jpg";
+        String url_photo = "http://192.168.1.66/gestao/img_profiles/"+id_profesor+".jpg";
         ImageRequest imageRequest = new ImageRequest(url_photo,
 
                 new Response.Listener<Bitmap>() {

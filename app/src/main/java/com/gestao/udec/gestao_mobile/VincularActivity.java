@@ -30,8 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VincularActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.3/gestao/mobile/select_clases_vincular.php";
-    String url2 = "http://192.168.1.3/gestao/mobile/insert_vinculacion.php";
+    String url = "http://192.168.1.66/gestao/mobile/select_clases_vincular.php";
+    String url2 = "http://192.168.1.66/gestao/mobile/insert_vinculacion.php";
     RequestQueue requestQueue;
     AutoCompleteTextView auto;
     Button vincular;

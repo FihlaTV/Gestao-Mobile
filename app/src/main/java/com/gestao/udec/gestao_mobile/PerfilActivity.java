@@ -29,8 +29,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.3/gestao/mobile/select_perfil.php";
-    String url2 = "http://192.168.1.3/gestao/mobile/update_perfil.php";
+    String url = "http://192.168.1.66/gestao/mobile/select_perfil.php";
+    String url2 = "http://192.168.1.66/gestao/mobile/update_perfil.php";
 
     EditText codigo;//o
     EditText nombre1;//o
