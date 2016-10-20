@@ -43,14 +43,32 @@
 
         </LinearLayout>
 
-        <TableLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:shrinkColumns="*"
-            android:stretchColumns="*"
-            android:id="@+id/tlclases">
+            android:id="@+id/tvclase_actual" />
 
-        </TableLayout>
+        <TextView
+            android:text="vacio! actualmente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvvacio"
+
+            android:visibility="invisible" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"
+                android:id="@+id/tlclases">
+
+            </TableLayout>
+        </ScrollView>
 
     </LinearLayout>
 </RelativeLayout>
