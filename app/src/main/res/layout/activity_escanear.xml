@@ -15,9 +15,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/fecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvfecha"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="@string/hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvhora"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="@string/aula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvaula"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvAula" />
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
+            android:id="@+id/tlclases">
+
+        </TableLayout>
+
     </LinearLayout>
 </RelativeLayout>
