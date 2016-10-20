@@ -80,6 +80,9 @@
     <string name="ingreseCantidadEstudiantes">Ingrese el numero de estudiantes en la clase</string>
     <string name="ingreseRequerimientos">Ingrese los requerimientos de la clase</string>
     <string name="cantidadNoValida">Cantidad  no valida</string>
+    <string name="hora">Hora</string>
+    <string name="aula">Aula</string>
+    <string name="actualmente">Actualmente</string>
 
 
 </resources>
