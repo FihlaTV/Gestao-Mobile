@@ -1,5 +1,6 @@
 package com.gestao.udec.gestao_mobile;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -59,6 +60,7 @@ public class ProfesoresActivity extends AppCompatActivity {
     ScrollView sv;
     TableRow trclase;
     Button btConsultar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SessionManager sesion = new SessionManager(ProfesoresActivity.this);
@@ -72,15 +74,15 @@ public class ProfesoresActivity extends AppCompatActivity {
         auto = (AutoCompleteTextView) findViewById(R.id.actProfesor);
         btConsultar = (Button) findViewById(R.id.btconsutar);
         tvnombrefull = (TextView) findViewById(R.id.tvnombrefull);
-         sv = (ScrollView)findViewById(R.id.sv);
+        sv = (ScrollView) findViewById(R.id.sv);
         tvcorreo = (TextView) findViewById(R.id.tvcorreo);
         tvdescrip = (TextView) findViewById(R.id.tvdescrip);
         tvtelefono = (TextView) findViewById(R.id.tvtelefono);
         tlclase = (TableLayout) findViewById(R.id.tlclases);
-        trclase = (TableRow)  findViewById(R.id.trclase);
+        trclase = (TableRow) findViewById(R.id.trclase);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         String font_path = "fonts/Ubuntu-C.ttf";
-        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+        final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
         auto.setTypeface(TF);
         tvcorreo.setTypeface(TF);
         tvnombrefull.setTypeface(TF);
@@ -97,7 +99,7 @@ public class ProfesoresActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String url = (String)itwiter.getTag();
+                String url = (String) itwiter.getTag();
 
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
@@ -105,8 +107,11 @@ public class ProfesoresActivity extends AppCompatActivity {
 
                 //pass the url to intent data
                 intent.setData(Uri.parse(url));
-
-                startActivity(intent);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException anfe_e) {
+                    Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.docenteNoHaRegistradoRecurso), Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -115,7 +120,7 @@ public class ProfesoresActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String url = (String)ifacebook.getTag();
+                String url = (String) ifacebook.getTag();
 
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
@@ -123,8 +128,11 @@ public class ProfesoresActivity extends AppCompatActivity {
 
                 //pass the url to intent data
                 intent.setData(Uri.parse(url));
-
-                startActivity(intent);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException anfe_e) {
+                    Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.docenteNoHaRegistradoRecurso), Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -135,42 +143,41 @@ public class ProfesoresActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 sv.scrollTo(0, btConsultar.getBottom());
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
                 inputMethodManager.hideSoftInputFromWindow(auto.getWindowToken(), 0);
 
 
-            String profesor = auto.getText().toString();
-              String[]  profesornombre = profesor.split(" ");
+                String profesor = auto.getText().toString();
+                String[] profesornombre = profesor.split(" ");
                 for (int i = 0; i < jArray.length(); i++) {
                     try {
                         JSONObject profesores = jArray.getJSONObject(i);
 
-                        if ((profesores.getString("nombre").equals(profesornombre[0])) && (profesores.getString("apellido").equals(profesornombre[1]))){
-                          id_profesor = profesores.getString("id");
+                        if ((profesores.getString("nombre").equals(profesornombre[0])) && (profesores.getString("apellido").equals(profesornombre[1]))) {
+                            id_profesor = profesores.getString("id");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                if (id_profesor==""){
+                if (id_profesor == "") {
                     itwiter.setVisibility(View.INVISIBLE);
                     ifacebook.setVisibility(View.INVISIBLE);
                     Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.errorDocente), Toast.LENGTH_LONG).show();
-                }else{
+                } else {
 
 
-obtener_profesor();
+                    obtener_profesor();
 
 
-
-
-            }}
+                }
+            }
 
 
         });
 
-}
+    }
 
 
     protected void obtener_profesor() {
@@ -184,7 +191,7 @@ obtener_profesor();
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if(jArray.length()>0){
+                    if (jArray.length() > 0) {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject profesor = jArray.getJSONObject(i);
                             itwiter.setTag(profesor.getString("twiter"));
@@ -193,17 +200,15 @@ obtener_profesor();
 
                             itwiter.setVisibility(View.VISIBLE);
                             ifacebook.setVisibility(View.VISIBLE);
-                            tvnombrefull.setText(profesor.getString("nombre1")+" "+profesor.getString("nombre2")+" "+profesor.getString("apellido1")+" "+profesor.getString("apellido2"));
+                            tvnombrefull.setText(profesor.getString("nombre1") + " " + profesor.getString("nombre2") + " " + profesor.getString("apellido1") + " " + profesor.getString("apellido2"));
                             tvdescrip.setText(profesor.getString("descripcion"));
                             tvcorreo.setText(profesor.getString("email"));
                             tvtelefono.setText(profesor.getString("telefono"));
                         }
-                    }else{
+                    } else {
 
                         Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.erroNoDocente), Toast.LENGTH_LONG).show();
                     }
-
-
 
 
                 } catch (JSONException e) {
@@ -237,39 +242,39 @@ obtener_profesor();
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if(jArray.length()>0){
+                    if (jArray.length() > 0) {
 
-                    for (int i = 0; i < jArray.length(); i++) {
-                        JSONObject clases = jArray.getJSONObject(i);
-
-
-                        trclase = new TableRow(getApplicationContext());
-                        trclase.setId(100+i);
-
-                        TextView tvcol1 = new TextView(getApplicationContext());
-                        tvcol1.setId(200+i);
-
-                        tvcol1.setText(clases.getString("nombre_clase"));
-                        TextView tvcol2 = new TextView(getApplicationContext());
-                        tvcol2.setId(200+i);
-                        tvcol2.setText(clases.getString("nombre_aula"));
-                        TextView tvcol3 = new TextView(getApplicationContext());
-                        tvcol3.setId(200+i);
-                        tvcol3.setText(clases.getString("hora_inicio") + " - "+clases.getString("hora_final"));
-
-                        TextView tvcol5 = new TextView(getApplicationContext());
-                        tvcol5.setId(200+i);
-                        tvcol5.setText(clases.getString("fecha").substring(0, 1).toUpperCase() + clases.getString("fecha").substring(1));
-                        trclase.addView(tvcol1);
-                        trclase.addView(tvcol2);
-                        trclase.addView(tvcol3);
+                        for (int i = 0; i < jArray.length(); i++) {
+                            JSONObject clases = jArray.getJSONObject(i);
 
 
-                        trclase.addView(tvcol5);
-                        tlclase.addView(trclase);
+                            trclase = new TableRow(getApplicationContext());
+                            trclase.setId(100 + i);
 
-                    }
-                    }else{
+                            TextView tvcol1 = new TextView(getApplicationContext());
+                            tvcol1.setId(200 + i);
+
+                            tvcol1.setText(clases.getString("nombre_clase"));
+                            TextView tvcol2 = new TextView(getApplicationContext());
+                            tvcol2.setId(200 + i);
+                            tvcol2.setText(clases.getString("nombre_aula"));
+                            TextView tvcol3 = new TextView(getApplicationContext());
+                            tvcol3.setId(200 + i);
+                            tvcol3.setText(clases.getString("hora_inicio") + " - " + clases.getString("hora_final"));
+
+                            TextView tvcol5 = new TextView(getApplicationContext());
+                            tvcol5.setId(200 + i);
+                            tvcol5.setText(clases.getString("fecha").substring(0, 1).toUpperCase() + clases.getString("fecha").substring(1));
+                            trclase.addView(tvcol1);
+                            trclase.addView(tvcol2);
+                            trclase.addView(tvcol3);
+
+
+                            trclase.addView(tvcol5);
+                            tlclase.addView(trclase);
+
+                        }
+                    } else {
                         Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.errorNoClases), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
@@ -293,27 +298,26 @@ obtener_profesor();
         requestQueue.add(requesttwo);
 
 
-        String url_photo = "http://192.168.1.66/gestao/img_profiles/"+id_profesor+".jpg";
+        String url_photo = "http://192.168.1.66/gestao/img_profiles/" + id_profesor + ".jpg";
         ImageRequest imageRequest = new ImageRequest(url_photo,
 
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap response) {
                         CircularNetworkImageView im = new CircularNetworkImageView(getApplicationContext());
-                Bitmap imgful = im.getCircularBitmap(response);
+                        Bitmap imgful = im.getCircularBitmap(response);
 
-                ivfoto.setImageBitmap(imgful);
+                        ivfoto.setImageBitmap(imgful);
                     }
-                },200,200, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener(){
+                }, 200, 200, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error){
+            public void onErrorResponse(VolleyError error) {
                 Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(imageRequest);
     }
-
 
 
     protected void obtener_profesores() {
@@ -325,12 +329,12 @@ obtener_profesor();
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     jArray = jsonResponse.getJSONArray("response");
-                    String[] profesoresNombre  = new String[jArray.length()];
+                    String[] profesoresNombre = new String[jArray.length()];
 
                     for (int i = 0; i < jArray.length(); i++) {
                         JSONObject profesores = jArray.getJSONObject(i);
 
-                                profesoresNombre[i] = profesores.getString("nombre")+" "+profesores.getString("apellido");
+                        profesoresNombre[i] = profesores.getString("nombre") + " " + profesores.getString("apellido");
 
 
                     }

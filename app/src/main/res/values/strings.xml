@@ -9,7 +9,7 @@
     <string name="errorLogin">Usuario o Contraseña Incorrectos !</string>
     <string name="campoNoNulo">Este campo no puede ser nulo !</string>
     <string name="claveNoIgual">Las claves deben coincidir !</string>
-    <string name="claveNoCaracter">las claves deben tener almenos 8 caracteres</string>
+    <string name="claveNoCaracter">Las claves deben tener almenos 8 caracteres</string>
     <string name="etapellido2">Ingresa tu segundo apellido</string>
     <string name="etpass">Ingresa tu clave de acceso</string>
     <string name="etcorreo">Tucorreo@mail.com</string>
@@ -83,6 +83,9 @@
     <string name="hora">Hora</string>
     <string name="aula">Aula</string>
     <string name="actualmente">Actualmente</string>
+    <string name="claseNoExistente">Esta clase no existe</string>
+    <string name="docenteNoHaRegistradoRecurso">El docente no ha registrado este recurso</string>
+    <string name="servidorNoAlcanzable">No se logro conectar con el servidor</string>
 
 
 </resources>

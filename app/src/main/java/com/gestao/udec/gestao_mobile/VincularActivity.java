@@ -110,55 +110,65 @@ public class VincularActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btVincular:
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        try {
+            switch (v.getId()) {
+                case R.id.btVincular:
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-                inputMethodManager.hideSoftInputFromWindow(auto.getWindowToken(), 0);
+                    inputMethodManager.hideSoftInputFromWindow(auto.getWindowToken(), 0);
+                    if (clasesLista.get(auto.getText().toString()) == null) {
+                        throw new Exception(getResources().getString(R.string.claseNoExistente));
+                    }
+                    new AlertDialog.Builder(VincularActivity.this)
+                            .setTitle(getResources().getString(R.string.vinculacionClase))
+                            .setMessage(String.format(getResources().getString(R.string.vinculacionAceptacion), auto.getText().toString()))
+                            .setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                    StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
 
-                new AlertDialog.Builder(VincularActivity.this)
-                        .setTitle(getResources().getString(R.string.vinculacionClase))
-                        .setMessage(String.format(getResources().getString(R.string.vinculacionAceptacion), auto.getText().toString()))
-                        .setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                requestQueue = Volley.newRequestQueue(getApplicationContext());
-                                StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Intent intent;
+                                            Toast.makeText(VincularActivity.this, response, Toast.LENGTH_LONG).show();
+                                            if(sesion.getUserDetails().get("rol").equals("E")) {
+                                                intent = new Intent(VincularActivity.this, UserAreaActivity.class);
+                                            }else{
+                                                intent = new Intent(VincularActivity.this, TeacherAreaActivity.class);
+                                            }
+                                            VincularActivity.this.startActivity(intent);
+                                        }
+                                    }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Toast.makeText(VincularActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+                                        }
+                                    }) {
+                                        @Override
+                                        protected Map<String, String> getParams() throws AuthFailureError {
+                                            Map<String, String> parameters = new HashMap<String, String>();
+                                            parameters.put("id_clase", clasesLista.get(auto.getText().toString()));
+                                            parameters.put("id_persona", sesion.getUserDetails().get("id"));
+                                            parameters.put("rol", sesion.getUserDetails().get("rol"));
 
-                                    @Override
-                                    public void onResponse(String response) {
-                                        Intent intent;
-                                        Toast.makeText(VincularActivity.this, response, Toast.LENGTH_LONG).show();
-                                        intent = new Intent(VincularActivity.this, UserAreaActivity.class);
-                                        VincularActivity.this.startActivity(intent);
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(VincularActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
-                                    }
-                                }) {
-                                    @Override
-                                    protected Map<String, String> getParams() throws AuthFailureError {
-                                        Map<String, String> parameters = new HashMap<String, String>();
-                                        parameters.put("id_clase", clasesLista.get(auto.getText().toString()));
-                                        parameters.put("id_persona", sesion.getUserDetails().get("id"));
-                                        parameters.put("rol", sesion.getUserDetails().get("rol"));
+                                            return parameters;
+                                        }
+                                    };
+                                    requestQueue.add(request);
+                                }
+                            })
+                            .setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    break;
 
-                                        return parameters;
-                                    }
-                                };
-                                requestQueue.add(request);
-                            }
-                        })
-                        .setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-                break;
-
+            }
+        }catch(Exception e){
+            Toast.makeText(VincularActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

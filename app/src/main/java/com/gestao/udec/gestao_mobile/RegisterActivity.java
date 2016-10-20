@@ -119,6 +119,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if (etclave2.length() < 7 || etclave.length() < 7) {
                     etclave2.setError(getResources().getString(R.string.claveNoCaracter));
+                    estado = false;
                 }
 
                 if (estado == true) {
