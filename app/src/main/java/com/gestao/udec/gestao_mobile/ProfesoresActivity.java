@@ -80,7 +80,7 @@ public class ProfesoresActivity extends AppCompatActivity {
         trclase = (TableRow)  findViewById(R.id.trclase);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         String font_path = "fonts/Ubuntu-C.ttf";
-        Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
         auto.setTypeface(TF);
         tvcorreo.setTypeface(TF);
         tvnombrefull.setTypeface(TF);
@@ -259,7 +259,7 @@ obtener_profesor();
 
                         TextView tvcol5 = new TextView(getApplicationContext());
                         tvcol5.setId(200+i);
-                        tvcol5.setText(clases.getString("fecha"));
+                        tvcol5.setText(clases.getString("fecha").substring(0, 1).toUpperCase() + clases.getString("fecha").substring(1));
                         trclase.addView(tvcol1);
                         trclase.addView(tvcol2);
                         trclase.addView(tvcol3);

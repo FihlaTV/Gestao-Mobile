@@ -83,7 +83,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraInicial"
-            android:hint="@string/ingreseLaHoraInicial" />
+            android:hint="@string/ingreseLaHoraInicial"
+            android:maxLength="@integer/length2" />
 
         <EditText
             android:layout_width="match_parent"
@@ -91,7 +92,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraFinal"
-            android:hint="@string/ingreseLaHoraFinal" />
+            android:hint="@string/ingreseLaHoraFinal"
+            android:maxLength="@integer/length2" />
 
         <Button
             android:text="@string/reservar"

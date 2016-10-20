@@ -2,6 +2,7 @@ package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,6 +76,22 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             semestre.setVisibility(View.VISIBLE);
         }
+
+        String font_path = "fonts/Ubuntu-C.ttf";
+        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+        codigo.setTypeface(TF);
+        nombre1.setTypeface(TF);
+        nombre2.setTypeface(TF);
+        apellido1.setTypeface(TF);
+        apellido2.setTypeface(TF);
+        email.setTypeface(TF);
+        telefono.setTypeface(TF);
+        facebook.setTypeface(TF);
+        twitter.setTypeface(TF);
+        descripcion.setTypeface(TF);
+        semestre.setTypeface(TF);
+        actualizar.setTypeface(TF);
 
         actualizar.setOnClickListener(this);
 

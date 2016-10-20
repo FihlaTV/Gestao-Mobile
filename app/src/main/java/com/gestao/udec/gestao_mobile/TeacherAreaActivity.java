@@ -1,5 +1,6 @@
 package com.gestao.udec.gestao_mobile;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -42,19 +43,17 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         registrar.setOnClickListener(this);
         clase.setOnClickListener(this);
         perfil.setOnClickListener(this);
-        /*
-        Intent intent = getIntent();
-        String name1 = intent.getStringExtra("name1");
 
+        String font_path = "fonts/Ubuntu-C.ttf";
+        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
 
+        escanear.setTypeface(TF);
+        vincular.setTypeface(TF);
+        horario.setTypeface(TF);
+        registrar.setTypeface(TF);
+        clase.setTypeface(TF);
+        perfil.setTypeface(TF);
 
-        TextView tvhola = (TextView) findViewById(R.id.tvhola);
-
-
-        // Display user details
-        String message = name1 + " welcome to your user area";
-        tvhola.setText(message);
-*/
     }
 
     @Override

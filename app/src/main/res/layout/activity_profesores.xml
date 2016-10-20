@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/actProfesor"
                 android:layout_weight="1"
-                android:hint="@string/nombreProfesor" />
+                android:hint="@string/nombreProfesor"
+                android:maxLength="@integer/textoSemiLargo" />
 
             <Button
                 android:text="@string/consultar"

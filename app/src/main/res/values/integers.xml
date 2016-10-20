@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="codigos">9</integer>
+    <integer name="nombreslength">20</integer>
+    <integer name="grupolength" >8</integer>
+    <integer name="length2">2</integer>
+    <integer name="textolargo">500</integer>
+    <integer name="textoSemiLargo">100</integer>
+    <integer name="passwordlength">60</integer>
+    <integer name="telefonolength">10</integer>
+</resources>

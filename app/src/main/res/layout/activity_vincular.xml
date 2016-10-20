@@ -20,7 +20,7 @@
             android:id="@+id/actClase"
             android:layout_weight="1"
             android:hint="@string/nombreClase"
-            android:completionHint="@string/nombreClase" />
+            android:maxLength="@integer/textoSemiLargo" />
 
         <Button
             android:text="@string/unirmeClase"

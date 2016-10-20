@@ -1,5 +1,6 @@
 package com.gestao.udec.gestao_mobile;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -32,7 +33,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     Button horario;
     Button profesores;
     Button perfil;
-    boolean obligatorios;
+
 
     SessionManager sesion;
     RequestQueue requestQueue;
@@ -57,6 +58,14 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         profesores = (Button) findViewById(R.id.btprofesores);
         perfil = (Button) findViewById(R.id.btPerfil);
 
+        String font_path = "fonts/Ubuntu-C.ttf";
+        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+        escanear.setTypeface(TF);
+        vincular.setTypeface(TF);
+        horario.setTypeface(TF);
+        profesores.setTypeface(TF);
+        perfil.setTypeface(TF);
 
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);

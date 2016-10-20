@@ -2,14 +2,18 @@ package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,6 +42,9 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
     EditText cantEstudiantes;
     EditText requerimientos;
 
+    TextView textoSemana;
+    TextView textoOcurrencias;
+
     Spinner diaSemana;
     Spinner ocurrencias;
     EditText horaInicial;
@@ -48,7 +55,8 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
     HashMap<String, String> arregloClases;
 
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.66/gestao/mobile/insert_clase.php";
+    String insertUrl = "http://" +
+            "192.168.1.66/gestao/mobile/insert_clase.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,21 +76,71 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
         cantEstudiantes= (EditText) findViewById(R.id.etCantEstudiantes);
         requerimientos= (EditText) findViewById(R.id.etRequerimientos);
 
+        textoSemana = (TextView) findViewById(R.id.tvDiaSemana);
+        textoOcurrencias = (TextView) findViewById(R.id.tvOcurrencias);
+
         diaSemana = (Spinner) findViewById(R.id.spDiaSemana);
         ocurrencias = (Spinner) findViewById(R.id.spOcurrencias);
         horaInicial = (EditText) findViewById(R.id.etHoraInicial);
         horaFinal = (EditText) findViewById(R.id.etHoraFinal);
         reservar = (Button) findViewById(R.id.btCrear);
 
+        String font_path = "fonts/Ubuntu-C.ttf";
+        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+        idClase.setTypeface(TF);
+        nombreClase.setTypeface(TF);
+        grupo.setTypeface(TF);
+        creditos.setTypeface(TF);
+        semestre.setTypeface(TF);
+        cantEstudiantes.setTypeface(TF);
+        requerimientos.setTypeface(TF);
+        horaInicial.setTypeface(TF);
+        horaFinal.setTypeface(TF);
+        reservar.setTypeface(TF);
+        textoSemana.setTypeface(TF);
+        textoOcurrencias.setTypeface(TF);
+
         reservar.setOnClickListener(this);
 
+
         String[] diasSemana = {getResources().getString(R.string.lunes), getResources().getString(R.string.martes), getResources().getString(R.string.miercoles), getResources().getString(R.string.jueves), getResources().getString(R.string.viernes), getResources().getString(R.string.sabado)};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+
+
+            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                View v =super.getDropDownView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         diaSemana.setAdapter(adapter);
 
         String[] aOcurrencias = {getResources().getString(R.string.unaSolaVez),getResources().getString(R.string.todoElSemestre)};
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, aOcurrencias);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, aOcurrencias){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+
+
+            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                View v =super.getDropDownView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ocurrencias.setAdapter(adapter);
 

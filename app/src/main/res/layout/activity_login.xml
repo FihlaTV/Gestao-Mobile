@@ -29,7 +29,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:hint="@string/etcorreo" />
+                android:hint="@string/etcorreo"
+                android:maxLength="@integer/textoSemiLargo" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -42,7 +43,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignRight="@+id/etCorreo"
                 android:layout_alignEnd="@+id/etCorreo"
-                android:hint="@string/etpass" />
+                android:hint="@string/etpass"
+                android:maxLength="@integer/passwordlength" />
 
             <LinearLayout
                 android:orientation="horizontal"

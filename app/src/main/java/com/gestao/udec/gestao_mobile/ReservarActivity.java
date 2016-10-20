@@ -2,14 +2,17 @@ package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,6 +42,13 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
     SessionManager sesion;
     Button reservar;
 
+    TextView textoClase;
+    TextView textoDiaSemana;
+    TextView textoOcurrencias;
+
+
+
+
     HashMap<String, String> arregloClases;
 
     RequestQueue requestQueue;
@@ -60,16 +70,59 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
         horaInicial = (EditText) findViewById(R.id.etHoraInicial);
         horaFinal = (EditText) findViewById(R.id.etHoraFinal);
         reservar = (Button) findViewById(R.id.btReservar);
+        textoClase = (TextView) findViewById(R.id.tvClase);
+        textoDiaSemana = (TextView) findViewById(R.id.tvDiaSemana);
+        textoOcurrencias = (TextView) findViewById(R.id.tvOcurrencias);
+
+        String font_path = "fonts/Ubuntu-C.ttf";
+        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+        horaInicial.setTypeface(TF);
+        horaFinal.setTypeface(TF);
+        reservar.setTypeface(TF);
+        textoClase.setTypeface(TF);
+        textoDiaSemana.setTypeface(TF);
+        textoOcurrencias.setTypeface(TF);
 
         reservar.setOnClickListener(this);
 
         String[] diasSemana = {getResources().getString(R.string.lunes), getResources().getString(R.string.martes), getResources().getString(R.string.miercoles), getResources().getString(R.string.jueves), getResources().getString(R.string.viernes), getResources().getString(R.string.sabado)};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+
+
+            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                View v =super.getDropDownView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         diaSemana.setAdapter(adapter);
 
         String[] aOcurrencias = {getResources().getString(R.string.unaSolaVez),getResources().getString(R.string.todoElSemestre)};
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, aOcurrencias);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, aOcurrencias){
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+
+
+            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                View v =super.getDropDownView(position, convertView, parent);
+                ((TextView) v).setTypeface(TF);
+
+                return v;
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ocurrencias.setAdapter(adapter);
 
@@ -92,7 +145,25 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
                         clasesNombres[i] = e.getString("nombre");
                         arregloClases.put(e.getString("nombre"), e.getString("id_clase"));
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservarActivity.this, android.R.layout.simple_spinner_dropdown_item, clasesNombres);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(ReservarActivity.this, android.R.layout.simple_spinner_dropdown_item, clasesNombres){
+                        String font_path = "fonts/Ubuntu-C.ttf";
+                        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            View v = super.getView(position, convertView, parent);
+                            ((TextView) v).setTypeface(TF);
+
+                            return v;
+                        }
+
+
+                        public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                            View v =super.getDropDownView(position, convertView, parent);
+                            ((TextView) v).setTypeface(TF);
+
+                            return v;
+                        }
+                    };
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     clase.setAdapter(adapter);
 

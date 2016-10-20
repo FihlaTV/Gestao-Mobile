@@ -54,6 +54,8 @@ public class VincularActivity extends AppCompatActivity implements View.OnClickL
         String font_path = "fonts/Ubuntu-C.ttf";
         Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
         auto.setTypeface(TF);
+        vincular.setTypeface(TF);
+        auto.requestFocus();
 
         vincular.setOnClickListener(this);
 
@@ -110,6 +112,10 @@ public class VincularActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btVincular:
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                inputMethodManager.hideSoftInputFromWindow(auto.getWindowToken(), 0);
+
                 new AlertDialog.Builder(VincularActivity.this)
                         .setTitle(getResources().getString(R.string.vinculacionClase))
                         .setMessage(String.format(getResources().getString(R.string.vinculacionAceptacion), auto.getText().toString()))

@@ -29,7 +29,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etCodigoClase"
-            android:hint="@string/ingresaCodigoClase" />
+            android:hint="@string/ingresaCodigoClase"
+            android:maxLength="@integer/codigos" />
 
         <EditText
             android:layout_width="match_parent"
@@ -37,7 +38,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etNombreClase"
-            android:hint="@string/ingresaNombreClase" />
+            android:hint="@string/ingresaNombreClase"
+            android:maxLength="@integer/nombreslength" />
 
         <EditText
             android:layout_width="match_parent"
@@ -45,7 +47,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etGrupo"
-            android:hint="@string/ingresaGrupoClase" />
+            android:hint="@string/ingresaGrupoClase"
+            android:maxLength="@integer/grupolength" />
 
         <EditText
             android:layout_width="match_parent"
@@ -53,7 +56,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etNumCreditos"
-            android:hint="@string/ingresaNumeroCreditos" />
+            android:hint="@string/ingresaNumeroCreditos"
+            android:maxLength="@integer/length2" />
 
         <EditText
             android:layout_width="match_parent"
@@ -61,7 +65,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etSemestre"
-            android:hint="@string/ingresaSemestre2" />
+            android:hint="@string/ingresaSemestre2"
+            android:maxLength="@integer/length2" />
 
         <EditText
             android:layout_width="match_parent"
@@ -69,15 +74,19 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etCantEstudiantes"
-            android:hint="@string/ingreseCantidadEstudiantes" />
+            android:hint="@string/ingreseCantidadEstudiantes"
+            android:maxLength="@integer/length2" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
+            android:lines="5"
+            android:gravity="top"
             android:id="@+id/etRequerimientos"
-            android:hint="@string/ingreseRequerimientos" />
+            android:hint="@string/ingreseRequerimientos"
+            android:maxLength="@integer/textolargo" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -124,7 +133,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraInicial"
-            android:hint="@string/ingreseLaHoraInicial" />
+            android:hint="@string/ingreseLaHoraInicial"
+            android:maxLength="@integer/length2" />
 
         <EditText
             android:layout_width="match_parent"
@@ -132,7 +142,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraFinal"
-            android:hint="@string/ingreseLaHoraFinal" />
+            android:hint="@string/ingreseLaHoraFinal"
+            android:maxLength="@integer/length2" />
 
         <Button
             android:text="@string/crearClase"

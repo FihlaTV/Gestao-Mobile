@@ -2,6 +2,7 @@ package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,33 +29,60 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     RequestQueue requestQueue;
     String insertUrl = "http://192.168.1.66/gestao/mobile/register_person.php";
 
+    EditText etnombre1;
+    EditText etapellido1;
+    EditText etcorreo;
+    EditText etclave;
+    EditText etclave2;
+    RadioButton rbestudiante;
+    RadioButton rbdocente;
+    Button btnregistro;
+    Button btncancelar;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        final EditText etnombre1 = (EditText) findViewById(R.id.etNombre1);
-        final EditText etapellido1 = (EditText) findViewById(R.id.etApellido1);
-        final EditText etcorreo = (EditText) findViewById(R.id.etCorreo);
-        final EditText etclave = (EditText) findViewById(R.id.etClave);
-        final EditText etclave2 = (EditText) findViewById(R.id.etClave2);
-        final RadioButton rbestudiante = (RadioButton) findViewById(R.id.rbEstudiante);
-        final RadioButton rbdocente = (RadioButton) findViewById(R.id.rbDocente);
-        final Button btnregistro = (Button) findViewById(R.id.btnRegistro);
+        etnombre1 = (EditText) findViewById(R.id.etNombre1);
+        etapellido1 = (EditText) findViewById(R.id.etApellido1);
+        etcorreo = (EditText) findViewById(R.id.etCorreo);
+        etclave = (EditText) findViewById(R.id.etClave);
+        etclave2 = (EditText) findViewById(R.id.etClave2);
+        rbestudiante = (RadioButton) findViewById(R.id.rbEstudiante);
+        rbdocente = (RadioButton) findViewById(R.id.rbDocente);
+        btnregistro = (Button) findViewById(R.id.btnRegistro);
+        btncancelar = (Button) findViewById(R.id.btnCancelar);
+
+        String font_path = "fonts/Ubuntu-C.ttf";
+        final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
+
+        etnombre1.setTypeface(TF);
+        etapellido1.setTypeface(TF);
+        etcorreo.setTypeface(TF);
+        etclave.setTypeface(TF);
+        etclave2.setTypeface(TF);
+        rbestudiante.setTypeface(TF);
+        rbdocente.setTypeface(TF);
+        btnregistro.setTypeface(TF);
+        btncancelar.setTypeface(TF);
 
 
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        btnregistro.setOnClickListener(this);
+        btncancelar.setOnClickListener(this);
 
+    }
 
-    requestQueue = Volley.newRequestQueue(getApplicationContext());
-        btnregistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnRegistro:
 
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
                 inputMethodManager.hideSoftInputFromWindow(etnombre1.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(etapellido1.getWindowToken(), 0);
@@ -76,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
                     etcorreo.setError(getResources().getString(R.string.correoInvalido));
                     estado = false;
                 }
-
 
 
                 if (etnombre1.getText().toString().trim().equalsIgnoreCase("")) {
@@ -105,11 +132,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 JSONArray jArray = jsonResponse.getJSONArray("response");
                                 JSONObject id = jArray.getJSONObject(0);
-                                if (id.getString("estado").equals("Registro Exitoso") && rbestudiante.isChecked()){
+                                if (id.getString("estado").equals("Registro Exitoso") && rbestudiante.isChecked()) {
 
 
                                     SessionManager sesion = new SessionManager(RegisterActivity.this);
-                                    sesion.createLoginSession(etnombre1.getText().toString(),etcorreo.getText().toString(),id.getString("id"),"E");
+                                    sesion.createLoginSession(etnombre1.getText().toString(), etcorreo.getText().toString(), id.getString("id"), "E");
                                     Intent intent = new Intent(RegisterActivity.this, UserAreaActivity.class);
 
                                     RegisterActivity.this.startActivity(intent);
@@ -126,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(RegisterActivity.this,getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
                         }
                     }) {
                         @Override
@@ -149,11 +176,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }
 
-            }
+
+                break;
+            case R.id.btnCancelar:
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                RegisterActivity.this.startActivity(intent);
+                break;
         }
-        );
-
     }
-
 }
 
