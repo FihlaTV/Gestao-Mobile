@@ -133,16 +133,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 JSONObject jsonResponse = new JSONObject(response);
                                 JSONArray jArray = jsonResponse.getJSONArray("response");
                                 JSONObject id = jArray.getJSONObject(0);
-                                if (id.getString("estado").equals("Registro Exitoso") && rbestudiante.isChecked()) {
+                                if (id.getString("estado").equals("Registro Exitoso")){
+                                    if(rbestudiante.isChecked()) {
 
+                                        SessionManager sesion = new SessionManager(RegisterActivity.this);
+                                        sesion.createLoginSession(etnombre1.getText().toString(), etcorreo.getText().toString(), id.getString("id"), "E");
+                                        Intent intent = new Intent(RegisterActivity.this, UserAreaActivity.class);
 
-                                    SessionManager sesion = new SessionManager(RegisterActivity.this);
-                                    sesion.createLoginSession(etnombre1.getText().toString(), etcorreo.getText().toString(), id.getString("id"), "E");
-                                    Intent intent = new Intent(RegisterActivity.this, UserAreaActivity.class);
+                                        RegisterActivity.this.startActivity(intent);
 
-                                    RegisterActivity.this.startActivity(intent);
-                                    //Toast.makeText(RegisterActivity.this,"aqui me voy al user activity" , Toast.LENGTH_LONG).show();
-
+                                    }
+                                    else{
+                                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.peticionDocenteRegistro) , Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent (RegisterActivity.this,LoginActivity.class);
+                                        RegisterActivity.this.startActivity(intent);
+                                    }
                                 }
 
                             } catch (JSONException e) {

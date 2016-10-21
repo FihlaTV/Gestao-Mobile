@@ -86,6 +86,10 @@
     <string name="claseNoExistente">Esta clase no existe</string>
     <string name="docenteNoHaRegistradoRecurso">El docente no ha registrado este recurso</string>
     <string name="servidorNoAlcanzable">No se logro conectar con el servidor</string>
+    <string name="peticionDocenteRegistro">Peticion de registro de docente realizada al administrador de salas</string>
+    <string name="docenteNoConfirmado">Su registro como docente no ha sido confirmado por el administrador, por favor intente mas tarde.</string>
+    <string name="olvideContrasena">Olvide mi contraseña</string>
+    <string name="enviar">Enviar</string>
 
 
 </resources>

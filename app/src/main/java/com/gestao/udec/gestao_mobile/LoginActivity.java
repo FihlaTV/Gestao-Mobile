@@ -1,5 +1,7 @@
 package com.gestao.udec.gestao_mobile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etemail = (EditText) findViewById(R.id.etCorreo);
         final EditText etPassword = (EditText) findViewById(R.id.etClave);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
+        final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);;
         final Button bLogin = (Button) findViewById(R.id.btnIngresar);
         final ImageView iudec = (ImageView) findViewById(R.id.iudec);
 
@@ -63,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         etemail.setTypeface(TF);
         etPassword.setTypeface(TF);
         tvRegisterLink.setTypeface(TF);
+        tvOlvideLink.setTypeface(TF);
         bLogin.setTypeface(TF);
 
         iudec.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +93,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
+            }
+        });
+
+        tvOlvideLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent olvideIntent = new Intent(LoginActivity.this, OlvidePaso1Activity.class);
+                olvideIntent.putExtra("correo",etemail.getText().toString());
+                LoginActivity.this.startActivity(olvideIntent);
             }
         });
 
@@ -136,10 +149,23 @@ public class LoginActivity extends AppCompatActivity {
                                     String email = jsonResponse.getString("email");
                                     String rol = jsonResponse.getString("rol");
 
-                                    SessionManager sesion = new SessionManager(LoginActivity.this);
-                                    sesion.createLoginSession(name1, email, id, rol);
-                                    requestQueue = Volley.newRequestQueue(getApplicationContext());
-                                    verificacionPerfil(rol);
+                                    if(jsonResponse.getString("estado").equals("N")){
+                                        new AlertDialog.Builder(LoginActivity.this)
+                                                .setTitle(getResources().getString(R.string.vinculacionClase))
+                                                .setMessage(getResources().getString(R.string.docenteNoConfirmado))
+                                                .setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+
+                                                    }
+                                                })
+                                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                                .show();
+                                    }else {
+                                        SessionManager sesion = new SessionManager(LoginActivity.this);
+                                        sesion.createLoginSession(name1, email, id, rol);
+                                        requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                        verificacionPerfil(rol);
+                                    }
                                 } else {
 
                                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.errorLogin), Toast.LENGTH_LONG).show();

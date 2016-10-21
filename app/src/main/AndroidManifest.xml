@@ -32,13 +32,13 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".UserAreaActivity"/>
+        <activity android:name=".UserAreaActivity" />
         <activity android:name=".VincularActivity" />
         <activity android:name=".ReservarActivity" />
         <activity android:name=".HorarioActivity" />
@@ -59,7 +59,8 @@
 
         <activity android:name=".PerfilActivity" />
         <activity android:name=".EscanearActivity" />
-        <activity android:name=".ClaseActivity"></activity>
+        <activity android:name=".ClaseActivity" />
+        <activity android:name=".OlvidePaso1Activity"></activity>
     </application>
 
 </manifest>
