@@ -60,7 +60,8 @@
         <activity android:name=".PerfilActivity" />
         <activity android:name=".EscanearActivity" />
         <activity android:name=".ClaseActivity" />
-        <activity android:name=".OlvidePaso1Activity"></activity>
+        <activity android:name=".OlvidePaso1Activity" />
+        <activity android:name=".OlvidePaso2Activity"></activity>
     </application>
 
 </manifest>

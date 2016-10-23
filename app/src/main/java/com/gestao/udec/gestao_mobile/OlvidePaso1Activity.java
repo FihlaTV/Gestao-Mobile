@@ -26,8 +26,11 @@ import java.util.regex.Pattern;
 
 public class OlvidePaso1Activity extends AppCompatActivity implements View.OnClickListener {
     String url ="http://192.168.1.66/gestao/mobile/olvido_contrasena_envio.php";
+    String url2 ="http://192.168.1.66/gestao/mobile/olvido_contrasena_restablecimiento.php";
     EditText correo;
+    EditText codigo;
     Button enviar;
+    Button recuperar;
     RequestQueue requestQueue;
 
     @Override
@@ -38,6 +41,9 @@ public class OlvidePaso1Activity extends AppCompatActivity implements View.OnCli
         correo = (EditText) findViewById(R.id.etCorreo);
         enviar = (Button) findViewById(R.id.btGenerarCodigo);
 
+        codigo = (EditText) findViewById(R.id.etCodigo);
+        recuperar = (Button) findViewById(R.id.btRecuperar);
+
         String font_path = "fonts/Ubuntu-C.ttf";
         Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
 
@@ -45,10 +51,16 @@ public class OlvidePaso1Activity extends AppCompatActivity implements View.OnCli
 
         correo.setTypeface(TF);
         enviar.setTypeface(TF);
+        codigo.setTypeface(TF);
+        recuperar.setTypeface(TF);
+
+        codigo.setEnabled(false);
+        recuperar.setClickable(false);
 
         correo.setText(getIntent().getStringExtra("correo"));
 
         enviar.setOnClickListener(this);
+        recuperar.setOnClickListener(this);
     }
 
     @Override
@@ -87,21 +99,29 @@ public class OlvidePaso1Activity extends AppCompatActivity implements View.OnCli
 
                         @Override
                         public void onResponse(String response) {
-                            Intent intent;
-                            Toast.makeText(OlvidePaso1Activity.this, response, Toast.LENGTH_LONG).show();
-                            intent = new Intent(OlvidePaso1Activity.this, TeacherAreaActivity.class);
-                            OlvidePaso1Activity.this.startActivity(intent);
+                            Toast.makeText(OlvidePaso1Activity.this, response.substring(0,response.length()-1), Toast.LENGTH_LONG).show();
+                            if(response.substring(response.length()-1).equals("1")) {
+                                enviar.setClickable(false);
+                                correo.setEnabled(false);
+                                enviar.setVisibility(View.GONE);
+                                correo.setVisibility(View.GONE);
+
+                                codigo.setEnabled(true);
+                                recuperar.setClickable(true);
+                                codigo.setVisibility(View.VISIBLE);
+                                recuperar.setVisibility(View.VISIBLE);
+                            }
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(OlvidePaso1Activity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(OlvidePaso1Activity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
                         }
                     }) {
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             Map<String, String> parameters = new HashMap<String, String>();
-                            parameters.put("email", correo.getText().toString());
+                            parameters.put("correo", correo.getText().toString());
 
 
                             return parameters;
@@ -114,7 +134,41 @@ public class OlvidePaso1Activity extends AppCompatActivity implements View.OnCli
 
 
                 break;
+            case R.id.btRecuperar:
+                requestQueue = Volley.newRequestQueue(getApplicationContext());
+                    StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
 
+                        @Override
+                        public void onResponse(String response) {
+
+                            Toast.makeText(OlvidePaso1Activity.this, response.substring(0,response.length()-1), Toast.LENGTH_LONG).show();
+                            if(response.substring(response.length()-1).equals("1")){
+                                Intent intent;
+                                intent = new Intent(OlvidePaso1Activity.this, OlvidePaso2Activity.class);
+                                intent.putExtra("correo",correo.getText().toString());
+                                OlvidePaso1Activity.this.startActivity(intent);
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(OlvidePaso1Activity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> parameters = new HashMap<String, String>();
+                            parameters.put("codigo", codigo.getText().toString());
+                            parameters.put("correo", correo.getText().toString());
+
+
+                            return parameters;
+                        }
+                    };
+                    requestQueue.add(request);
+
+                break;
         }
     }
 }

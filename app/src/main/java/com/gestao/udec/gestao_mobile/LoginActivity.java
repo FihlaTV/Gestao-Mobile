@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setError(getResources().getString(R.string.campoNoNulo));
                     estado = false;
                 }
-                if (etPassword.length() < 7) {
+                if (etPassword.length() < 8) {
                     etPassword.setError(getResources().getString(R.string.claveNoCaracter));
                     estado = false;
                 }

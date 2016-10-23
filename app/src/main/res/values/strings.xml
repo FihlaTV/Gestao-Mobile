@@ -90,6 +90,8 @@
     <string name="docenteNoConfirmado">Su registro como docente no ha sido confirmado por el administrador, por favor intente mas tarde.</string>
     <string name="olvideContrasena">Olvide mi contraseña</string>
     <string name="enviar">Enviar</string>
+    <string name="ingresaCodigoCorreo">Ingresa el codigo generado</string>
+    <string name="recuperarContrasena" >Recuperar contraseña</string>
 
 
 </resources>
