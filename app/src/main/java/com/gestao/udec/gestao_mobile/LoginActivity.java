@@ -35,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
-    String url = "http://192.168.1.66/gestao/mobile/verificacion_datos_basicos.php";
+    String url = "http://gestao.audiplantas.com/verificacion_datos_basicos.php";
     SessionManager sesion;
     RequestQueue requestQueue;
 

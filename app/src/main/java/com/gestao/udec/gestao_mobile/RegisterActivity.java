@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.66/gestao/mobile/register_person.php";
+    String insertUrl = "http://gestao.audiplantas.com/register_person.php";
 
     EditText etnombre1;
     EditText etapellido1;
