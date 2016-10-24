@@ -46,11 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     private Timer timer = null;
     ImageSwitcher i_s;
-    ImageView igestao;
+
     private int[] gallery = { R.mipmap.udec, R.mipmap.gestao, R.mipmap.semillero};
     private int position;
 
-    private static final Integer DURATION = 3000;
+    static Integer DURATION = 10000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             verificacionPerfil(sesion.getUserDetails().get("rol"));
         }
 
-        igestao = (ImageView) findViewById(R.id.igestao);
+
         final EditText etemail = (EditText) findViewById(R.id.etCorreo);
         final EditText etPassword = (EditText) findViewById(R.id.etClave);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
@@ -198,25 +198,35 @@ public class LoginActivity extends AppCompatActivity {
         i_s.setOutAnimation(fadeOut);
 startSlider();
 
-        igestao.setOnClickListener(new View.OnClickListener() {
+
+
+        i_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
+                if (position==0){
 
-                String url = (String) igestao.getTag();
+                    v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
+                    Uri uri = Uri.parse("https://www.facebook.com/SICG-Mandala-UDEC-348743578797892/");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+                if (position==1){
 
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
+                    Uri uri = Uri.parse("http://www.unicundi.edu.co/");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+                if (position==2){
 
-                //pass the url to intent data
-                intent.setData(Uri.parse(url));
-
-                startActivity(intent);
+                    v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
+                    Uri uri = Uri.parse("http://gestao.audiplantas.com/");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
 
             }
         });
-
 
 
     }
@@ -244,7 +254,9 @@ startSlider();
                 // "Only the original thread that created a view hierarchy can touch its views"
                 runOnUiThread(new Runnable() {
                     public void run() {
+
                         i_s.setImageResource(gallery[position]);
+
                         position++;
                         if (position == gallery.length) {
                             position = 0;
