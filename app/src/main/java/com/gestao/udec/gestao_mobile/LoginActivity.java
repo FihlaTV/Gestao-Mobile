@@ -8,11 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,6 +35,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,7 +44,13 @@ public class LoginActivity extends AppCompatActivity {
     String url = "http://gestao.audiplantas.com/verificacion_datos_basicos.php";
     SessionManager sesion;
     RequestQueue requestQueue;
+    private Timer timer = null;
+    ImageSwitcher i_s;
+    ImageView igestao;
+    private int[] gallery = { R.mipmap.udec, R.mipmap.gestao, R.mipmap.semillero};
+    private int position;
 
+    private static final Integer DURATION = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +64,14 @@ public class LoginActivity extends AppCompatActivity {
             verificacionPerfil(sesion.getUserDetails().get("rol"));
         }
 
-
+        igestao = (ImageView) findViewById(R.id.igestao);
         final EditText etemail = (EditText) findViewById(R.id.etCorreo);
         final EditText etPassword = (EditText) findViewById(R.id.etClave);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
         final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);;
         final Button bLogin = (Button) findViewById(R.id.btnIngresar);
-        final ImageView iudec = (ImageView) findViewById(R.id.iudec);
+
+        i_s = (ImageSwitcher)findViewById(R.id.is_logos_main);
 
         String font_path = "fonts/Ubuntu-C.ttf";
         final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
@@ -69,24 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         tvOlvideLink.setTypeface(TF);
         bLogin.setTypeface(TF);
 
-        iudec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                String url = (String) iudec.getTag();
-
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-
-                //pass the url to intent data
-                intent.setData(Uri.parse(url));
-
-                startActivity(intent);
-
-            }
-        });
 
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,7 +179,99 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        i_s.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+
+
+                return new ImageView(LoginActivity.this);
+            }
+        });
+
+
+
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        i_s.setInAnimation(fadeIn);
+        i_s.setOutAnimation(fadeOut);
+startSlider();
+
+        igestao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
+
+                String url = (String) igestao.getTag();
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+                //pass the url to intent data
+                intent.setData(Uri.parse(url));
+
+                startActivity(intent);
+
+            }
+        });
+
+
+
     }
+
+
+
+    public void stop(View button) {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
+    public void startSlider() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        position = 0;
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            public void run() {
+                // avoid exception:
+                // "Only the original thread that created a view hierarchy can touch its views"
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        i_s.setImageResource(gallery[position]);
+                        position++;
+                        if (position == gallery.length) {
+                            position = 0;
+                        }
+                    }
+                });
+            }
+
+        }, 0, DURATION);
+    }
+
+    // Stops the slider when the Activity is going into the background
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timer != null) {
+            startSlider();
+        }}
+
 
     private void verificacionPerfil(final String rol) {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

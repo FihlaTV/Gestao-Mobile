@@ -11,7 +11,7 @@
     <string name="claveNoIgual">Las claves deben coincidir !</string>
     <string name="claveNoCaracter">Las claves deben tener almenos 8 caracteres</string>
     <string name="etapellido2">Ingresa tu segundo apellido</string>
-    <string name="etpass">Ingresa tu clave de acceso</string>
+    <string name="etpass">ingresa tu clave</string>
     <string name="etcorreo">Tucorreo@mail.com</string>
     <string name="estudiante">Estudiante</string>
     <string name="docente">Docente</string>
@@ -19,7 +19,7 @@
     <string name="ingresar">Ingresar</string>
     <string name="registroExitoso">Registro Exitoso !</string>
     <string name="errorConexion">Ha ocurrido un error de conexion</string>
-    <string name="Registrarse">Registrarse</string>
+    <string name="Registrarse"><u>Registrarse</u></string>
     <string name="claveConfirm">Confirma tu clave de acceso</string>
     <string name="escanear">Escanear</string>
     <string name="vincular">Vincular clases</string>
@@ -88,7 +88,7 @@
     <string name="servidorNoAlcanzable">No se logro conectar con el servidor</string>
     <string name="peticionDocenteRegistro">Peticion de registro de docente realizada al administrador de salas</string>
     <string name="docenteNoConfirmado">Su registro como docente no ha sido confirmado por el administrador, por favor intente mas tarde.</string>
-    <string name="olvideContrasena">Olvide mi contraseña</string>
+    <string name="olvideContrasena"><i><u>Olvide mi contraseña</u></i></string>
     <string name="enviar">Enviar</string>
     <string name="ingresaCodigoCorreo">Ingresa el codigo generado</string>
     <string name="recuperarContrasena" >Recuperar contraseña</string>
