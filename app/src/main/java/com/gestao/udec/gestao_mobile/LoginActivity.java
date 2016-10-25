@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     private Timer timer = null;
     ImageSwitcher i_s;
-    Button btn1;
+
     private int[] gallery = { R.mipmap.udec, R.mipmap.gestao_grande, R.mipmap.semillero};
     private int position;
 
@@ -75,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
         final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);;
         final Button bLogin = (Button) findViewById(R.id.btnIngresar);
-        btn1 = (Button) findViewById(R.id.btn1);
         i_s = (ImageSwitcher)findViewById(R.id.is_logos_main);
 
         String font_path = "fonts/Ubuntu-C.ttf";
@@ -92,20 +91,12 @@ public class LoginActivity extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
             }
         });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                FirebaseMessaging.getInstance().subscribeToTopic("test");
-                FirebaseInstanceId.getInstance().getToken();
-
-            }
-        });
         tvOlvideLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

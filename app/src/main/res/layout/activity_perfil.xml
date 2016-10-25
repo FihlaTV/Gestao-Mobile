@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.PerfilActivity">
+    tools:context="com.gestao.udec.gestao_mobile.PerfilActivity"
+    android:background="@color/colorAccent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,108 +24,140 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
+                android:gravity="center"
                 android:inputType="number"
+                android:layout_margin="5dp"
                 android:ems="10"
                 android:id="@+id/etCodigo"
                 android:hint="@string/ingresaCodigo"
-                android:maxLength="@integer/codigos" />
+                android:maxLength="@integer/codigos"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
+                android:layout_margin="5dp"
                 android:inputType="textPersonName"
                 android:ems="10"
+                android:gravity="center"
                 android:id="@+id/etNombre1"
                 android:hint="@string/ingresaNombre1"
-                android:maxLength="@integer/nombreslength" />
+                android:maxLength="@integer/nombreslength"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:inputType="textPersonName"
                 android:ems="10"
+                android:layout_margin="5dp"
+                android:gravity="center"
                 android:id="@+id/etNombre2"
                 android:hint="@string/ingresaNombre2"
-                android:maxLength="@integer/nombreslength" />
+                android:maxLength="@integer/nombreslength"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:inputType="textPersonName"
+                android:gravity="center"
                 android:ems="10"
+                android:layout_margin="5dp"
                 android:id="@+id/etApellido1"
                 android:hint="@string/ingresaApellido1"
-                android:maxLength="@integer/nombreslength" />
+                android:maxLength="@integer/nombreslength"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:inputType="textPersonName"
                 android:ems="10"
+                android:gravity="center"
+                android:layout_margin="5dp"
                 android:id="@+id/etApellido2"
                 android:hint="@string/ingresaApellido2"
-                android:maxLength="@integer/nombreslength" />
+                android:maxLength="@integer/nombreslength"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:ems="10"
                 android:id="@+id/etEmail"
+                android:gravity="center"
+                android:layout_margin="5dp"
                 android:inputType="textEmailAddress"
                 android:hint="@string/ingresaCorreo"
-                android:maxLength="@integer/textoSemiLargo" />
+                android:maxLength="@integer/textoSemiLargo"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:ems="10"
+                android:gravity="center"
+                android:layout_margin="5dp"
                 android:id="@+id/etTelefono"
                 android:inputType="number"
                 android:hint="@string/ingresaTelefono"
-                android:maxLength="@integer/telefonolength" />
+                android:maxLength="@integer/telefonolength"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:inputType="textWebEmailAddress"
                 android:ems="10"
+                android:layout_margin="5dp"
                 android:id="@+id/etFacebook"
+                android:gravity="center"
                 android:visibility="gone"
                 android:hint="@string/ingresaUrlFacebook"
-                android:maxLength="@integer/textoSemiLargo"/>
+                android:maxLength="@integer/textoSemiLargo"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:ems="10"
+                android:layout_margin="5dp"
                 android:id="@+id/etTwitter"
+                android:gravity="center"
                 android:visibility="gone"
                 android:hint="@string/ingresaUrlTwitter"
                 android:inputType="textWebEmailAddress"
-                android:maxLength="@integer/textoSemiLargo"/>
+                android:maxLength="@integer/textoSemiLargo"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:inputType="text"
                 android:ems="10"
+                android:layout_margin="5dp"
                 android:id="@+id/etDescripcion"
                 android:visibility="gone"
                 android:hint="@string/ingresaDescripcion"
                 android:lines="5"
                 android:gravity="top"
-                android:maxLength="@integer/textolargo"/>
+                android:maxLength="@integer/textolargo"
+                android:background="@drawable/edittextstyle"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:ems="10"
                 android:id="@+id/etSemestre"
+                android:gravity="center"
                 android:inputType="number"
                 android:visibility="gone"
                 android:hint="@string/ingresaSemestre"
-                android:maxLength="@integer/length2"/>
+                android:maxLength="@integer/length2"
+                android:layout_margin="5dp"
+                android:background="@drawable/edittextstyle"/>
 
             <Button
                 android:layout_width="match_parent"

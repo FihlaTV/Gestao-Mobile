@@ -185,8 +185,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.btnCancelar:
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                RegisterActivity.this.startActivity(intent);
+                startActivity(new Intent(this, LoginActivity.class));
+                overridePendingTransition(R.anim.right_in, R.anim.right_out);
                 break;
         }
     }

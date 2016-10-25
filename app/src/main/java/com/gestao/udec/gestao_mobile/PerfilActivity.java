@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -57,6 +58,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         sesion = new SessionManager(PerfilActivity.this);
 
         codigo = (EditText) findViewById(R.id.etCodigo);
+        codigo.setInputType(InputType.TYPE_NULL);
         nombre1 = (EditText) findViewById(R.id.etNombre1);
         nombre2 = (EditText) findViewById(R.id.etNombre2);
         apellido1 = (EditText) findViewById(R.id.etApellido1);
