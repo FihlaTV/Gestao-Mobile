@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "781650201944",
+    "firebase_url": "https://gestao-cce99.firebaseio.com",
+    "project_id": "gestao-cce99",
+    "storage_bucket": "gestao-cce99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781650201944:android:2fd37f46a7b18c64",
+        "android_client_info": {
+          "package_name": "com.gestao.udec.gestao_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781650201944-dakf153auiuf3sthp5pli3fo9cqtrjt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHMgXZmIqC0on_zh-h54OhKvubxkVTXyU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781650201944:android:eb574fd273e6a9ab",
+        "android_client_info": {
+          "package_name": "com.asda.c"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781650201944-dakf153auiuf3sthp5pli3fo9cqtrjt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHMgXZmIqC0on_zh-h54OhKvubxkVTXyU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

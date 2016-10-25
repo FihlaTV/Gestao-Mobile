@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +38,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
 
 
     SessionManager sesion;
-
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,7 +48,12 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
 
         sesion = new SessionManager(UserAreaActivity.this);
         sesion.checkLogin();
+        if (FirebaseInstanceId.getInstance().getToken()!= ""){
+            comprobartoken(FirebaseInstanceId.getInstance().getToken());
+        }
 
+        FirebaseMessaging.getInstance().subscribeToTopic("test");
+        FirebaseInstanceId.getInstance().getToken();
 
         escanear = (Button) findViewById(R.id.btescanear);
         vincular = (Button) findViewById(R.id.btvincular);
@@ -68,6 +75,56 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         horario.setOnClickListener(this);
         profesores.setOnClickListener(this);
         perfil.setOnClickListener(this);
+
+    }
+
+    protected void comprobartoken(final String token){
+
+
+
+
+
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest request = new StringRequest(Request.Method.POST, urlp, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray jArray = jsonResponse.getJSONArray("response");
+                    JSONObject id = jArray.getJSONObject(0);
+                    Toast.makeText(UserAreaActivity.this, id.getString("estado"), Toast.LENGTH_LONG).show();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(UserAreaActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("persona", sesion.getUserDetails().get("id"));
+                parameters.put("from_token", token);
+                return parameters;
+            }
+        };
+        requestQueue.add(request);
+
+
+
+
 
     }
 

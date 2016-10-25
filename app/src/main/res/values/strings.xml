@@ -92,6 +92,7 @@
     <string name="enviar">Enviar</string>
     <string name="ingresaCodigoCorreo">Ingresa el codigo generado</string>
     <string name="recuperarContrasena" >Recuperar contraseña</string>
-
+    <string name="FCM_PREF" >com.gestao.udec.gestao_mobile.fcm_pref</string>
+    <string name="FCM_TOKEN" >com.gestao.udec.gestao_mobile.fcm_token</string>
 
 </resources>

@@ -1,8 +1,10 @@
 package com.gestao.udec.gestao_mobile;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +27,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,13 +46,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
-    String url = "http://gestao.audiplantas.com/verificacion_datos_basicos.php";
+    String url = "http://192.168.1.66/gestao/mobile/verificacion_datos_basicos.php";
     SessionManager sesion;
     RequestQueue requestQueue;
     private Timer timer = null;
     ImageSwitcher i_s;
-
-    private int[] gallery = { R.mipmap.udec, R.mipmap.gestao, R.mipmap.semillero};
+    Button btn1;
+    private int[] gallery = { R.mipmap.udec, R.mipmap.gestao_grande, R.mipmap.semillero};
     private int position;
 
     static Integer DURATION = 10000;
@@ -60,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         sesion = new SessionManager(LoginActivity.this);
         if (sesion.isLoggedIn()) {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
-
             verificacionPerfil(sesion.getUserDetails().get("rol"));
         }
 
@@ -70,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
         final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);;
         final Button bLogin = (Button) findViewById(R.id.btnIngresar);
-
+        btn1 = (Button) findViewById(R.id.btn1);
         i_s = (ImageSwitcher)findViewById(R.id.is_logos_main);
 
         String font_path = "fonts/Ubuntu-C.ttf";
@@ -92,6 +96,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseMessaging.getInstance().subscribeToTopic("test");
+                FirebaseInstanceId.getInstance().getToken();
+
+            }
+        });
         tvOlvideLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,7 +233,7 @@ startSlider();
                 if (position==2){
 
                     v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
-                    Uri uri = Uri.parse("http://gestao.audiplantas.com/");
+                    Uri uri = Uri.parse("http://192.168.1.66/gestao/mobile/");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
