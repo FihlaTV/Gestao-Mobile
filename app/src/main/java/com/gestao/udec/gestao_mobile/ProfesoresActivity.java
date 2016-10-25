@@ -43,10 +43,10 @@ import java.util.Map;
 import static android.R.attr.bitmap;
 
 public class ProfesoresActivity extends AppCompatActivity {
-    String showteachers = "http://gestao.audiplantas.com/show_teachers.php";
+    String showteachers = "http://192.168.1.66/Gestao/mobile/show_teachers.php";
 
-    String showteacheree = "http://gestao.audiplantas.com/show_teachers_e.php";
-    String showteacherec = "http://gestao.audiplantas.com/select_latest_clases_e.php";
+    String showteacheree = "http://192.168.1.66/Gestao/mobile/show_teachers_e.php";
+    String showteacherec = "http://192.168.1.66/Gestao/mobile/select_latest_clases_e.php";
     ImageView ifacebook;
     ImageView itwiter;
     ImageView ivfoto;

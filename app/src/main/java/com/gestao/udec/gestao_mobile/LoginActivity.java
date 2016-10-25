@@ -41,7 +41,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
-    String url = "http://gestao.audiplantas.com/verificacion_datos_basicos.php";
+    String url = "http://192.168.1.66/Gestao/mobile/verificacion_datos_basicos.php";
     SessionManager sesion;
     RequestQueue requestQueue;
     private Timer timer = null;
@@ -220,7 +220,7 @@ startSlider();
                 if (position==2){
 
                     v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
-                    Uri uri = Uri.parse("http://gestao.audiplantas.com/");
+                    Uri uri = Uri.parse("http://192.168.1.66/Gestao/mobile/");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
