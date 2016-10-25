@@ -94,5 +94,11 @@
     <string name="recuperarContrasena" >Recuperar contraseña</string>
     <string name="FCM_PREF" >com.gestao.udec.gestao_mobile.fcm_pref</string>
     <string name="FCM_TOKEN" >com.gestao.udec.gestao_mobile.fcm_token</string>
+    <string name="irPaginaWeb">Ir a nuestro sitio</string>
+    <string name="contactanos">Contactanos</string>
+    <string name="udecVirtual">Ir a udec virtual</string>
+    <string name="plataformaUdec">Ir a portal institucional</string>
+    <string name="cerrarSesion">Cerrar sesion</string>
+
 
 </resources>

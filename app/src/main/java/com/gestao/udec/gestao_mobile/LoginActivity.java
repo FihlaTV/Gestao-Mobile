@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         sesion = new SessionManager(LoginActivity.this);
         if (sesion.isLoggedIn()) {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
+
             verificacionPerfil(sesion.getUserDetails().get("rol"));
         }
 
