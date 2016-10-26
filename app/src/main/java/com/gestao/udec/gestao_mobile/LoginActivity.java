@@ -52,10 +52,11 @@ public class LoginActivity extends AppCompatActivity {
     private Timer timer = null;
     ImageSwitcher i_s;
 
-    private int[] gallery = { R.mipmap.udec, R.mipmap.gestao_grande, R.mipmap.semillero};
+    private int[] gallery = {R.mipmap.udec, R.mipmap.gestao_grande, R.mipmap.semillero};
     private int position;
 
     static Integer DURATION = 10000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +74,10 @@ public class LoginActivity extends AppCompatActivity {
         final EditText etemail = (EditText) findViewById(R.id.etCorreo);
         final EditText etPassword = (EditText) findViewById(R.id.etClave);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
-        final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);;
+        final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);
+        ;
         final Button bLogin = (Button) findViewById(R.id.btnIngresar);
-        i_s = (ImageSwitcher)findViewById(R.id.is_logos_main);
+        i_s = (ImageSwitcher) findViewById(R.id.is_logos_main);
 
         String font_path = "fonts/Ubuntu-C.ttf";
         final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
@@ -85,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
         tvRegisterLink.setTypeface(TF);
         tvOlvideLink.setTypeface(TF);
         bLogin.setTypeface(TF);
-
 
 
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent olvideIntent = new Intent(LoginActivity.this, OlvidePaso1Activity.class);
-                olvideIntent.putExtra("correo",etemail.getText().toString());
+                olvideIntent.putExtra("correo", etemail.getText().toString());
                 LoginActivity.this.startActivity(olvideIntent);
             }
         });
@@ -150,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String email = jsonResponse.getString("email");
                                     String rol = jsonResponse.getString("rol");
 
-                                    if(jsonResponse.getString("estado").equals("N")){
+                                    if (jsonResponse.getString("estado").equals("N")) {
                                         new AlertDialog.Builder(LoginActivity.this)
                                                 .setTitle(getResources().getString(R.string.vinculacionClase))
                                                 .setMessage(getResources().getString(R.string.docenteNoConfirmado))
@@ -161,7 +162,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 })
                                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                                 .show();
-                                    }else {
+                                    } else {
+
                                         SessionManager sesion = new SessionManager(LoginActivity.this);
                                         sesion.createLoginSession(name1, email, id, rol);
                                         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -195,34 +197,31 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         i_s.setInAnimation(fadeIn);
         i_s.setOutAnimation(fadeOut);
-startSlider();
-
+        startSlider();
 
 
         i_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (position==0){
+                if (position == 0) {
 
                     v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
                     Uri uri = Uri.parse("https://www.facebook.com/SICG-Mandala-UDEC-348743578797892/");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
-                if (position==1){
+                if (position == 1) {
 
                     v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
                     Uri uri = Uri.parse("http://www.unicundi.edu.co/");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
-                if (position==2){
+                if (position == 2) {
 
                     v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
                     Uri uri = Uri.parse("http://192.168.1.66/gestao/mobile/");
@@ -235,7 +234,6 @@ startSlider();
 
 
     }
-
 
 
     public void stop(View button) {
@@ -287,7 +285,8 @@ startSlider();
         super.onResume();
         if (timer != null) {
             startSlider();
-        }}
+        }
+    }
 
 
     private void verificacionPerfil(final String rol) {
@@ -300,25 +299,41 @@ startSlider();
                     JSONArray jArray = jsonResponse.getJSONArray("response");
                     for (int i = 0; i < jArray.length(); i++) {
                         JSONObject clases = jArray.getJSONObject(i);
-                        if (clases.getString("permiso").equals("0")) {
-                            Intent intent;
-                            intent = new Intent(LoginActivity.this, PerfilActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            LoginActivity.this.startActivity(intent);
 
-                        } else if (rol.equals("D")) {
-                            Intent intent;
-                            intent = new Intent(LoginActivity.this, TeacherAreaActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            LoginActivity.this.startActivity(intent);
-                        } else if (rol.equals("E")) {
-                            Intent intent;
-                            intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            LoginActivity.this.startActivity(intent);
+                        if(!clases.isNull("estado")){
+
+                            new AlertDialog.Builder(LoginActivity.this)
+                                    .setTitle(getResources().getString(R.string.vinculacionClase))
+                                    .setMessage(getResources().getString(R.string.docenteNoConfirmado))
+                                    .setPositiveButton(getResources().getString(R.string.aceptar), new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        } else {
+
+                            if (clases.getString("permiso").equals("0")) {
+                                Intent intent;
+                                intent = new Intent(LoginActivity.this, PerfilActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                LoginActivity.this.startActivity(intent);
+
+                            } else if (rol.equals("D")) {
+                                Intent intent;
+                                intent = new Intent(LoginActivity.this, TeacherAreaActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                LoginActivity.this.startActivity(intent);
+                            } else if (rol.equals("E")) {
+                                Intent intent;
+                                intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                LoginActivity.this.startActivity(intent);
+                            }
                         }
 
 

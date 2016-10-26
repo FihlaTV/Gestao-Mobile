@@ -8,10 +8,13 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,18 +29,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class VincularActivity extends AppCompatActivity implements View.OnClickListener {
     String url = "http://192.168.1.66/gestao/mobile/select_clases_vincular.php";
     String url2 = "http://192.168.1.66/gestao/mobile/insert_vinculacion.php";
+    String url3 = "http://192.168.1.66/gestao/mobile/select_clases_all.php";
     RequestQueue requestQueue;
     AutoCompleteTextView auto;
     Button vincular;
     SessionManager sesion;
+    ListView vinculadasLista;
 
     HashMap<String, String> clasesLista;
+    HashMap<String, String> clasesVinculadas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +57,68 @@ public class VincularActivity extends AppCompatActivity implements View.OnClickL
 
         auto = (AutoCompleteTextView) findViewById(R.id.actClase);
         vincular = (Button) findViewById(R.id.btVincular);
+        vinculadasLista = (ListView) findViewById(R.id.lvVinculadas);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         String font_path = "fonts/Ubuntu-C.ttf";
         Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
         auto.setTypeface(TF);
         vincular.setTypeface(TF);
+
         auto.requestFocus();
 
         vincular.setOnClickListener(this);
 
-        obtenerClases();
+        obtenerClasesSinVinculacion();
+        obtenerClasesVinculadas();
 
     }
+    protected void obtenerClasesVinculadas(){
+        StringRequest request = new StringRequest(Request.Method.POST, url3, new Response.Listener<String>() {
 
-    protected void obtenerClases() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray jArray = jsonResponse.getJSONArray("response");
+                    ArrayList<String> clasesNombres = new ArrayList<String>();
+                    clasesVinculadas = new HashMap<String, String>();
+                    for (int i = 0; i < jArray.length(); i++) {
+                        JSONObject e = jArray.getJSONObject(i);
+                        if(sesion.getUserDetails().get("rol").equals("D")){
+                            clasesNombres.add(e.getString("nombre")+" - "+ e.getString("grupo"));
+                            clasesVinculadas.put(e.getString("nombre")+" - "+ e.getString("grupo"), e.getString("id_clase"));
+                        }else{
+                            clasesNombres.add(e.getString("nombre"));
+                            clasesVinculadas.put(e.getString("nombre"), e.getString("id_clase"));
+                        }
+
+
+                    }
+                    CustomListAdapter adapter = new CustomListAdapter(clasesNombres,clasesVinculadas,VincularActivity.this);
+                    vinculadasLista.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VincularActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("id_persona", sesion.getUserDetails().get("id"));
+                parameters.put("rol", sesion.getUserDetails().get("rol"));
+
+                return parameters;
+            }
+        };
+        requestQueue.add(request);
+    }
+    protected void obtenerClasesSinVinculacion() {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
             @Override

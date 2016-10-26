@@ -99,6 +99,8 @@
     <string name="udecVirtual">Ir a udec virtual</string>
     <string name="plataformaUdec">Ir a portal institucional</string>
     <string name="cerrarSesion">Cerrar sesion</string>
+    <string name="notasUdec">Plataforma udec</string>
+    <string name="borrar">Borrar</string>
 
 
 </resources>
