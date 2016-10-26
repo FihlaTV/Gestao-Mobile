@@ -34,6 +34,8 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         if (sesion.isLoggedIn()) {
             String token = FirebaseInstanceId.getInstance().getToken();
             registerToken(token);
+        }else{
+
         }
     }
 

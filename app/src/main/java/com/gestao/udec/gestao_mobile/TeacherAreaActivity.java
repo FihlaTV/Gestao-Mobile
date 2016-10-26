@@ -14,6 +14,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TeacherAreaActivity extends AppCompatActivity implements View.OnClickListener{
@@ -23,7 +40,8 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
     Button registrar;
     Button clase;
     Button perfil;
-
+    SessionManager sesion;
+    RequestQueue requestQueue;
     Toolbar myToolbar;
 
 
@@ -35,7 +53,9 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
 
         SessionManager sesion = new SessionManager(TeacherAreaActivity.this);
         sesion.checkLogin();
-
+        if (FirebaseInstanceId.getInstance().getToken()!= ""){
+            comprobartoken(FirebaseInstanceId.getInstance().getToken());
+        }
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //setSupportActionBar(myToolbar);
         myToolbar.inflateMenu(R.menu.main);
@@ -111,6 +131,56 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         perfil.setTypeface(TF);
 
     }
+    protected void comprobartoken(final String token){
+
+
+
+
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest request = new StringRequest(Request.Method.POST, urlp, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray jArray = jsonResponse.getJSONArray("response");
+                    JSONObject id = jArray.getJSONObject(0);
+                    Toast.makeText(TeacherAreaActivity.this, id.getString("estado"), Toast.LENGTH_LONG).show();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(TeacherAreaActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("persona", sesion.getUserDetails().get("id"));
+                parameters.put("from_token", token);
+                return parameters;
+            }
+        };
+        requestQueue.add(request);
+
+
+
+
+
+    }
+
 
     @Override
     public void onClick(View v) {
