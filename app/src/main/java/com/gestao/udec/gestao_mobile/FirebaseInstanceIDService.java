@@ -31,16 +31,17 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
     SessionManager sesion;
     @Override
     public void onTokenRefresh() {
+        SessionManager sesion = new SessionManager(getApplicationContext());
         if (sesion.isLoggedIn()) {
             String token = FirebaseInstanceId.getInstance().getToken();
-            registerToken(token);
+            registerToken(token,sesion.getUserDetails().get("id"));
         }else{
 
         }
     }
 
-    private void registerToken(final String token) {
-
+    private void registerToken(final String token, final String persona) {
+        sesion = new SessionManager(FirebaseInstanceIDService.this);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
         StringRequest request = new StringRequest(Request.Method.POST, urlp, new Response.Listener<String>() {
@@ -66,6 +67,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
                 parameters.put("from_token",token);
+                SessionManager sesion = new SessionManager(getApplicationContext());
                 parameters.put("persona",sesion.getUserDetails().get("id"));
                 return parameters;
             }

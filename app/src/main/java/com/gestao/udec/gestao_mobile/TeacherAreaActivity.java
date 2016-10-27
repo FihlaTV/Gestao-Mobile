@@ -134,8 +134,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
     protected void comprobartoken(final String token){
 
 
-
-
+        sesion = new SessionManager(TeacherAreaActivity.this);
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
@@ -150,7 +149,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
                     JSONObject id = jArray.getJSONObject(0);
-                    Toast.makeText(TeacherAreaActivity.this, id.getString("estado"), Toast.LENGTH_LONG).show();
+
 
 
                 } catch (JSONException e) {
@@ -162,14 +161,15 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(TeacherAreaActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+
             }
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("persona", sesion.getUserDetails().get("id"));
                 parameters.put("from_token", token);
+                parameters.put("persona", sesion.getUserDetails().get("id"));
+
                 return parameters;
             }
         };
