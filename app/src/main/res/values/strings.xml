@@ -91,9 +91,9 @@
     <string name="olvideContrasena"><i><u>Olvide mi contraseña</u></i></string>
     <string name="enviar">Enviar</string>
     <string name="ingresaCodigoCorreo">Ingresa el codigo generado</string>
-    <string name="recuperarContrasena" >Recuperar contraseña</string>
-    <string name="FCM_PREF" >com.gestao.udec.gestao_mobile.fcm_pref</string>
-    <string name="FCM_TOKEN" >com.gestao.udec.gestao_mobile.fcm_token</string>
+    <string name="recuperarContrasena">Recuperar contraseña</string>
+    <string name="FCM_PREF">com.gestao.udec.gestao_mobile.fcm_pref</string>
+    <string name="FCM_TOKEN">com.gestao.udec.gestao_mobile.fcm_token</string>
     <string name="irPaginaWeb">Ir a nuestro sitio</string>
     <string name="contactanos">Contactanos</string>
     <string name="udecVirtual">Ir a udec virtual</string>
@@ -101,6 +101,9 @@
     <string name="cerrarSesion">Cerrar sesion</string>
     <string name="notasUdec">Plataforma udec</string>
     <string name="borrar">Borrar</string>
+    <string name="title_activity_horario">HorarioActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 
 </resources>

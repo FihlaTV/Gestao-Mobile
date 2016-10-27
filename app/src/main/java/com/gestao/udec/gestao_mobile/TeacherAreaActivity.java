@@ -191,6 +191,8 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                 TeacherAreaActivity.this.startActivity(intent);
                 break;
             case R.id.bthorario:
+                intent = new Intent(TeacherAreaActivity.this, HorarioActivity.class);
+                TeacherAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btreservar:
                 intent = new Intent(TeacherAreaActivity.this, ReservarActivity.class);

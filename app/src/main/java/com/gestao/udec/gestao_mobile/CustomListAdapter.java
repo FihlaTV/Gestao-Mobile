@@ -31,12 +31,14 @@ import java.util.Map;
 public class CustomListAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> lista = new ArrayList<String>();
     private Context context;
+    private String botonTitulo;
     private HashMap<String,String> clasesVinculadas;
 
-    public CustomListAdapter(ArrayList<String> lista, HashMap<String, String> clasesVinculadas, Context context){
+    public CustomListAdapter(ArrayList<String> lista, HashMap<String, String> clasesVinculadas,String botonTitulo, Context context){
         this.lista = lista;
         this.context = context;
         this.clasesVinculadas = clasesVinculadas;
+        this.botonTitulo = botonTitulo;
     }
     @Override
     public int getCount() {
@@ -68,62 +70,57 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
         listItemText.setTypeface(TF);
 
         //Handle buttons and add onClickListeners
-        Button deleteBtn = (Button)view.findViewById(R.id.btListBorrar);
-        deleteBtn.setTypeface(TF);
+        Button boton = (Button)view.findViewById(R.id.btListBorrar);
+        boton.setText(botonTitulo);
+        boton.setTypeface(TF);
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String url = "http://192.168.1.66/gestao/mobile/desvinculacion_clase.php";
+        if(boton.getText().toString().equals("Borrar")) {
+            boton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "http://192.168.1.66/gestao/mobile/desvinculacion_clase.php";
 
-                RequestQueue requestQueue;
-                requestQueue = Volley.newRequestQueue(context.getApplicationContext());
-                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    RequestQueue requestQueue;
+                    requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+                    StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-                        lista.remove(position);
-                        notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if(error!=null && error.getMessage() !=null){
-                            Toast.makeText(context,lista.get(position),Toast.LENGTH_LONG).show();
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                            lista.remove(position);
+                            notifyDataSetChanged();
                         }
-                        else{
-                            Toast.makeText(context,"Something went wrong",Toast.LENGTH_LONG).show();
-
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, context.getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
                         }
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        SessionManager sesion;
-                        sesion = new SessionManager(context);
-                        Map<String, String> parameters = new HashMap<String, String>();
-                        parameters.put("id_clase", clasesVinculadas.get(lista.get(position)));
-                        parameters.put("id_persona", sesion.getUserDetails().get("id"));
-                        parameters.put("rol", sesion.getUserDetails().get("rol"));
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            SessionManager sesion;
+                            sesion = new SessionManager(context);
+                            Map<String, String> parameters = new HashMap<String, String>();
+                            parameters.put("id_clase", clasesVinculadas.get(lista.get(position)));
+                            parameters.put("id_persona", sesion.getUserDetails().get("id"));
+                            parameters.put("rol", sesion.getUserDetails().get("rol"));
 
-                        return parameters;
-                    }
-                };
-                requestQueue.add(request);
-
+                            return parameters;
+                        }
+                    };
+                    requestQueue.add(request);
 
 
-
-
-
-
-
-
-
-
-            }
-        });
+                }
+            });
+        }else{
+            boton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, clasesVinculadas.get(lista.get(position)) , Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
 
         return view;

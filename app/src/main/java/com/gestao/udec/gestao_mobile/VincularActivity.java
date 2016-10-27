@@ -94,7 +94,7 @@ public class VincularActivity extends AppCompatActivity implements View.OnClickL
 
 
                     }
-                    CustomListAdapter adapter = new CustomListAdapter(clasesNombres,clasesVinculadas,VincularActivity.this);
+                    CustomListAdapter adapter = new CustomListAdapter(clasesNombres,clasesVinculadas,"Borrar",VincularActivity.this);
                     vinculadasLista.setAdapter(adapter);
 
                 } catch (JSONException e) {

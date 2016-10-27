@@ -37,24 +37,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".FirebaseInstanceIDService">
+        <service android:name=".FirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-
         </service>
 
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".VincularActivity" />
         <activity android:name=".ReservarActivity" />
-        <activity android:name=".HorarioActivity" />
         <activity android:name=".TeacherAreaActivity" />
         <activity android:name=".ProfesoresActivity" />
         <activity
@@ -74,7 +72,10 @@
         <activity android:name=".EscanearActivity" />
         <activity android:name=".ClaseActivity" />
         <activity android:name=".OlvidePaso1Activity" />
-        <activity android:name=".OlvidePaso2Activity"></activity>
+        <activity android:name=".OlvidePaso2Activity" />
+        <activity
+            android:name=".HorarioActivity"
+            android:label="@string/title_activity_horario"></activity>
     </application>
 
 </manifest>
