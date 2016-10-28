@@ -75,7 +75,11 @@
         <activity android:name=".OlvidePaso2Activity" />
         <activity
             android:name=".HorarioActivity"
-            android:label="@string/title_activity_horario"></activity>
+            android:label="@string/title_activity_horario" />
+        <activity android:name=".SalasSeleccionActivity" />
+        <activity
+            android:name=".SalasHorarioActivity"
+            android:label="@string/title_activity_salas_horario"></activity>
     </application>
 
 </manifest>

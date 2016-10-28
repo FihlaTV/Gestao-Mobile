@@ -42,6 +42,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     Button horario;
     Button profesores;
     Button perfil;
+    Button salas;
     Toolbar myToolbar;
 
     SessionManager sesion;
@@ -117,6 +118,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         horario = (Button) findViewById(R.id.bthorario);
         profesores = (Button) findViewById(R.id.btprofesores);
         perfil = (Button) findViewById(R.id.btPerfil);
+        salas = (Button) findViewById(R.id.btSalas);
 
         String font_path = "fonts/Ubuntu-C.ttf";
         final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
@@ -126,12 +128,14 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         horario.setTypeface(TF);
         profesores.setTypeface(TF);
         perfil.setTypeface(TF);
+        salas.setTypeface(TF);
 
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);
         horario.setOnClickListener(this);
         profesores.setOnClickListener(this);
         perfil.setOnClickListener(this);
+        salas.setOnClickListener(this);
 
     }
 
@@ -210,7 +214,10 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                 intent = new Intent(UserAreaActivity.this, PerfilActivity.class);
                 UserAreaActivity.this.startActivity(intent);
                 break;
-
+            case R.id.btSalas:
+                intent = new Intent(UserAreaActivity.this, SalasSeleccionActivity.class);
+                UserAreaActivity.this.startActivity(intent);
+                break;
         }
     }
 }

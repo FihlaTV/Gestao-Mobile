@@ -95,6 +95,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btPerfil"
                 android:layout_weight="1" />
+
+            <Button
+                android:text="@string/misSalas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btSalas"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>

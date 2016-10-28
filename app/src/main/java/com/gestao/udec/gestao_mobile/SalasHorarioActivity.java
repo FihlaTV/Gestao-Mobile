@@ -7,10 +7,8 @@ import android.app.FragmentTransaction;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v13.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +29,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,15 +43,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HorarioActivity extends Activity {
+public class SalasHorarioActivity extends Activity {
 
     /**
-     * The {@link PagerAdapter} that will provide
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link FragmentStatePagerAdapter}.
+     * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -64,16 +59,15 @@ public class HorarioActivity extends Activity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    static String aula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_horario);
+        setContentView(R.layout.activity_salas_horario);
+
+        Bundle extra = getIntent().getExtras();
+        aula = extra.getString("sala");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
@@ -83,16 +77,13 @@ public class HorarioActivity extends Activity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_horario, menu);
+        getMenuInflater().inflate(R.menu.menu_salas_horario, menu);
         return true;
     }
 
@@ -112,42 +103,6 @@ public class HorarioActivity extends Activity {
     }
 
     /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Horario Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
-
-    /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
@@ -156,15 +111,16 @@ public class HorarioActivity extends Activity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+
         private ListView horario;
         TextView fecha;
-        private String url = "http://192.168.1.66/gestao/mobile/select_horario_persona.php";
+        private String url = "http://192.168.1.66/gestao/mobile/select_horario_aula.php";
         View rootView;
-        HashMap<String,String> clasesVinculadas;
 
         String fechaABuscar;
 
         RequestQueue requestQueue;
+
 
         public PlaceholderFragment() {
         }
@@ -184,8 +140,7 @@ public class HorarioActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
-            rootView = inflater.inflate(R.layout.fragment_horario, container, false);
+            rootView = inflater.inflate(R.layout.fragment_salas_horario, container, false);
             fecha = (TextView) rootView.findViewById(R.id.tvFecha);
             horario = (ListView) rootView.findViewById(R.id.lvHorario);
 
@@ -205,6 +160,7 @@ public class HorarioActivity extends Activity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             fechaABuscar= sdf.format(c.getTime());
             fecha.setText(obtenerDiaSemana(c.get(Calendar.DAY_OF_WEEK)) +" - " + fechaABuscar);
+            fecha.setTypeface(Typeface.createFromAsset(rootView.getContext().getAssets(),"fonts/Ubuntu-C.ttf"));
             obtenerHorario();
 
             return rootView;
@@ -248,33 +204,37 @@ public class HorarioActivity extends Activity {
                         JSONArray jArray = jsonResponse.getJSONArray("response");
                         SessionManager sesion = new SessionManager(rootView.getContext());
                         String[] claseHoras= new String[15];
-                        clasesVinculadas = new HashMap<String, String>();
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject e = jArray.getJSONObject(i);
-                            if (sesion.getUserDetails().get("rol").equals("D")) {
                                 for (int j=e.getInt("hora_inicio");j<e.getInt("hora_final");j++){
-                                    String textoLista = String.format("%02d", j)+" - "+ String.format("%02d", (j+1))+" "+e.getString("clase")+" - "+ e.getString("grupo")+" - "+e.getString("aula");
+                                    String textoLista = String.format("%02d", j)+" - "+ String.format("%02d", (j+1))+" "+e.getString("clase")+" - "+ e.getString("grupo")+" - " +e.getString("docente");
                                     claseHoras[j-7]= textoLista;
-                                    clasesVinculadas.put(textoLista,e.getString("observaciones"));
                                 }
-                            } else {
-                                for (int j=e.getInt("hora_inicio");j<e.getInt("hora_final");j++){
-                                    String textoLista = String.format("%02d", j)+" - "+ String.format("%02d", (j+1))+" "+e.getString("clase")+" - "+ e.getString("grupo")+" - "+e.getString("aula")+" - "+e.getString("docente");
-                                    claseHoras[j-7]= textoLista;
-                                    clasesVinculadas.put(textoLista,e.getString("observaciones"));
-                                }
-                            }
                         }
                         for(int j=0;j<claseHoras.length;j++){
                             if(claseHoras[j]== null){
                                 String output = String.format("%02d", (j+7))+" - "+ String.format("%02d", (j+8))+" Libre";
                                 claseHoras[j]= output;
-                                clasesVinculadas.put(output,"No tienes clase en salas a esta hora");
                             }
                         }
-                        List<String> wordList = Arrays.asList(claseHoras);
-                        ArrayList<String> al = new ArrayList<String>(wordList);
-                        CustomListAdapter adapter = new CustomListAdapter(al, clasesVinculadas,"Observacion", rootView.getContext());
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1,claseHoras){
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                View v = super.getView(position, convertView, parent);
+                                ((TextView) v).setTypeface(Typeface.createFromAsset(rootView.getContext().getAssets(),"fonts/Ubuntu-C.ttf"));
+
+                                return v;
+                            }
+
+
+                            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                                View v =super.getDropDownView(position, convertView, parent);
+                                ((TextView) v).setTypeface(Typeface.createFromAsset(rootView.getContext().getAssets(),"fonts/Ubuntu-C.ttf"));
+
+                                return v;
+                            }
+                        };
+
                         horario.setAdapter(adapter);
 
                     } catch (JSONException e) {
@@ -291,8 +251,7 @@ public class HorarioActivity extends Activity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     SessionManager sesion = new SessionManager(rootView.getContext());
                     Map<String, String> parameters = new HashMap<String, String>();
-                    parameters.put("id_persona", sesion.getUserDetails().get("id"));
-                    parameters.put("rol", sesion.getUserDetails().get("rol"));
+                    parameters.put("id_aula", aula);
                     parameters.put("fecha",fechaABuscar);
 
                     return parameters;

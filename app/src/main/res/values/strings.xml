@@ -104,6 +104,11 @@
     <string name="title_activity_horario">HorarioActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="misSalas">Mis salas</string>
+    <string name="escogeSalaHorario">Escoge la sala la cual quieres visualizar horario</string>
+    <string name="mostrarHorario">Mostrar horario</string>
+    <string name="title_activity_salas_horario">SalasHorarioActivity</string>
+    <string name="diaNoDefinido">Dia no definido</string>
 
 
 </resources>

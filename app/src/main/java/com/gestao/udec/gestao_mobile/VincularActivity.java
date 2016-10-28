@@ -58,7 +58,9 @@ public class VincularActivity extends AppCompatActivity implements View.OnClickL
         auto = (AutoCompleteTextView) findViewById(R.id.actClase);
         vincular = (Button) findViewById(R.id.btVincular);
         vinculadasLista = (ListView) findViewById(R.id.lvVinculadas);
+
         requestQueue = Volley.newRequestQueue(getApplicationContext());
+
         String font_path = "fonts/Ubuntu-C.ttf";
         Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
         auto.setTypeface(TF);

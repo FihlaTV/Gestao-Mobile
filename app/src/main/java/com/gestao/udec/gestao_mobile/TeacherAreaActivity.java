@@ -40,6 +40,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
     Button registrar;
     Button clase;
     Button perfil;
+    Button salas;
     SessionManager sesion;
     RequestQueue requestQueue;
     Toolbar myToolbar;
@@ -112,6 +113,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         registrar = (Button) findViewById(R.id.btreservar);
         clase = (Button) findViewById(R.id.btclase);
         perfil = (Button) findViewById(R.id.btPerfil);
+        salas = (Button) findViewById(R.id.btSalas);
 
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);
@@ -119,6 +121,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         registrar.setOnClickListener(this);
         clase.setOnClickListener(this);
         perfil.setOnClickListener(this);
+        salas.setOnClickListener(this);
 
         String font_path = "fonts/Ubuntu-C.ttf";
         final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
@@ -129,6 +132,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         registrar.setTypeface(TF);
         clase.setTypeface(TF);
         perfil.setTypeface(TF);
+        salas.setTypeface(TF);
 
     }
     protected void comprobartoken(final String token){
@@ -208,6 +212,10 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.btPerfil:
                 intent = new Intent(TeacherAreaActivity.this, PerfilActivity.class);
+                TeacherAreaActivity.this.startActivity(intent);
+                break;
+            case R.id.btSalas:
+                intent = new Intent(TeacherAreaActivity.this, SalasSeleccionActivity.class);
                 TeacherAreaActivity.this.startActivity(intent);
                 break;
         }
