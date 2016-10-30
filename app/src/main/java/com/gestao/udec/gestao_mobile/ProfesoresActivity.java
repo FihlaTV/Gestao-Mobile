@@ -261,13 +261,17 @@ public class ProfesoresActivity extends AppCompatActivity {
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject clases = jArray.getJSONObject(i);
                             trclase = new TableRow(getApplicationContext());
+                            trclase.setBackgroundResource(R.drawable.edittextstyle);
+                            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                            llp.setMargins(30, 30, 30, 30); // llp.setMargins(left, top, right, bottom);
+                            trclase.setLayoutParams(llp);
                             trclase.setId(100 + i);
                             TextView tvcol1 = new TextView(getApplicationContext());
                             String font_path = "fonts/Ubuntu-C.ttf";
                             final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
                             tvcol1.setTypeface(TF);
                             tvcorreo.setTypeface(TF);
-                            tvcol1.setBackgroundResource(R.drawable.edittextstyle);
+
                             Color.parseColor("#000000");
                             tvcol1.setTextColor(Color.parseColor("#000000"));
                             tvcol1.setId(200 + i);
