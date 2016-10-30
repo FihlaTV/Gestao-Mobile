@@ -39,7 +39,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
     Button horario;
     Button registrar;
     Button clase;
-    Button perfil;
+
     Button salas;
     SessionManager sesion;
     RequestQueue requestQueue;
@@ -120,7 +120,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         horario.setOnClickListener(this);
         registrar.setOnClickListener(this);
         clase.setOnClickListener(this);
-        perfil.setOnClickListener(this);
+
         salas.setOnClickListener(this);
 
         String font_path = "fonts/Ubuntu-C.ttf";
@@ -131,7 +131,6 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         horario.setTypeface(TF);
         registrar.setTypeface(TF);
         clase.setTypeface(TF);
-        perfil.setTypeface(TF);
         salas.setTypeface(TF);
 
     }
