@@ -41,7 +41,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     Button vincular;
     Button horario;
     Button profesores;
-    Button perfil;
+
     Button salas;
     Toolbar myToolbar;
 
@@ -117,7 +117,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         vincular = (Button) findViewById(R.id.btvincular);
         horario = (Button) findViewById(R.id.bthorario);
         profesores = (Button) findViewById(R.id.btprofesores);
-        perfil = (Button) findViewById(R.id.btPerfil);
+
         salas = (Button) findViewById(R.id.btSalas);
 
         String font_path = "fonts/Ubuntu-C.ttf";
@@ -127,14 +127,14 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         vincular.setTypeface(TF);
         horario.setTypeface(TF);
         profesores.setTypeface(TF);
-        perfil.setTypeface(TF);
+
         salas.setTypeface(TF);
 
         escanear.setOnClickListener(this);
         vincular.setOnClickListener(this);
         horario.setOnClickListener(this);
         profesores.setOnClickListener(this);
-        perfil.setOnClickListener(this);
+
         salas.setOnClickListener(this);
 
     }
@@ -158,7 +158,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
                     JSONObject id = jArray.getJSONObject(0);
-                    Toast.makeText(UserAreaActivity.this, id.getString("estado"), Toast.LENGTH_LONG).show();
+
 
 
                 } catch (JSONException e) {
@@ -208,10 +208,6 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btprofesores:
                 intent = new Intent(UserAreaActivity.this, ProfesoresActivity.class);
-                UserAreaActivity.this.startActivity(intent);
-                break;
-            case R.id.btPerfil:
-                intent = new Intent(UserAreaActivity.this, PerfilActivity.class);
                 UserAreaActivity.this.startActivity(intent);
                 break;
             case R.id.btSalas:

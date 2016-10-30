@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.VincularActivity">
+    tools:context="com.gestao.udec.gestao_mobile.VincularActivity"
+    android:background="@color/colorAccent">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -16,9 +17,12 @@
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dip"
             android:id="@+id/actClase"
+            android:gravity="center"
             android:layout_weight="1"
+            android:background="@drawable/edittextstyle"
+            android:layout_margin="5dp"
             android:hint="@string/nombreClase"
             android:maxLength="@integer/textoSemiLargo" />
 
@@ -29,23 +33,18 @@
             android:id="@+id/btVincular"
             android:layout_weight="1" />
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittextstyle"
+            android:layout_margin="5dp"
             android:layout_weight="1">
 
-            <TextView
+            <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvnombrefull"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lvVinculadas" />
+                android:id="@+id/lvVinculadas" />
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -17,6 +20,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -50,17 +56,19 @@ public class ProfesoresActivity extends AppCompatActivity {
     ImageView ifacebook;
     ImageView itwiter;
     ImageView ivfoto;
+    private ListView lvclasesd;
 
     RequestQueue requestQueue;
     JSONArray jArray;
-    TextView tvnombrefull, tvcorreo, tvdescrip, tvtelefono;
+    TextView tvnombrefull, tvcorreo, tvdescrip, tvtelefono,tvpersonal,tvclasesd;
     AutoCompleteTextView auto;
     String id_profesor = "";
     TableLayout tlclase;
     ScrollView sv;
     TableRow trclase;
-    Button btConsultar;
 
+    Button btConsultar;
+    RelativeLayout inf_per;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SessionManager sesion = new SessionManager(ProfesoresActivity.this);
@@ -76,7 +84,10 @@ public class ProfesoresActivity extends AppCompatActivity {
         tvnombrefull = (TextView) findViewById(R.id.tvnombrefull);
         sv = (ScrollView) findViewById(R.id.sv);
         tvcorreo = (TextView) findViewById(R.id.tvcorreo);
+        tvpersonal = (TextView) findViewById(R.id.tvpersonal);
         tvdescrip = (TextView) findViewById(R.id.tvdescrip);
+        tvclasesd = (TextView) findViewById(R.id.tvclasesd);
+        inf_per = (RelativeLayout) findViewById(R.id.inf_per);
         tvtelefono = (TextView) findViewById(R.id.tvtelefono);
         tlclase = (TableLayout) findViewById(R.id.tlclases);
         trclase = (TableRow) findViewById(R.id.trclase);
@@ -88,9 +99,12 @@ public class ProfesoresActivity extends AppCompatActivity {
         tvnombrefull.setTypeface(TF);
         btConsultar.setTypeface(TF);
         tvdescrip.setTypeface(TF);
-        itwiter.setVisibility(View.INVISIBLE);
-        ifacebook.setVisibility(View.INVISIBLE);
+        tvpersonal.setTypeface(TF);
+        tvclasesd.setTypeface(TF);
+        inf_per.setVisibility(View.INVISIBLE);
         tlclase.setVisibility(View.INVISIBLE);
+        tvpersonal.setVisibility(View.INVISIBLE);
+        tvclasesd.setVisibility(View.INVISIBLE);
         obtener_profesores();
 
 
@@ -100,17 +114,15 @@ public class ProfesoresActivity extends AppCompatActivity {
 
 
                 String url = (String) itwiter.getTag();
-
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-
-                //pass the url to intent data
-                intent.setData(Uri.parse(url));
-                try {
-                    startActivity(intent);
-                } catch (ActivityNotFoundException anfe_e) {
+                v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
+                if (url.equals("")){
                     Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.docenteNoHaRegistradoRecurso), Toast.LENGTH_LONG).show();
+                }else{
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
                 }
 
             }
@@ -120,19 +132,20 @@ public class ProfesoresActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
                 String url = (String) ifacebook.getTag();
-
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-
-                //pass the url to intent data
-                intent.setData(Uri.parse(url));
-                try {
-                    startActivity(intent);
-                } catch (ActivityNotFoundException anfe_e) {
+                if (url.equals("")){
                     Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.docenteNoHaRegistradoRecurso), Toast.LENGTH_LONG).show();
+                }else{
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
                 }
+
+
+
 
             }
         });
@@ -193,13 +206,14 @@ public class ProfesoresActivity extends AppCompatActivity {
 
                     if (jArray.length() > 0) {
                         for (int i = 0; i < jArray.length(); i++) {
+                            tvpersonal.setVisibility(View.VISIBLE);
+                            inf_per.setVisibility(View.VISIBLE);
                             JSONObject profesor = jArray.getJSONObject(i);
                             itwiter.setTag(profesor.getString("twiter"));
 
                             ifacebook.setTag(profesor.getString("facebook"));
 
-                            itwiter.setVisibility(View.VISIBLE);
-                            ifacebook.setVisibility(View.VISIBLE);
+
                             tvnombrefull.setText(profesor.getString("nombre1") + " " + profesor.getString("nombre2") + " " + profesor.getString("apellido1") + " " + profesor.getString("apellido2"));
                             tvdescrip.setText(profesor.getString("descripcion"));
                             tvcorreo.setText(profesor.getString("email"));
@@ -234,7 +248,7 @@ public class ProfesoresActivity extends AppCompatActivity {
 
         ////////////////////////
         StringRequest requesttwo = new StringRequest(Request.Method.POST, showteacherec, new Response.Listener<String>() {
-
+            String clases_nombre[];
             @Override
             public void onResponse(String response) {
                 tlclase.setVisibility(View.VISIBLE);
@@ -242,38 +256,30 @@ public class ProfesoresActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if (jArray.length() > 0) {
-
+                    if (jArray.length() >= 0) {
+                        tvclasesd.setVisibility(View.VISIBLE);
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject clases = jArray.getJSONObject(i);
-
-
                             trclase = new TableRow(getApplicationContext());
                             trclase.setId(100 + i);
-
                             TextView tvcol1 = new TextView(getApplicationContext());
+                            String font_path = "fonts/Ubuntu-C.ttf";
+                            final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
+                            tvcol1.setTypeface(TF);
+                            tvcorreo.setTypeface(TF);
+                            tvcol1.setBackgroundResource(R.drawable.edittextstyle);
+                            Color.parseColor("#000000");
+                            tvcol1.setTextColor(Color.parseColor("#000000"));
                             tvcol1.setId(200 + i);
+                            tvcol1.setText(" Clase: " + clases.getString("nombre_clase") + "\n" + " Sala: " + clases.getString("nombre_aula") + "\n" + " hora: " + clases.getString("hora_inicio") + " - " + clases.getString("hora_final") + "\n" + " fecha: " + clases.getString("fecha"));
 
-                            tvcol1.setText(clases.getString("nombre_clase"));
-                            TextView tvcol2 = new TextView(getApplicationContext());
-                            tvcol2.setId(200 + i);
-                            tvcol2.setText(clases.getString("nombre_aula"));
-                            TextView tvcol3 = new TextView(getApplicationContext());
-                            tvcol3.setId(200 + i);
-                            tvcol3.setText(clases.getString("hora_inicio") + " - " + clases.getString("hora_final"));
-
-                            TextView tvcol5 = new TextView(getApplicationContext());
-                            tvcol5.setId(200 + i);
-                            tvcol5.setText(clases.getString("fecha").substring(0, 1).toUpperCase() + clases.getString("fecha").substring(1));
                             trclase.addView(tvcol1);
-                            trclase.addView(tvcol2);
-                            trclase.addView(tvcol3);
-
-
-                            trclase.addView(tvcol5);
                             tlclase.addView(trclase);
-
                         }
+
+
+
+
                     } else {
                         Toast.makeText(ProfesoresActivity.this, getResources().getString(R.string.errorNoClases), Toast.LENGTH_LONG).show();
                     }
@@ -309,7 +315,7 @@ public class ProfesoresActivity extends AppCompatActivity {
 
                         ivfoto.setImageBitmap(imgful);
                     }
-                }, 200, 200, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+                }, 300, 300, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {

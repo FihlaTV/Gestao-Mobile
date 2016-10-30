@@ -40,7 +40,8 @@
     <string name="horaInicialIntervalo">La hora inicial debe estar entre las 7 y las 21 horas</string>
     <string name="horaFinalIntervalo">La hora final debe estar entre las 8 y las 22 horas</string>
     <string name="clase">Clase</string>
-    <string name="nombreProfesor">Nombre del profesor</string>
+    <string name="clasen"><u> Clase: </u></string>
+    <string name="nombreProfesor">Nombre del docente</string>
     <string name="consultar">Consultar</string>
     <string name="crearClase">Crear clase</string>
     <string name="nombreClase">Ingresa el nombre de la clase</string>
@@ -109,6 +110,8 @@
     <string name="mostrarHorario">Mostrar horario</string>
     <string name="title_activity_salas_horario">SalasHorarioActivity</string>
     <string name="diaNoDefinido">Dia no definido</string>
+    <string name="informacionPersonal"><i>Informacion personal:</i></string>
+    <string name="siguientesClasesDelDocente"><i>Siguientes clases del docente:</i></string>
 
 
 </resources>

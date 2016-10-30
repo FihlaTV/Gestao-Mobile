@@ -8,104 +8,113 @@
     android:background="@color/colorAccent">
 
 
-
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        >
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?android:attr/colorActivatedHighlight"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            >
 
-
-
-        <Button
-            android:text="@string/escanear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btescanear"
-            />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:text="@string/vincular"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/my_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btvincular"
-                android:layout_weight="1" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="?android:attr/colorActivatedHighlight"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-            <Button
-                android:text="@string/horario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/bthorario"
-                android:layout_weight="1" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:text="@string/miPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btPerfil"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/profesores"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btprofesores"
-                android:layout_weight="1" />
-
-        </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
 
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btSalas"
-                    android:layout_weight="1"
-                    android:text="@string/misSalas" />
-            </LinearLayout>
-        </LinearLayout>
+                android:text="@string/escanear"
+                android:layout_width="match_parent"
+                android:drawableLeft="@mipmap/camera"
+                    android:layout_height="200px"
+                android:id="@+id/btescanear"
+                />
 
-    </LinearLayout>
+                <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                    android:gravity="center"
+                android:layout_height="wrap_content">
+
+                    <Button
+                        android:text="@string/vincular"
+                        android:layout_width="match_parent"
+                        android:layout_height="200px"
+
+                        android:drawableLeft="@mipmap/vincular"
+                        android:id="@+id/btvincular"
+                        android:layout_weight="1" />
+
+                    <Button
+                    android:text="@string/horario"
+                    android:layout_width="match_parent"
+                        android:layout_height="200px"
+                    android:drawableLeft="@mipmap/horario"
+                    android:id="@+id/bthorario"
+                    android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                    android:gravity="center"
+                android:layout_height="wrap_content">
+
+                    <Button
+                    android:text="@string/profesores"
+                    android:layout_width="match_parent"
+                    android:layout_height="200px"
+                    android:drawableLeft="@mipmap/teacher"
+                    android:id="@+id/btprofesores"
+                    android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="200px"
+                        android:id="@+id/btSalas"
+                        android:drawableLeft="@mipmap/aula"
+                        android:layout_weight="1"
+                        android:text="@string/misSalas" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

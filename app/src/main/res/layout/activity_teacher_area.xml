@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gestao.udec.gestao_mobile.TeacherAreaActivity">
+    tools:context="com.gestao.udec.gestao_mobile.TeacherAreaActivity"
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -38,25 +39,31 @@
         <Button
             android:text="@string/escanear"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btescanear" />
+            android:drawableLeft="@mipmap/camera"
+            android:layout_height="200px"
+            android:id="@+id/btescanear"
+            />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content">
 
             <Button
                 android:text="@string/vincular"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200px"
+
+                android:drawableLeft="@mipmap/vincular"
                 android:id="@+id/btvincular"
                 android:layout_weight="1" />
 
             <Button
                 android:text="@string/horario"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200px"
+                android:drawableLeft="@mipmap/horario"
                 android:id="@+id/bthorario"
                 android:layout_weight="1" />
 
@@ -65,20 +72,23 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             >
 
             <Button
                 android:text="@string/reservar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200px"
+                android:drawableLeft="@mipmap/rese"
                 android:id="@+id/btreservar"
                 android:layout_weight="1" />
 
             <Button
                 android:text="@string/crearClase"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/crear"
+                android:layout_height="200px"
                 android:id="@+id/btclase"
                 android:layout_weight="1" />
 
@@ -90,18 +100,12 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:text="@string/miPerfil"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btPerfil"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/misSalas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200px"
                 android:id="@+id/btSalas"
-                android:layout_weight="1" />
+                android:drawableLeft="@mipmap/aula"
+                android:layout_weight="1"
+                android:text="@string/misSalas" />
         </LinearLayout>
 
     </LinearLayout>

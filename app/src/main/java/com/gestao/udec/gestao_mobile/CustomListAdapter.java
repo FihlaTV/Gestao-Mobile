@@ -2,6 +2,7 @@ package com.gestao.udec.gestao_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
         TextView listItemText = (TextView)view.findViewById(R.id.tvListElementVinculadas);
         listItemText.setText(lista.get(position));
         listItemText.setTypeface(TF);
+
 
         //Handle buttons and add onClickListeners
         Button boton = (Button)view.findViewById(R.id.btListBorrar);

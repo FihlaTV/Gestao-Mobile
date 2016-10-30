@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.ProfesoresActivity">
+    tools:context="com.gestao.udec.gestao_mobile.ProfesoresActivity"
+    android:background="@color/colorAccent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,10 +25,14 @@
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:id="@+id/actProfesor"
                 android:layout_weight="1"
+                android:background="@drawable/edittextstyle"
+                android:layout_margin="5dp"
                 android:hint="@string/nombreProfesor"
+
+                android:gravity="center"
                 android:maxLength="@integer/textoSemiLargo" />
 
             <Button
@@ -37,124 +42,135 @@
                 android:id="@+id/btconsutar"
                 android:layout_weight="1" />
 
-            <ImageView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/ivfoto"
-                android:layout_weight="1" />
-
             <TextView
+                android:text="@string/informacionPersonal"
                 android:layout_width="match_parent"
+                android:textColor="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvnombrefull"
+                android:id="@+id/tvpersonal"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="24sp" />
+                android:visibility="invisible" />
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/tvcorreo"
-                android:layout_weight="1" />
+                android:background="@drawable/edittextstyle"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:id="@+id/inf_per">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/tvtelefono"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/tvdescrip"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="100dp">
-
-                <ImageView
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_margin="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/twiter"
-                    android:gravity="center"
-                    android:id="@+id/itwiter"
-                    android:layout_weight="1"
-                    android:visibility="invisible" />
+                    android:id="@+id/personal_inf">
 
-                <ImageView
+                    <ImageView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/ivfoto"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvnombrefull"
+                        android:layout_weight="1"
+
+                    android:textColor="#000000"
+                        android:gravity="center"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:id="@+id/tvcorreo"
+                        android:textColor="#000000"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:id="@+id/tvtelefono" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:id="@+id/tvdescrip"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/facebook"
-                    android:id="@+id/ifacebook"
                     android:gravity="center"
-                    android:layout_weight="1"
-                    android:visibility="invisible" />
-            </LinearLayout>
+                    android:layout_margin="5dp"
+                    android:layout_below="@+id/personal_inf"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fotos">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dip"
+                        app:srcCompat="@mipmap/twiter"
+                        android:gravity="center"
+                        android:id="@+id/itwiter"
+                        android:layout_weight="1"
+                         />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dip"
+                        app:srcCompat="@mipmap/facebook"
+                        android:id="@+id/ifacebook"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
 
             <TextView
+                android:text="@string/siguientesClasesDelDocente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView"
+                android:id="@+id/tvclasesd"
+                android:textColor="#FFFFFF"
                 android:layout_weight="1"
-                android:textSize="24sp" />
+                android:visibility="invisible" />
 
-            <TableLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:shrinkColumns="*"
-                android:stretchColumns="*"
-                android:id="@+id/tlclases"
-                android:visibility="invisible">
+                android:layout_height="wrap_content"
+                android:gravity="center"
 
-                <TableRow
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent">
 
-                    <TextView
-                        android:text="@string/clase"
-                        android:layout_width="match_parent"
+                android:layout_weight="1">
 
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView2" />
-
-                    <TextView
-                        android:text="@string/sala"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView5" />
-
-                    <TextView
-                        android:text="@string/horas"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView3" />
-
-                    <TextView
-                        android:text="@string/fecha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView6" />
-
-                </TableRow>
-
-                <TableRow
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/trclase" />
 
-            </TableLayout>
+                    android:gravity="center"
+                    android:id="@+id/tlclases">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/trclase" />
+                </TableLayout>
+
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
