@@ -112,6 +112,8 @@
     <string name="diaNoDefinido">Dia no definido</string>
     <string name="informacionPersonal"><i>Informacion personal:</i></string>
     <string name="siguientesClasesDelDocente"><i>Siguientes clases del docente:</i></string>
+    <string name="tuSiguienteClaseEn"><i>Tu siguiente clase:</i></string>
+    <string name="siguientesClasesEnEstaSala"><i>Siguientes clases en esta sala:</i></string>
 
 
 </resources>

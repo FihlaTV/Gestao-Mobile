@@ -8,67 +8,116 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.EscanearActivity">
+    tools:context="com.gestao.udec.gestao_mobile.EscanearActivity"
+    android:background="@color/colorAccent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:text="@string/fecha"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvfecha"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/fecha"
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_height="40dip"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:background="@drawable/edittextstyle"
+                    android:id="@+id/tvfecha"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="@string/hora"
+                    android:layout_width="match_parent"
+                    android:layout_margin="5dp"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:layout_height="40dip"
+                    android:background="@drawable/edittextstyle"
+                    android:id="@+id/tvhora"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="@string/aula"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittextstyle"
+                    android:layout_margin="5dp"
+                    android:layout_height="40dip"
+                    android:textColor="#000000"
+                    android:id="@+id/tvaula"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:id="@+id/rlclasem">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvmiclase"
+                        android:textColor="#FFFFFF"
+                        android:text="@string/tuSiguienteClaseEn" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dip"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:drawableRight="@mipmap/ver"
+                        android:textColor="#000000"
+                        android:layout_below="@+id/tvmiclase"
+
+                        android:background="@drawable/edittextstyle"
+                        android:id="@+id/tvclase_actual"
+                        android:visibility="invisible"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <TextView
-                android:text="@string/hora"
+                android:text="@string/siguientesClasesEnEstaSala"
                 android:layout_width="match_parent"
+                android:textColor="#FFFFFF"
+                android:layout_below="@+id/rlclasem"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvhora"
+                android:id="@+id/tvclasess"
+                android:visibility="invisible"
                 android:layout_weight="1" />
-
-            <TextView
-                android:text="@string/aula"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvaula"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvclase_actual" />
-
-        <TextView
-            android:text="vacio! actualmente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvvacio"
-
-            android:visibility="invisible" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:shrinkColumns="*"
-                android:stretchColumns="*"
+                android:layout_height="match_parent"
+
+                android:gravity="center"
+                android:layout_margin="5dp"
+
                 android:id="@+id/tlclases">
 
             </TableLayout>
-        </ScrollView>
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
