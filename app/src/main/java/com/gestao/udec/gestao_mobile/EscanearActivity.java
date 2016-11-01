@@ -9,7 +9,9 @@ import android.net.Uri;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -310,6 +312,7 @@ public class EscanearActivity extends AppCompatActivity {
 
                            }
                             trclase = new TableRow(getApplicationContext());
+
                             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                             llp.setMargins(30, 30, 30, 30); // llp.setMargins(left, top, right, bottom);
 
@@ -317,6 +320,7 @@ public class EscanearActivity extends AppCompatActivity {
                             trclase.setBackgroundResource(R.drawable.edittextstyle);
                             trclase.setId(100+i);
                             TextView tvcol1 = new TextView(getApplicationContext());
+                            tvcol1.setCompoundDrawablesWithIntrinsicBounds(  R.mipmap.cls, 0,0, 0);
                             tvcol1.setId(200+i);
                             String font_path = "fonts/Ubuntu-C.ttf";
                             final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
@@ -335,6 +339,7 @@ public class EscanearActivity extends AppCompatActivity {
                             if (Integer.parseInt(clase_en_aula.getString("hora_inicio"))<=Integer.parseInt(hora) && Integer.parseInt(clase_en_aula.getString("hora_final"))>Integer.parseInt(hora)){
                                 tvcol1.setText(tvcol1.getText()+"\n"+" ACTUALMENTE");
                             }
+
                             trclase.addView(tvcol1);
                             tlclase.addView(trclase);
 

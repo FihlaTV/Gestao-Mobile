@@ -70,7 +70,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".PerfilActivity" />
-        <activity android:name=".EscanearActivity" />
+        <activity android:name=".EscanearActivity" android:configChanges="screenSize|orientation" />
         <activity android:name=".ClaseActivity" />
         <activity android:name=".OlvidePaso1Activity" />
         <activity android:name=".OlvidePaso2Activity" />

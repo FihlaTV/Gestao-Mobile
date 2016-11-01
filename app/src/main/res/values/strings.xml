@@ -114,6 +114,7 @@
     <string name="siguientesClasesDelDocente"><i>Siguientes clases del docente:</i></string>
     <string name="tuSiguienteClaseEn"><i>Tu siguiente clase:</i></string>
     <string name="siguientesClasesEnEstaSala"><i>Siguientes clases en esta sala:</i></string>
+    <string name="fotoPerfil">Cambiar foto perfil</string>
 
 
 </resources>

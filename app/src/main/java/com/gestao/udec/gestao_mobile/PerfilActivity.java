@@ -1,16 +1,26 @@
 package com.gestao.udec.gestao_mobile;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Base64;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -18,6 +28,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -25,7 +36,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,17 +59,30 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     EditText twitter;
     EditText descripcion;//o
     EditText semestre;
-    Button actualizar;
+    Button actualizar,imagen;
 
     RequestQueue requestQueue;
     SessionManager sesion;
+    private Bitmap bitmap;
+    private ImageView imageView;
+    private int PICK_IMAGE_REQUEST = 1;
 
+    private String UPLOAD_URL ="http://192.168.1.66/gestao/mobile/upload_image.php";
+
+    private String KEY_IMAGE = "image";
+    private String KEY_NAME = "name";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
         sesion = new SessionManager(PerfilActivity.this);
+        imageView  = (ImageView) findViewById(R.id.imageView);
+        CircularNetworkImageView im = new CircularNetworkImageView(getApplicationContext());
+        Bitmap icon = BitmapFactory.decodeResource(PerfilActivity.this.getResources(),
+                R.mipmap.defaul);
+        icon = redimensionarImagenMaximo(icon,150,150);
+        imageView.setImageBitmap(im.getCircularBitmap(icon));
 
         codigo = (EditText) findViewById(R.id.etCodigo);
         codigo.setInputType(InputType.TYPE_NULL);
@@ -70,11 +97,13 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         descripcion = (EditText) findViewById(R.id.etDescripcion);
         semestre = (EditText) findViewById(R.id.etSemestre);
         actualizar = (Button) findViewById(R.id.btActualizar);
-
+        imagen = (Button) findViewById(R.id.imagen);
         if (sesion.getUserDetails().get("rol").equals("D")) {
             facebook.setVisibility(View.VISIBLE);
             twitter.setVisibility(View.VISIBLE);
             descripcion.setVisibility(View.VISIBLE);
+            imagen.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.VISIBLE);
         } else {
             semestre.setVisibility(View.VISIBLE);
         }
@@ -96,13 +125,36 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         actualizar.setTypeface(TF);
 
         actualizar.setOnClickListener(this);
-
+        imagen.setOnClickListener(this);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         obtenerDatosActuales();
     }
 
     protected void obtenerDatosActuales() {
+
+
+        String url_photo = "http://192.168.1.66/gestao/img_profiles/" + sesion.getUserDetails().get("id") + ".jpg";
+        ImageRequest imageRequest = new ImageRequest(url_photo,
+
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        CircularNetworkImageView im = new CircularNetworkImageView(getApplicationContext());
+                        Bitmap imgful = im.getCircularBitmap(response);
+
+                        imageView.setImageBitmap(imgful);
+                    }
+                }, 150, 150, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(imageRequest);
+
+
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
             @Override
@@ -155,6 +207,9 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btActualizar:
+                if (sesion.getUserDetails().get("rol").equals("D")) {
+                    uploadImage();
+                }
 
                 requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -213,15 +268,6 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
 
-            /*    if (telefono.getText().toString().equals("")) {
-                    estado = false;
-                    telefono.setError(getResources().getString(R.string.numeroTelefonicoInvalido));
-                } else if (Integer.parseInt(telefono.getText().toString()) < 1000000 || Integer.parseInt(telefono.getText().toString()) >= 9999999) {
-                    if ((Long.getLong(telefono.getText().toString()) < 3000000000L) || (Long.getLong(telefono.getText().toString()) >= 3999999999L)) {
-                        estado = false;
-                        telefono.setError(getResources().getString(R.string.numeroTelefonicoInvalido));
-                    }
-                }*/
                 if (sesion.getUserDetails().get("rol").equals("E")) {
                     if (semestre.getText().toString().equals("")) {
                         estado = false;
@@ -240,7 +286,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onResponse(String response) {
                             Intent intent;
-                            Toast.makeText(PerfilActivity.this, response, Toast.LENGTH_LONG).show();
+                           //Toast.makeText(PerfilActivity.this, response, Toast.LENGTH_LONG).show();
                             if (sesion.getUserDetails().get("rol").equals("D")) {
                                 intent = new Intent(PerfilActivity.this, TeacherAreaActivity.class);
                             } else {
@@ -277,12 +323,111 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                     };
                     requestQueue.add(request);
 
-
                 }
 
 
                 break;
+            case R.id.imagen:
+                showFileChooser();
+                break;
 
         }
     }
+
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+                //Getting the Bitmap from Gallery
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Setting the Bitmap to ImageView
+                bitmap = redimensionarImagenMaximo(bitmap,150,150);
+                CircularNetworkImageView im = new CircularNetworkImageView(getApplicationContext());
+                imageView.setImageBitmap(im.getCircularBitmap(bitmap));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public Bitmap redimensionarImagenMaximo(Bitmap mBitmap, float newWidth, float newHeigth){
+        //Redimensionamos
+        int width = mBitmap.getWidth();
+        int height = mBitmap.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeigth) / height;
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+        // recreate the new Bitmap
+        return Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
+    }
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    private void uploadImage(){
+        //Showing the progress dialog
+        final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //Disimissing the progress dialog
+                        loading.dismiss();
+                        //Showing toast message of the response
+                       // Toast.makeText(PerfilActivity.this, s , Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        loading.dismiss();
+
+                        //Showing toast
+                      //  Toast.makeText(PerfilActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+                String image = getStringImage(bitmap);
+
+                //Getting Image Name
+                String name = sesion.getUserDetails().get("id");
+
+                //Creating parameters
+                Map<String,String> params = new Hashtable<String, String>();
+
+                //Adding parameters
+                params.put(KEY_IMAGE, image);
+                params.put(KEY_NAME, name);
+
+                //returning parameters
+                return params;
+            }
+        };
+
+        //Creating a Request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+    }
+
 }

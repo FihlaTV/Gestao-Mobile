@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_perfil"
     android:layout_width="match_parent"
@@ -21,6 +22,21 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+                android:id="@+id/imageView"
+                android:visibility="gone" />
+
+            <Button
+                android:text="@string/fotoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/up"
+                android:id="@+id/imagen"
+                android:visibility="gone" />
 
             <EditText
                 android:layout_width="match_parent"
