@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.ClaseActivity">
+    tools:context="com.gestao.udec.gestao_mobile.ClaseActivity"
+    android:background="@color/colorAccent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,73 +22,127 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        >
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etCodigoClase"
             android:hint="@string/ingresaCodigoClase"
-            android:maxLength="@integer/codigos" />
+            android:maxLength="@integer/codigos"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etNombreClase"
             android:hint="@string/ingresaNombreClase"
-            android:maxLength="@integer/nombreslength" />
+            android:maxLength="@integer/nombreslength"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etGrupo"
             android:hint="@string/ingresaGrupoClase"
-            android:maxLength="@integer/grupolength" />
+            android:maxLength="@integer/grupolength"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etNumCreditos"
             android:hint="@string/ingresaNumeroCreditos"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etSemestre"
             android:hint="@string/ingresaSemestre2"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etCantEstudiantes"
             android:hint="@string/ingreseCantidadEstudiantes"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:lines="5"
-            android:gravity="top"
+            android:gravity="center"
             android:id="@+id/etRequerimientos"
             android:hint="@string/ingreseRequerimientos"
-            android:maxLength="@integer/textolargo" />
-
+            android:maxLength="@integer/textolargo"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittextstyle" >
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -98,7 +153,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDiaSemana"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:gravity="center"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -117,7 +173,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvOcurrencias"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:gravity="center"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -126,24 +183,39 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
+            </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraInicial"
             android:hint="@string/ingreseLaHoraInicial"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraFinal"
             android:hint="@string/ingreseLaHoraFinal"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <Button
             android:text="@string/crearClase"

@@ -8,21 +8,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.OlvidePaso1Activity">
+    tools:context="com.gestao.udec.gestao_mobile.OlvidePaso1Activity"
+    android:background="@color/colorAccent"
+    >
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:ems="10"
             android:id="@+id/etCorreo"
             android:hint="@string/ingresaCorreo"
-            android:maxLength="@integer/textoSemiLargo" />
+            android:maxLength="@integer/textoSemiLargo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"
+            android:ems="10"
+            android:background="@drawable/edittextstyle"/>
 
         <Button
             android:text="@string/enviar"
@@ -32,13 +42,20 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etCodigo"
             android:visibility="gone"
             android:hint="@string/ingresaCodigoCorreo"
             android:maxLength="4"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"
              />
 
         <Button

@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.OlvidePaso2Activity">
+    tools:context="com.gestao.udec.gestao_mobile.OlvidePaso2Activity"
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,18 +18,33 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/etClave"
-            android:hint="@string/etpass" />
+            android:background="@drawable/edittextstyle"
+            android:hint="@string/etpass"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"
+            />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/etClave2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"
             android:hint="@string/claveConfirm" />
 
         <Button

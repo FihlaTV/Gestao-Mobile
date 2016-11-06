@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/miPaginaWeb"
         android:title="@string/irPaginaWeb"
-        app:showAsAction="never"/>
+        app:showAsAction="never"
+        android:background="@color/colorAccent"/>
     <item android:title="@string/contactanos"
         android:id="@+id/miContacto" />
     <item android:title="@string/miPerfil"
