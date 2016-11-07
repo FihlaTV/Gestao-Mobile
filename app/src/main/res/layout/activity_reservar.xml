@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gestao.udec.gestao_mobile.ReservarActivity">
+    tools:context="com.gestao.udec.gestao_mobile.ReservarActivity"
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,6 +18,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextstyle" >
 
         <LinearLayout
             android:orientation="horizontal"
@@ -29,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvClase"
                 android:layout_weight="1"
+                android:gravity="center"
                 />
 
             <Spinner
@@ -48,7 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDiaSemana"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:gravity="center"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -67,7 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvOcurrencias"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:gravity="center"/>
 
             <Spinner
                 android:layout_width="match_parent"
@@ -76,24 +86,38 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
-
+</LinearLayout>
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraInicial"
             android:hint="@string/ingreseLaHoraInicial"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/etHoraFinal"
             android:hint="@string/ingreseLaHoraFinal"
-            android:maxLength="@integer/length2" />
+            android:maxLength="@integer/length2"
+            android:background="@drawable/edittextstyle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:layout_height="40dip"
+            android:gravity="center"/>
 
         <Button
             android:text="@string/reservar"
