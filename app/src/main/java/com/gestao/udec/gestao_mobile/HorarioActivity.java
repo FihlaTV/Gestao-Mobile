@@ -255,7 +255,7 @@ public class HorarioActivity extends Activity {
                                 for (int j=e.getInt("hora_inicio");j<e.getInt("hora_final");j++){
                                     String textoLista = String.format("%02d", j)+" - "+ String.format("%02d", (j+1))+" "+e.getString("clase")+" - "+ e.getString("grupo")+" - "+e.getString("aula");
                                     claseHoras[j-7]= textoLista;
-                                    clasesVinculadas.put(textoLista,e.getString("observaciones"));
+                                    clasesVinculadas.put(textoLista,e.getString("observaciones")+"_"+fechaABuscar+"_"+e.getString("clase_id"));
                                 }
                             } else {
                                 for (int j=e.getInt("hora_inicio");j<e.getInt("hora_final");j++){
@@ -269,7 +269,7 @@ public class HorarioActivity extends Activity {
                             if(claseHoras[j]== null){
                                 String output = String.format("%02d", (j+7))+" - "+ String.format("%02d", (j+8))+" Libre";
                                 claseHoras[j]= output;
-                                clasesVinculadas.put(output,"No tienes clase en salas a esta hora");
+                                clasesVinculadas.put(output,getResources().getString(R.string.noTienesClaseAEstaHora));
                             }
                         }
                         List<String> wordList = Arrays.asList(claseHoras);

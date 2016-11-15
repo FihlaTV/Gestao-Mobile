@@ -115,6 +115,8 @@
     <string name="tuSiguienteClaseEn"><i>Tu siguiente clase:</i></string>
     <string name="siguientesClasesEnEstaSala"><i>Siguientes clases en esta sala:</i></string>
     <string name="fotoPerfil">Cambiar foto perfil</string>
-
+    <string name="ingreseObservacionClase">Ingrese las observaciones para la clase</string>
+    <string name="observacion">Observación</string>
+    <string name="noTienesClaseAEstaHora">No tienes clase a esta hora</string>
 
 </resources>
