@@ -118,5 +118,19 @@
     <string name="ingreseObservacionClase">Ingrese las observaciones para la clase</string>
     <string name="observacion">Observación</string>
     <string name="noTienesClaseAEstaHora">No tienes clase a esta hora</string>
+    <string name="profesor">Profesor</string>
+    <string name="horaInicio">Hora inicio</string>
+    <string name="horaFinal">Hora final</string>
+    <string name="observaciones">Observaciones</string>
+    <string name="yaMismoEn">Ya mismo en</string>
+    <string name="en">en</string>
+    <string name="minutos">minutos</string>
+    <string name="horasMin">horas</string>
+    <string name="hoyNoTienesNingunaClase">hoy no tienes ninguna clase!</string>
+    <string name="noHayObservaciones">No hay observaciones</string>
+    <string name="noSeEncontraronClasesParaEstaAula">No se encontraron clases para esta aula</string>
+    <string name="vacioActualmente">Vacio actualmente!</string>
+    <string name="docenteNoEncontrado">docente no encontrado!</string>
+    <string name="actualmenteMay">ACTUALMENTE!</string>
 
 </resources>

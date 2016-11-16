@@ -94,11 +94,6 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
-                    case R.id.miPlataforma2Udec:
-                        uri = Uri.parse("https://www.unicundi.edu.co:8443/unicundi/hermesoft/vortal/login.jsp");
-                        intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
-                        break;
                     case R.id.miCerrarSesion:
                         SessionManager sesion;
                         sesion = new SessionManager(UserAreaActivity.this);

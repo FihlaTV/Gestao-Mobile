@@ -37,9 +37,9 @@ import java.util.Map;
 
 public class EscanearActivity extends AppCompatActivity {
     TextView aulaNombre;
-    String observaciones="",clase="",profesor="",aula_c="",hora_iniciof="",hora_finalf="";
+    String observaciones = "", clase = "", profesor = "", aula_c = "", hora_iniciof = "", hora_finalf = "";
     RequestQueue requestQueue;
-    TextView tvfecha, tvhora, tvaula, tvclase_actual,tvclasess;
+    TextView tvfecha, tvhora, tvaula, tvclase_actual, tvclasess;
     String aula, hora, minuto;
     String scan = "http://192.168.1.66/gestao/mobile/escanear.php";
     String scan1 = "http://192.168.1.66/gestao/mobile/escanear_mis_clases.php";
@@ -49,6 +49,7 @@ public class EscanearActivity extends AppCompatActivity {
     ScrollView sv;
     SessionManager sesion;
     TableRow trclase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,19 +65,19 @@ public class EscanearActivity extends AppCompatActivity {
         tvclasess = (TextView) findViewById(R.id.tvclasess);
         rlclasem = (RelativeLayout) findViewById(R.id.rlclasem);
         rlclasem.setVisibility(View.INVISIBLE);
-        tvclase_actual= (TextView) findViewById(R.id.tvclase_actual);
+        tvclase_actual = (TextView) findViewById(R.id.tvclase_actual);
 
         tlclase = (TableLayout) findViewById(R.id.tlclases);
 
-        trclase = (TableRow)  findViewById(R.id.trclase);
+        trclase = (TableRow) findViewById(R.id.trclase);
         tvclase_actual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EscanearActivity.this);
-                builder.setMessage("Clase: "+clase+"\n"+"Profesor: "+profesor+"\n"+"Sala: "+aula_c+"\n"+"Hora de inicio: "+hora_iniciof+"\n"+"Hora final:"+hora_finalf+"\n"+"Observaciones: "+observaciones)
+                builder.setMessage(getResources().getString(R.string.clase) + ": " + clase + "\n" + getResources().getString(R.string.profesor) + ": " + profesor + "\n" + getResources().getString(R.string.aula) + ": " + aula_c + "\n" + getResources().getString(R.string.horaInicio) + ": " + hora_iniciof + "\n" + getResources().getString(R.string.horaFinal) + ":" + hora_finalf + "\n" + getResources().getString(R.string.observaciones) + ": " + observaciones)
                         .setTitle(clase)
                         .setCancelable(false)
-                        .setNeutralButton("Aceptar",
+                        .setNeutralButton(getResources().getString(R.string.aceptar),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
@@ -89,12 +90,8 @@ public class EscanearActivity extends AppCompatActivity {
             }
         });
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-       resumen();
+        resumen();
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-
-
-
 
 
         clase_en_aula();
@@ -113,17 +110,17 @@ public class EscanearActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if(jArray.length()>0){
+                    if (jArray.length() > 0) {
 
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject resumen = jArray.getJSONObject(i);
-                            tvaula.setText(tvaula.getText()+": "+aula);
-                            tvfecha.setText(tvfecha.getText()+": "+resumen.getString("fecha"));
-                            tvhora.setText(tvhora.getText()+": "+resumen.getString("hora")+":"+resumen.getString("minuto"));
+                            tvaula.setText(tvaula.getText() + ": " + aula);
+                            tvfecha.setText(tvfecha.getText() + ": " + resumen.getString("fecha"));
+                            tvhora.setText(tvhora.getText() + ": " + resumen.getString("hora") + ":" + resumen.getString("minuto"));
                             hora = resumen.getString("hora");
                             minuto = resumen.getString("minuto");
                         }
-                    }else{
+                    } else {
 
                     }
                 } catch (JSONException e) {
@@ -148,7 +145,7 @@ public class EscanearActivity extends AppCompatActivity {
 
     }
 
-    protected void traermisiguienteclase(final String id, final String hora_inicio, final String hora_final, final String nombre){
+    protected void traermisiguienteclase(final String id, final String hora_inicio, final String hora_final, final String nombre) {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request1 = new StringRequest(Request.Method.POST, scan2, new Response.Listener<String>() {
 
@@ -159,47 +156,46 @@ public class EscanearActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if(jArray.length()>0){
+                    if (jArray.length() > 0) {
                         String nombre1;
 
                         String apellido;
                         JSONObject miclase = jArray.getJSONObject(0);
-                        if (miclase.getString("nombre1").toString().trim().equalsIgnoreCase("null")){
+                        if (miclase.getString("nombre1").toString().trim().equalsIgnoreCase("null")) {
                             nombre1 = "";
-                        }else{
+                        } else {
                             nombre1 = miclase.getString("nombre1");
                         }
-                        if (miclase.getString("apellido1").toString().trim().equalsIgnoreCase("null")){
+                        if (miclase.getString("apellido1").toString().trim().equalsIgnoreCase("null")) {
                             apellido = "";
-                        }else{
+                        } else {
                             apellido = miclase.getString("apellido1");
                         }
                         rlclasem.setVisibility(View.VISIBLE);
                         tvclase_actual.setVisibility(View.VISIBLE);
-                        clase=miclase.getString("materia");
-                        profesor=nombre1+" "+apellido;
-                        aula_c=nombre;
-                        hora_iniciof=hora_inicio;
-                        hora_finalf=hora_final;
-                        int horaserver=Integer.parseInt(hora);
-                        int horabd=Integer.parseInt(hora_inicio);
-                        int horas_diferencia= horabd-horaserver;
-                        int minutos_diferencia = 60-Integer.parseInt(minuto);
+                        clase = miclase.getString("materia");
+                        profesor = nombre1 + " " + apellido;
+                        aula_c = nombre;
+                        hora_iniciof = hora_inicio;
+                        hora_finalf = hora_final;
+                        int horaserver = Integer.parseInt(hora);
+                        int horabd = Integer.parseInt(hora_inicio);
+                        int horas_diferencia = horabd - horaserver;
+                        int minutos_diferencia = 60 - Integer.parseInt(minuto);
                         String horast;
-                        if (Integer.parseInt(hora)>=Integer.parseInt(hora_inicio)){
-                            horast = " ya mismo en "+nombre;
-                        }
-                        else{
-                            if(horas_diferencia--==0){
-                                horast = " en : "+String.valueOf(minutos_diferencia)+" minutos";
-                            }else{
-                                horast = " en : "+String.valueOf(horas_diferencia)+" horas "+String.valueOf(minutos_diferencia)+" minutos";
+                        if (Integer.parseInt(hora) >= Integer.parseInt(hora_inicio)) {
+                            horast = getResources().getString(R.string.yaMismoEn) + nombre;
+                        } else {
+                            if (horas_diferencia-- == 0) {
+                                horast = getResources().getString(R.string.en) + ": " + String.valueOf(minutos_diferencia) + " " + getResources().getString(R.string.minutos);
+                            } else {
+                                horast = getResources().getString(R.string.en) + ": " + String.valueOf(horas_diferencia) + " " + getResources().getString(R.string.horasMin) + String.valueOf(minutos_diferencia) + " " + getResources().getString(R.string.minutos);
                             }
 
                         }
-                        tvclase_actual.setText(miclase.getString("materia")+horast);
-                    }else{
-                        tvclase_actual.setText("hoy no tienes ninguna clase!");
+                        tvclase_actual.setText(miclase.getString("materia") + horast);
+                    } else {
+                        tvclase_actual.setText(getResources().getString(R.string.hoyNoTienesNingunaClase));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -214,14 +210,15 @@ public class EscanearActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("id",id);
+                parameters.put("id", id);
 
                 return parameters;
             }
         };
         requestQueue.add(request1);
     }
-    protected void clase_en_aula(){
+
+    protected void clase_en_aula() {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request1 = new StringRequest(Request.Method.POST, scan1, new Response.Listener<String>() {
 
@@ -232,20 +229,20 @@ public class EscanearActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if(jArray.length()>0){
+                    if (jArray.length() > 0) {
                         rlclasem.setLayoutParams(new TableLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                                 RelativeLayout.LayoutParams.WRAP_CONTENT, 1f));
                         JSONObject miclase = jArray.getJSONObject(0);
-                        if (miclase.getString("observaciones").equalsIgnoreCase("null")){
-                            observaciones="no hay observaciones";
-                        }else{
-                            observaciones=miclase.getString("observaciones");
+                        if (miclase.getString("observaciones").equalsIgnoreCase("null")) {
+                            observaciones = getResources().getString(R.string.noHayObservaciones);
+                        } else {
+                            observaciones = miclase.getString("observaciones");
                         }
 
 
-                            traermisiguienteclase(miclase.getString("id"),miclase.getString("hora_inicio"),miclase.getString("hora_final"),miclase.getString("nombre"));
+                        traermisiguienteclase(miclase.getString("id"), miclase.getString("hora_inicio"), miclase.getString("hora_final"), miclase.getString("nombre"));
 
-                    }else{
+                    } else {
 
 
                     }
@@ -262,7 +259,7 @@ public class EscanearActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("persona",sesion.getUserDetails().get("id"));
+                parameters.put("persona", sesion.getUserDetails().get("id"));
 
                 return parameters;
             }
@@ -281,26 +278,26 @@ public class EscanearActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jArray = jsonResponse.getJSONArray("response");
 
-                    if(jArray.length()>0){
+                    if (jArray.length() > 0) {
                         tvclasess.setVisibility(View.VISIBLE);
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject clase_en_aula = jArray.getJSONObject(i);
-                            if(i==0){
-                               int horaserver = Integer.parseInt(hora);
+                            if (i == 0) {
+                                int horaserver = Integer.parseInt(hora);
 
-                                int horabd= Integer.parseInt(clase_en_aula.getString("hora_inicio"));
-                                if (horabd>horaserver){
+                                int horabd = Integer.parseInt(clase_en_aula.getString("hora_inicio"));
+                                if (horabd > horaserver) {
                                     trclase = new TableRow(getApplicationContext());
-                                    trclase.setId(100+i+1);
+                                    trclase.setId(100 + i + 1);
                                     trclase.setBackgroundResource(R.drawable.edittextstyle);
                                     TextView tvcol8 = new TextView(getApplicationContext());
-                                    tvcol8.setId(200+i);
+                                    tvcol8.setId(200 + i);
                                     String font_path = "fonts/Ubuntu-C.ttf";
                                     final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
                                     tvcol8.setTypeface(TF);
                                     Color.parseColor("#000000");
                                     tvcol8.setTextColor(Color.parseColor("#000000"));
-                                    tvcol8.setText(" Vacio actualmente!");
+                                    tvcol8.setText(getResources().getString(R.string.vacioActualmente));
                                     trclase.addView(tvcol8);
                                     LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                                     llp.setMargins(30, 30, 30, 30); // llp.setMargins(left, top, right, bottom);
@@ -310,34 +307,33 @@ public class EscanearActivity extends AppCompatActivity {
 
                                 }
 
-                           }
+                            }
                             trclase = new TableRow(getApplicationContext());
 
                             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                             llp.setMargins(30, 30, 30, 30); // llp.setMargins(left, top, right, bottom);
 
-                                                      trclase.setLayoutParams(llp);
+                            trclase.setLayoutParams(llp);
                             trclase.setBackgroundResource(R.drawable.edittextstyle);
-                            trclase.setId(100+i);
+                            trclase.setId(100 + i);
                             TextView tvcol1 = new TextView(getApplicationContext());
-                            tvcol1.setCompoundDrawablesWithIntrinsicBounds(  R.mipmap.cls, 0,0, 0);
-                            tvcol1.setId(200+i);
+                            tvcol1.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cls, 0, 0, 0);
+                            tvcol1.setId(200 + i);
                             String font_path = "fonts/Ubuntu-C.ttf";
                             final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
                             tvcol1.setTypeface(TF);
                             Color.parseColor("#000000");
                             tvcol1.setTextColor(Color.parseColor("#000000"));
                             String nombretemp;
-                            if (clase_en_aula.getString("nombre1").toString().trim().equalsIgnoreCase("null")){
-                                nombretemp ="docente no encontrado!";
+                            if (clase_en_aula.getString("nombre1").toString().trim().equalsIgnoreCase("null")) {
+                                nombretemp = getResources().getString(R.string.docenteNoEncontrado);
+                            } else {
+                                nombretemp = clase_en_aula.getString("nombre1") + " " + clase_en_aula.getString("apellido1");
                             }
-                            else{
-                                nombretemp =clase_en_aula.getString("nombre1")+" "+clase_en_aula.getString("apellido1");
-                            }
-                            tvcol1.setText(" Clase: "+clase_en_aula.getString("nombre")+"\n"+" Docente: "+nombretemp+"\n"+" Hora inicio: "+clase_en_aula.getString("hora_inicio")+"\n"+" Hora final: "+clase_en_aula.getString("hora_final"));
+                            tvcol1.setText(getResources().getString(R.string.clase) + ": " + clase_en_aula.getString("nombre") + "\n" + getResources().getString(R.string.profesor) + ": " + nombretemp + "\n" + getResources().getString(R.string.horaInicio) + ": " + clase_en_aula.getString("hora_inicio") + "\n" + getResources().getString(R.string.horaFinal) + ": " + clase_en_aula.getString("hora_final"));
 
-                            if (Integer.parseInt(clase_en_aula.getString("hora_inicio"))<=Integer.parseInt(hora) && Integer.parseInt(clase_en_aula.getString("hora_final"))>Integer.parseInt(hora)){
-                                tvcol1.setText(tvcol1.getText()+"\n"+" ACTUALMENTE");
+                            if (Integer.parseInt(clase_en_aula.getString("hora_inicio")) <= Integer.parseInt(hora) && Integer.parseInt(clase_en_aula.getString("hora_final")) > Integer.parseInt(hora)) {
+                                tvcol1.setText(tvcol1.getText() + "\n" + getResources().getString(R.string.actualmenteMay));
                             }
 
                             trclase.addView(tvcol1);
@@ -345,8 +341,8 @@ public class EscanearActivity extends AppCompatActivity {
 
 
                         }
-                    }else{
-                        Toast.makeText(EscanearActivity.this, "No se encontraron clases para esta aula", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(EscanearActivity.this, getResources().getString(R.string.noSeEncontraronClasesParaEstaAula), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

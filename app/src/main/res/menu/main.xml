@@ -16,8 +16,6 @@
         android:id="@+id/miUdecVirtual" />
     <item android:title="@string/plataformaUdec"
         android:id="@+id/miPlataformaUdec" />
-    <item android:title="@string/notasUdec"
-        android:id="@+id/miPlataforma2Udec" />
     <item android:title="@string/cerrarSesion"
         android:id="@+id/miCerrarSesion" />
 </menu>
