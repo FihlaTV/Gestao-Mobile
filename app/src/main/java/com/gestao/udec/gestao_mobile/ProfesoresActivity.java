@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -316,7 +317,7 @@ public class ProfesoresActivity extends AppCompatActivity {
                     public void onResponse(Bitmap response) {
                         CircularNetworkImageView im = new CircularNetworkImageView(getApplicationContext());
                         Bitmap imgful = im.getCircularBitmap(response);
-
+                        imgful = redimensionarImagenMaximo(imgful,150,150);
                         ivfoto.setImageBitmap(imgful);
                     }
                 }, 300, 300, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
@@ -367,6 +368,19 @@ public class ProfesoresActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+    public Bitmap redimensionarImagenMaximo(Bitmap mBitmap, float newWidth, float newHeigth){
+        //Redimensionamos
+        int width = mBitmap.getWidth();
+        int height = mBitmap.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeigth) / height;
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+        // recreate the new Bitmap
+        return Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
+    }
 }
 
 

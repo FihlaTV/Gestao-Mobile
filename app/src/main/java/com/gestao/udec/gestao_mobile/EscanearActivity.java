@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -73,6 +74,7 @@ public class EscanearActivity extends AppCompatActivity {
         tvclase_actual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
                 AlertDialog.Builder builder = new AlertDialog.Builder(EscanearActivity.this);
                 builder.setMessage(getResources().getString(R.string.clase) + ": " + clase + "\n" + getResources().getString(R.string.profesor) + ": " + profesor + "\n" + getResources().getString(R.string.aula) + ": " + aula_c + "\n" + getResources().getString(R.string.horaInicio) + ": " + hora_iniciof + "\n" + getResources().getString(R.string.horaFinal) + ":" + hora_finalf + "\n" + getResources().getString(R.string.observaciones) + ": " + observaciones)
                         .setTitle(clase)
@@ -130,6 +132,7 @@ public class EscanearActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 Toast.makeText(EscanearActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
             }
         }) {
@@ -189,11 +192,11 @@ public class EscanearActivity extends AppCompatActivity {
                             if (horas_diferencia-- == 0) {
                                 horast = getResources().getString(R.string.en) + ": " + String.valueOf(minutos_diferencia) + " " + getResources().getString(R.string.minutos);
                             } else {
-                                horast = getResources().getString(R.string.en) + ": " + String.valueOf(horas_diferencia) + " " + getResources().getString(R.string.horasMin) + String.valueOf(minutos_diferencia) + " " + getResources().getString(R.string.minutos);
+                                horast = getResources().getString(R.string.en) + ": " + String.valueOf(horas_diferencia) + " " + getResources().getString(R.string.horasMin) + " "+ String.valueOf(minutos_diferencia) + " " + getResources().getString(R.string.minutos);
                             }
 
                         }
-                        tvclase_actual.setText(miclase.getString("materia") + horast);
+                        tvclase_actual.setText(miclase.getString("materia") + " " +horast);
                     } else {
                         tvclase_actual.setText(getResources().getString(R.string.hoyNoTienesNingunaClase));
                     }
@@ -205,6 +208,8 @@ public class EscanearActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(EscanearActivity.this, getResources().getString(R.string.errorConexion), Toast.LENGTH_LONG).show();
+
+
             }
         }) {
             @Override
@@ -260,7 +265,7 @@ public class EscanearActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
                 parameters.put("persona", sesion.getUserDetails().get("id"));
-
+                parameters.put("rol", sesion.getUserDetails().get("rol"));
                 return parameters;
             }
         };
@@ -290,8 +295,10 @@ public class EscanearActivity extends AppCompatActivity {
                                     trclase = new TableRow(getApplicationContext());
                                     trclase.setId(100 + i + 1);
                                     trclase.setBackgroundResource(R.drawable.edittextstyle);
+
                                     TextView tvcol8 = new TextView(getApplicationContext());
                                     tvcol8.setId(200 + i);
+                                    tvcol8.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.dispon, 0, 0, 0);
                                     String font_path = "fonts/Ubuntu-C.ttf";
                                     final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
                                     tvcol8.setTypeface(TF);

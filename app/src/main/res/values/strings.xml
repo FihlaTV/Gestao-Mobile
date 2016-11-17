@@ -118,7 +118,7 @@
     <string name="ingreseObservacionClase">Ingrese las observaciones para la clase</string>
     <string name="observacion">Observación</string>
     <string name="noTienesClaseAEstaHora">No tienes clase a esta hora</string>
-    <string name="profesor">Profesor</string>
+    <string name="profesor">Docente</string>
     <string name="horaInicio">Hora inicio</string>
     <string name="horaFinal">Hora final</string>
     <string name="observaciones">Observaciones</string>
