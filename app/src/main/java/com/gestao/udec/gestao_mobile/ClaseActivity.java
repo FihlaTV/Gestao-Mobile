@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ClaseActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -68,13 +69,13 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
         sesion.checkLogin();
 
 
-        idClase= (EditText) findViewById(R.id.etCodigoClase);
-        nombreClase= (EditText) findViewById(R.id.etNombreClase);
-        grupo= (EditText) findViewById(R.id.etGrupo);
-        creditos= (EditText) findViewById(R.id.etNumCreditos);
-        semestre= (EditText) findViewById(R.id.etSemestre);
-        cantEstudiantes= (EditText) findViewById(R.id.etCantEstudiantes);
-        requerimientos= (EditText) findViewById(R.id.etRequerimientos);
+        idClase = (EditText) findViewById(R.id.etCodigoClase);
+        nombreClase = (EditText) findViewById(R.id.etNombreClase);
+        grupo = (EditText) findViewById(R.id.etGrupo);
+        creditos = (EditText) findViewById(R.id.etNumCreditos);
+        semestre = (EditText) findViewById(R.id.etSemestre);
+        cantEstudiantes = (EditText) findViewById(R.id.etCantEstudiantes);
+        requerimientos = (EditText) findViewById(R.id.etRequerimientos);
 
         textoSemana = (TextView) findViewById(R.id.tvDiaSemana);
         textoOcurrencias = (TextView) findViewById(R.id.tvOcurrencias);
@@ -86,7 +87,7 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
         reservar = (Button) findViewById(R.id.btCrear);
 
         String font_path = "fonts/Ubuntu-C.ttf";
-        final Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+        final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
 
         idClase.setTypeface(TF);
         nombreClase.setTypeface(TF);
@@ -105,7 +106,7 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
 
 
         String[] diasSemana = {getResources().getString(R.string.lunes), getResources().getString(R.string.martes), getResources().getString(R.string.miercoles), getResources().getString(R.string.jueves), getResources().getString(R.string.viernes), getResources().getString(R.string.sabado)};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana) {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
                 ((TextView) v).setTypeface(TF);
@@ -114,8 +115,8 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
             }
 
 
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View v =super.getDropDownView(position, convertView, parent);
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView, parent);
                 ((TextView) v).setTypeface(TF);
 
                 return v;
@@ -124,8 +125,8 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         diaSemana.setAdapter(adapter);
 
-        String[] aOcurrencias = {getResources().getString(R.string.unaSolaVez),getResources().getString(R.string.todoElSemestre)};
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, aOcurrencias){
+        String[] aOcurrencias = {getResources().getString(R.string.unaSolaVez), getResources().getString(R.string.todoElSemestre)};
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, aOcurrencias) {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
                 ((TextView) v).setTypeface(TF);
@@ -134,8 +135,8 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
             }
 
 
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View v =super.getDropDownView(position, convertView, parent);
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView, parent);
                 ((TextView) v).setTypeface(TF);
 
                 return v;
@@ -163,19 +164,39 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
 
                 boolean estado = true;
 
-
-                if(idClase.getText().toString().isEmpty()){
+                Pattern pattern;
+                if (idClase.getText().toString().isEmpty()) {
                     idClase.setError(getResources().getString(R.string.campoNoNulo));
                     estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
+                    if (pattern.matcher(idClase.getText().toString()).find() != true) {
+                        idClase.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
                 }
-                if(nombreClase.getText().toString().isEmpty()){
+                if (nombreClase.getText().toString().isEmpty()) {
                     nombreClase.setError(getResources().getString(R.string.campoNoNulo));
                     estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
+                    if (pattern.matcher(nombreClase.getText().toString()).find() != true) {
+                        nombreClase.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
                 }
-                if(grupo.getText().toString().isEmpty()){
+
+                if (grupo.getText().toString().isEmpty()) {
                     grupo.setError(getResources().getString(R.string.campoNoNulo));
                     estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
+                    if (pattern.matcher(grupo.getText().toString()).find() != true) {
+                        grupo.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
                 }
+
                 try {
                     if (Integer.parseInt(cantEstudiantes.getText().toString()) < 1 || Integer.parseInt(cantEstudiantes.getText().toString()) >= 100) {
                         estado = false;
@@ -186,7 +207,7 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
                     cantEstudiantes.setError(getResources().getString(R.string.cantidadNoValida));
                 }
 
-                if(!semestre.getText().toString().isEmpty()){
+                if (!semestre.getText().toString().isEmpty()) {
                     try {
                         if (Integer.parseInt(semestre.getText().toString()) < 1 || Integer.parseInt(semestre.getText().toString()) >= 13) {
                             estado = false;
@@ -197,7 +218,7 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
                         semestre.setError(getResources().getString(R.string.cantidadNoValida));
                     }
                 }
-                if(!creditos.getText().toString().isEmpty()){
+                if (!creditos.getText().toString().isEmpty()) {
                     try {
                         if (Integer.parseInt(creditos.getText().toString()) < 1 || Integer.parseInt(creditos.getText().toString()) > 18) {
                             estado = false;
@@ -214,14 +235,16 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
                         estado = false;
                         horaInicial.setError(getResources().getString(R.string.horaInicialIntervalo));
                     }
-                } catch (NumberFormatException e) {
-                    estado = false;
-                    horaInicial.setError(getResources().getString(R.string.horaInicialIntervalo));
-                }
-                try {
                     if (Integer.parseInt(horaFinal.getText().toString()) <= 7 || Integer.parseInt(horaFinal.getText().toString()) > 22) {
                         estado = false;
                         horaFinal.setError(getResources().getString(R.string.horaFinalIntervalo));
+                    }
+
+                    int diferenciaHoras = Integer.parseInt(horaFinal.getText().toString()) - Integer.parseInt(horaInicial.getText().toString());
+
+                    if (diferenciaHoras > 6 || diferenciaHoras < 1) {
+                        estado = false;
+                        horaFinal.setError(getResources().getString(R.string.intervaloIncorrecto));
                     }
                 } catch (NumberFormatException e) {
                     estado = false;

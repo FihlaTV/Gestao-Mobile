@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     RadioButton rbdocente;
     Button btnregistro;
     Button btncancelar;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,9 +110,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 if (etnombre1.getText().toString().trim().equalsIgnoreCase("")) {
                     etnombre1.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z ]*$");
+                    if (pattern.matcher(etnombre1.getText().toString()).find() != true) {
+                        etnombre1.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
                 }
                 if (etapellido1.getText().toString().trim().equalsIgnoreCase("")) {
                     etapellido1.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z ]*$");
+                    if (pattern.matcher(etapellido1.getText().toString()).find() != true) {
+                        etapellido1.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
                 }
                 if (!etclave.getText().toString().equals(etclave2.getText().toString())) {
                     etclave2.setError(getResources().getString(R.string.claveNoIgual));
@@ -134,8 +149,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 JSONObject jsonResponse = new JSONObject(response);
                                 JSONArray jArray = jsonResponse.getJSONArray("response");
                                 JSONObject id = jArray.getJSONObject(0);
-                                if (id.getString("estado").equals("Registro Exitoso")){
-                                    if(rbestudiante.isChecked()) {
+                                if (id.getString("estado").equals("Registro Exitoso")) {
+                                    if (rbestudiante.isChecked()) {
 
                                         SessionManager sesion = new SessionManager(RegisterActivity.this);
                                         sesion.createLoginSession(etnombre1.getText().toString(), etcorreo.getText().toString(), id.getString("id"), "E");
@@ -143,15 +158,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                                         RegisterActivity.this.startActivity(intent);
 
-                                    }
-                                    else{
-                                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.peticionDocenteRegistro) , Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.peticionDocenteRegistro), Toast.LENGTH_LONG).show();
                                         SessionManager sesion = new SessionManager(RegisterActivity.this);
                                         sesion.createLoginSession(etnombre1.getText().toString(), etcorreo.getText().toString(), id.getString("id"), "D");
-                                        if (FirebaseInstanceId.getInstance().getToken()!= ""){
+                                        if (FirebaseInstanceId.getInstance().getToken() != "") {
                                             comprobartoken(FirebaseInstanceId.getInstance().getToken());
                                         }
-                                        Intent intent = new Intent (RegisterActivity.this,LoginActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
 
                                         RegisterActivity.this.startActivity(intent);
                                     }
@@ -197,10 +211,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
-    protected void comprobartoken(final String token){
 
-
-
+    protected void comprobartoken(final String token) {
 
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -234,7 +246,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 SessionManager sesion;
-                sesion= new SessionManager(RegisterActivity.this);
+                sesion = new SessionManager(RegisterActivity.this);
                 Map<String, String> parameters = new HashMap<String, String>();
                 parameters.put("persona", sesion.getUserDetails().get("id"));
                 parameters.put("from_token", token);
@@ -242,9 +254,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         };
         requestQueue.add(request);
-
-
-
 
 
     }

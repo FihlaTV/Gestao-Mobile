@@ -85,7 +85,6 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         imageView.setImageBitmap(im.getCircularBitmap(icon));
 
         codigo = (EditText) findViewById(R.id.etCodigo);
-        codigo.setInputType(InputType.TYPE_NULL);
         nombre1 = (EditText) findViewById(R.id.etNombre1);
         nombre2 = (EditText) findViewById(R.id.etNombre2);
         apellido1 = (EditText) findViewById(R.id.etApellido1);
@@ -239,6 +238,45 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                 ;
 
                 Matcher mather = pattern.matcher(email.getText().toString());
+
+                if (nombre1.getText().toString().trim().equalsIgnoreCase("")) {
+                    nombre1.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z ]*$");
+                    if (pattern.matcher(nombre1.getText().toString()).find() != true) {
+                        nombre1.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
+                }
+
+                if (!nombre2.getText().toString().trim().equalsIgnoreCase("")) {
+                    pattern = Pattern.compile("^[a-zA-Z ]*$");
+                    if (pattern.matcher(nombre2.getText().toString()).find() != true) {
+                        nombre2.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
+                }
+
+                if (apellido1.getText().toString().trim().equalsIgnoreCase("")) {
+                    apellido1.setError(getResources().getString(R.string.campoNoNulo));
+                    estado = false;
+                } else {
+                    pattern = Pattern.compile("^[a-zA-Z ]*$");
+                    if (pattern.matcher(apellido1.getText().toString()).find() != true) {
+                        apellido1.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
+                }
+
+                if (!apellido2.getText().toString().trim().equalsIgnoreCase("")) {
+                    pattern = Pattern.compile("^[a-zA-Z ]*$");
+                    if (pattern.matcher(apellido2.getText().toString()).find() != true) {
+                        apellido2.setError(getResources().getString(R.string.campoLetras));
+                        estado = false;
+                    }
+                }
+
 
                 if (mather.find() != true) {
                     email.setError(getResources().getString(R.string.correoInvalido));

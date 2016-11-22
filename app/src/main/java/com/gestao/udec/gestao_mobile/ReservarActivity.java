@@ -204,7 +204,7 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
 
                 boolean estado = true;
 
-                if(clase.getSelectedItem() == null){
+                if (clase.getSelectedItem() == null) {
                     Toast.makeText(ReservarActivity.this, getResources().getString(R.string.noClaseSeleccionada), Toast.LENGTH_LONG).show();
                     estado = false;
                 }
@@ -214,16 +214,18 @@ public class ReservarActivity extends AppCompatActivity implements View.OnClickL
                         estado = false;
                         horaInicial.setError(getResources().getString(R.string.horaInicialIntervalo));
                     }
-                } catch (NumberFormatException e) {
+
+
+                if (Integer.parseInt(horaFinal.getText().toString()) <= 7 || Integer.parseInt(horaFinal.getText().toString()) > 22) {
                     estado = false;
-                    horaInicial.setError(getResources().getString(R.string.horaInicialIntervalo));
+                    horaFinal.setError(getResources().getString(R.string.horaFinalIntervalo));
                 }
-                try {
-                    if (Integer.parseInt(horaFinal.getText().toString()) <= 7 || Integer.parseInt(horaFinal.getText().toString()) > 22) {
+                    int diferenciaHoras = Integer.parseInt(horaFinal.getText().toString()) - Integer.parseInt(horaInicial.getText().toString());
+                    if(diferenciaHoras>6 || diferenciaHoras <1){
                         estado = false;
-                        horaFinal.setError(getResources().getString(R.string.horaFinalIntervalo));
+                        horaFinal.setError(getResources().getString(R.string.intervaloIncorrecto));
                     }
-                } catch (NumberFormatException e) {
+                  }catch (NumberFormatException e) {
                     estado = false;
                     horaFinal.setError(getResources().getString(R.string.horaInicialIntervalo));
                 }
