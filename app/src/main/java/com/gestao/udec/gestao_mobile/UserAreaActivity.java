@@ -43,7 +43,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     Button profesores;
 
     Button salas;
-    Toolbar myToolbar;
+    //Toolbar myToolbar;
 
     SessionManager sesion;
     RequestQueue requestQueue;
@@ -62,7 +62,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
 
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
-        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+       /* myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //setSupportActionBar(myToolbar);
         myToolbar.inflateMenu(R.menu.main);
         myToolbar.setTitle("Gestao");
@@ -106,7 +106,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
+*/
 
         escanear = (Button) findViewById(R.id.btescanear);
         vincular = (Button) findViewById(R.id.btvincular);

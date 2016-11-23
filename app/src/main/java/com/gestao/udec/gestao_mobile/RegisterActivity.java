@@ -159,7 +159,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         RegisterActivity.this.startActivity(intent);
 
                                     } else {
-                                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.peticionDocenteRegistro), Toast.LENGTH_LONG).show();
                                         SessionManager sesion = new SessionManager(RegisterActivity.this);
                                         sesion.createLoginSession(etnombre1.getText().toString(), etcorreo.getText().toString(), id.getString("id"), "D");
                                         if (FirebaseInstanceId.getInstance().getToken() != "") {
