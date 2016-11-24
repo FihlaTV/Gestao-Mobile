@@ -87,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
                 inputMethodManager.hideSoftInputFromWindow(etnombre1.getWindowToken(), 0);
-                inputMethodManager.hideSoftInputFromWindow(etapellido1.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(etclave.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(etclave2.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(etcorreo.getWindowToken(), 0);

@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
@@ -62,6 +63,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        final EditText etemail = (EditText) findViewById(R.id.etCorreo);
+        final EditText etPassword = (EditText) findViewById(R.id.etClave);
+        final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
+        final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);
+        final Button bLogin = (Button) findViewById(R.id.btnIngresar);
+        i_s = (ImageSwitcher) findViewById(R.id.is_logos_main);
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputMethodManager.hideSoftInputFromWindow(etemail.getWindowToken(), 0);
+        inputMethodManager.hideSoftInputFromWindow(etPassword.getWindowToken(), 0);
 
         sesion = new SessionManager(LoginActivity.this);
         if (sesion.isLoggedIn()) {
@@ -71,13 +83,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        final EditText etemail = (EditText) findViewById(R.id.etCorreo);
-        final EditText etPassword = (EditText) findViewById(R.id.etClave);
-        final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegistro);
-        final TextView tvOlvideLink = (TextView) findViewById(R.id.tvOlvido);
-        ;
-        final Button bLogin = (Button) findViewById(R.id.btnIngresar);
-        i_s = (ImageSwitcher) findViewById(R.id.is_logos_main);
+
+
+
 
         String font_path = "fonts/Ubuntu-C.ttf";
         final Typeface TF = Typeface.createFromAsset(getAssets(), font_path);
