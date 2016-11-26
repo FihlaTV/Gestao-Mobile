@@ -4,14 +4,14 @@
     >
 
     <!-- Settings, should always be in the overflow -->
+
+    <item android:title="@string/miPerfil"
+        android:id="@+id/miPerfil" />
     <item android:id="@+id/miPaginaWeb"
         android:title="@string/irPaginaWeb"
         app:showAsAction="never"
         android:background="@color/colorAccent"/>
-    <item android:title="@string/contactanos"
-        android:id="@+id/miContacto" />
-    <item android:title="@string/miPerfil"
-        android:id="@+id/miPerfil" />
+
     <item android:title="@string/udecVirtual"
         android:id="@+id/miUdecVirtual" />
     <item android:title="@string/plataformaUdec"

@@ -43,7 +43,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
     Button profesores;
 
     Button salas;
-    //Toolbar myToolbar;
+    Toolbar myToolbar;
 
     SessionManager sesion;
     RequestQueue requestQueue;
@@ -59,10 +59,9 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
         if (FirebaseInstanceId.getInstance().getToken()!= ""){
             comprobartoken(FirebaseInstanceId.getInstance().getToken());
         }
-
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
-       /* myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //setSupportActionBar(myToolbar);
         myToolbar.inflateMenu(R.menu.main);
         myToolbar.setTitle("Gestao");
@@ -76,9 +75,6 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                         uri = Uri.parse("http://gestao.audiplantas.com/");
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
-                        break;
-                    case R.id.miContacto:
-
                         break;
                     case R.id.miPerfil:
                         intent = new Intent(UserAreaActivity.this, PerfilActivity.class);
@@ -94,6 +90,7 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
+
                     case R.id.miCerrarSesion:
                         SessionManager sesion;
                         sesion = new SessionManager(UserAreaActivity.this);
@@ -106,7 +103,6 @@ public class UserAreaActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-*/
 
         escanear = (Button) findViewById(R.id.btescanear);
         vincular = (Button) findViewById(R.id.btvincular);

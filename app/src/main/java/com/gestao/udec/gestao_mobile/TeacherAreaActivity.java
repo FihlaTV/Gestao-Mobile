@@ -72,9 +72,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
-                    case R.id.miContacto:
 
-                        break;
                     case R.id.miPerfil:
                         intent = new Intent(TeacherAreaActivity.this, PerfilActivity.class);
                         TeacherAreaActivity.this.startActivity(intent);
