@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     RequestQueue requestQueue;
-    String insertUrl = "http://192.168.1.66/gestao/mobile/register_person.php";
+    String insertUrl = "http://gestao-web.co/register_person.php";
 
     EditText etnombre1;
     EditText etapellido1;
@@ -214,7 +214,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
+        String urlp = "http://gestao-web.co/token_insert.php";
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, urlp, new Response.Listener<String>() {

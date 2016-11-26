@@ -25,7 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OlvidePaso2Activity extends AppCompatActivity implements View.OnClickListener{
-    String url ="http://192.168.1.66/gestao/mobile/olvido_contrasena_nuevo.php";
+    String url ="http://gestao-web.co/olvido_contrasena_nuevo.php";
 
     EditText contrasena;
     EditText contrasena2;

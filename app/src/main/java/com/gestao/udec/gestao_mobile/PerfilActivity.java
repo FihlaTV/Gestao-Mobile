@@ -45,8 +45,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.66/gestao/mobile/select_perfil.php";
-    String url2 = "http://192.168.1.66/gestao/mobile/update_perfil.php";
+    String url = "http://gestao-web.co/select_perfil.php";
+    String url2 = "http://gestao-web.co/update_perfil.php";
 
     EditText codigo;//o
     EditText nombre1;//o
@@ -67,7 +67,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView imageView;
     private int PICK_IMAGE_REQUEST = 1;
 
-    private String UPLOAD_URL ="http://192.168.1.66/gestao/mobile/upload_image.php";
+    private String UPLOAD_URL ="http://gestao-web.co/upload_image.php";
 
     private String KEY_IMAGE = "image";
     private String KEY_NAME = "name";
@@ -133,7 +133,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     protected void obtenerDatosActuales() {
 
 
-        String url_photo = "http://192.168.1.66/gestao/img_profiles/" + sesion.getUserDetails().get("id") + ".jpg";
+        String url_photo = "http://gestao-web.co/img/" + sesion.getUserDetails().get("id") + ".jpg";
         ImageRequest imageRequest = new ImageRequest(url_photo,
 
                 new Response.Listener<Bitmap>() {

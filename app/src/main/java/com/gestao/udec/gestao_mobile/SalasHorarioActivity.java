@@ -114,7 +114,7 @@ public class SalasHorarioActivity extends Activity {
 
         private ListView horario;
         TextView fecha;
-        private String url = "http://192.168.1.66/gestao/mobile/select_horario_aula.php";
+        private String url = "http://gestao-web.co/select_horario_aula.php";
         View rootView;
 
         String fechaABuscar;

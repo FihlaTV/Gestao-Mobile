@@ -85,7 +85,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
             boton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String url = "http://192.168.1.66/gestao/mobile/desvinculacion_clase.php";
+                    String url = "http://gestao-web.co/desvinculacion_clase.php";
 
                     RequestQueue requestQueue;
                     requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -147,7 +147,7 @@ public class CustomListAdapter extends BaseAdapter implements ListAdapter {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             if (!input.getText().toString().equals(textoObservaciones)) {
-                                                String url2 = "http://192.168.1.66/gestao/mobile/actualizar_observacion.php";
+                                                String url2 = "http://gestao-web.co/actualizar_observacion.php";
                                                 RequestQueue requestQueue;
                                                 requestQueue = Volley.newRequestQueue(context);
                                                 StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {

@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SalasSeleccionActivity extends AppCompatActivity implements View.OnClickListener {
-    String url = "http://192.168.1.66/gestao/mobile/select_aulas.php";
+    String url = "http://gestao-web.co/select_aulas.php";
     TextView escogerSalas;
     Spinner salasSpinner;
     Button mostrarHorario;

@@ -68,7 +68,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
                 Intent intent;
                 switch (item.getItemId()) {
                     case R.id.miPaginaWeb:
-                        uri = Uri.parse("http://gestao.audiplantas.com/");
+                        uri = Uri.parse("http://gestao-web.co/");
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
@@ -133,7 +133,7 @@ public class TeacherAreaActivity extends AppCompatActivity implements View.OnCli
         sesion = new SessionManager(TeacherAreaActivity.this);
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
+        String urlp = "http://gestao-web.co/token_insert.php";
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, urlp, new Response.Listener<String>() {

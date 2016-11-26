@@ -158,7 +158,7 @@ public class HorarioActivity extends Activity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private ListView horario;
         TextView fecha;
-        private String url = "http://192.168.1.66/gestao/mobile/select_horario_persona.php";
+        private String url = "http://gestao-web.co/select_horario_persona.php";
         View rootView;
         HashMap<String,String> clasesVinculadas;
 

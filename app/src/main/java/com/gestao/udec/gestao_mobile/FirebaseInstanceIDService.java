@@ -43,7 +43,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
     private void registerToken(final String token, final String persona) {
         sesion = new SessionManager(FirebaseInstanceIDService.this);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String urlp = "http://192.168.1.66/gestao/mobile/token_insert.php";
+        String urlp = "http://gestao-web.co/token_insert.php";
         StringRequest request = new StringRequest(Request.Method.POST, urlp, new Response.Listener<String>() {
 
             @Override

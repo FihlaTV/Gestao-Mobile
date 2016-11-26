@@ -42,9 +42,9 @@ public class EscanearActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     TextView tvfecha, tvhora, tvaula, tvclase_actual, tvclasess;
     String aula, hora, minuto;
-    String scan = "http://192.168.1.66/gestao/mobile/escanear.php";
-    String scan1 = "http://192.168.1.66/gestao/mobile/escanear_mis_clases.php";
-    String scan2 = "http://192.168.1.66/gestao/mobile/escanear_mi_clase.php";
+    String scan = "http://gestao-web.co/escanear.php";
+    String scan1 = "http://gestao-web.co/escanear_mis_clases.php";
+    String scan2 = "http://gestao-web.co/escanear_mi_clase.php";
     RelativeLayout rlclasem;
     TableLayout tlclase;
     ScrollView sv;

@@ -50,10 +50,10 @@ import java.util.Map;
 import static android.R.attr.bitmap;
 
 public class ProfesoresActivity extends AppCompatActivity {
-    String showteachers = "http://192.168.1.66/gestao/mobile/show_teachers.php";
+    String showteachers = "http://gestao-web.co/show_teachers.php";
 
-    String showteacheree = "http://192.168.1.66/gestao/mobile/show_teachers_e.php";
-    String showteacherec = "http://192.168.1.66/gestao/mobile/select_latest_clases_e.php";
+    String showteacheree = "http://gestao-web.co/show_teachers_e.php";
+    String showteacherec = "http://gestao-web.co/select_latest_clases_e.php";
     ImageView ifacebook;
     ImageView itwiter;
     ImageView ivfoto;
