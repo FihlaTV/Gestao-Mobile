@@ -56,8 +56,7 @@ public class ClaseActivity extends AppCompatActivity implements View.OnClickList
     HashMap<String, String> arregloClases;
 
     RequestQueue requestQueue;
-    String insertUrl = "http://" +
-            "192.168.1.66/gestao/mobile/insert_clase.php";
+    String insertUrl = "http://gestao-web.co/insert_clase.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
