@@ -309,7 +309,7 @@ public class ProfesoresActivity extends AppCompatActivity {
         requestQueue.add(requesttwo);
 
 
-        String url_photo = "http://192.168.1.66/gestao/img_profiles/" + id_profesor + ".jpg";
+        String url_photo = "http://gestao-web.co/img/" + id_profesor + ".jpg";
         ImageRequest imageRequest = new ImageRequest(url_photo,
 
                 new Response.Listener<Bitmap>() {

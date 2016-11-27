@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (position == 0) {
 
                     v.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click));
-                    Uri uri = Uri.parse("https://www.facebook.com/SICG-Mandala-UDEC-348743578797892/");
+                    Uri uri = Uri.parse("https://www.facebook.com/sicg.mandala.udec?fref=ts");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
