@@ -10,7 +10,6 @@ Este es el repositorio principal del código fuente del aplicativo Gestao Mobile
 
 
 ## 2016
-![imagen](http://pythogram.co/img1.jpg)
 
 ![imagen](http://pythogram.co/img2.png)
 
